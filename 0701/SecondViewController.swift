@@ -16,6 +16,7 @@ class SecondViewController: UIViewController {
     view.backgroundColor = .blue
     
     print(#function)
+    
   }
   
   override func viewWillAppear(_ animated: Bool) {
