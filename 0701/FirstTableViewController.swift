@@ -12,7 +12,7 @@ class FirstTableViewController: UITableViewController {
   
   var addItemButton: UIButton!
   
-  var animals: [String] = ["cat", "dog", "mouse", "pig"]
+  var animals: [String] = ["cat", "dog", "mouse", "pigg"]
   
   
   
