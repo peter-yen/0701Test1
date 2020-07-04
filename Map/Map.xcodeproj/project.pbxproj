@@ -12,6 +12,14 @@
 		8907A62324AF421A00EEED09 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8907A62124AF421A00EEED09 /* LaunchScreen.storyboard */; };
 		8972CBBE24AF430500E94D81 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8972CBBD24AF430500E94D81 /* TabBarViewController.swift */; };
 		8972CBC024AF4A2700E94D81 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8972CBBF24AF4A2700E94D81 /* MapViewController.swift */; };
+		8989EAFD24B03723002DD71C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8989EAFC24B03723002DD71C /* HomeViewController.swift */; };
+		8989EAFF24B03C0A002DD71C /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8989EAFE24B03C0A002DD71C /* SearchTableViewController.swift */; };
+		8989EB0124B0559C002DD71C /* AddTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8989EB0024B0559C002DD71C /* AddTableViewCell.swift */; };
+		8989EB0324B05CD0002DD71C /* JayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8989EB0224B05CD0002DD71C /* JayViewController.swift */; };
+		8989EB0524B06E43002DD71C /* MayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8989EB0424B06E43002DD71C /* MayViewController.swift */; };
+		8989EB0724B07367002DD71C /* EasonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8989EB0624B07367002DD71C /* EasonViewController.swift */; };
+		8989EB0924B077F2002DD71C /* SunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8989EB0824B077F2002DD71C /* SunViewController.swift */; };
+		8989EB0B24B07A4F002DD71C /* JjlinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8989EB0A24B07A4F002DD71C /* JjlinViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +30,14 @@
 		8907A62424AF421A00EEED09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8972CBBD24AF430500E94D81 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		8972CBBF24AF4A2700E94D81 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		8989EAFC24B03723002DD71C /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		8989EAFE24B03C0A002DD71C /* SearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
+		8989EB0024B0559C002DD71C /* AddTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTableViewCell.swift; sourceTree = "<group>"; };
+		8989EB0224B05CD0002DD71C /* JayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JayViewController.swift; sourceTree = "<group>"; };
+		8989EB0424B06E43002DD71C /* MayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MayViewController.swift; sourceTree = "<group>"; };
+		8989EB0624B07367002DD71C /* EasonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasonViewController.swift; sourceTree = "<group>"; };
+		8989EB0824B077F2002DD71C /* SunViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunViewController.swift; sourceTree = "<group>"; };
+		8989EB0A24B07A4F002DD71C /* JjlinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JjlinViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +72,14 @@
 			children = (
 				8907A61624AF421500EEED09 /* AppDelegate.swift */,
 				8972CBBD24AF430500E94D81 /* TabBarViewController.swift */,
+				8989EAFE24B03C0A002DD71C /* SearchTableViewController.swift */,
+				8989EB0A24B07A4F002DD71C /* JjlinViewController.swift */,
+				8989EB0824B077F2002DD71C /* SunViewController.swift */,
+				8989EB0624B07367002DD71C /* EasonViewController.swift */,
+				8989EB0424B06E43002DD71C /* MayViewController.swift */,
+				8989EB0224B05CD0002DD71C /* JayViewController.swift */,
+				8989EB0024B0559C002DD71C /* AddTableViewCell.swift */,
+				8989EAFC24B03723002DD71C /* HomeViewController.swift */,
 				8972CBBF24AF4A2700E94D81 /* MapViewController.swift */,
 				8907A61F24AF421A00EEED09 /* Assets.xcassets */,
 				8907A62124AF421A00EEED09 /* LaunchScreen.storyboard */,
@@ -134,9 +158,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8989EB0524B06E43002DD71C /* MayViewController.swift in Sources */,
+				8989EB0724B07367002DD71C /* EasonViewController.swift in Sources */,
 				8972CBBE24AF430500E94D81 /* TabBarViewController.swift in Sources */,
+				8989EB0924B077F2002DD71C /* SunViewController.swift in Sources */,
 				8972CBC024AF4A2700E94D81 /* MapViewController.swift in Sources */,
+				8989EAFF24B03C0A002DD71C /* SearchTableViewController.swift in Sources */,
+				8989EB0B24B07A4F002DD71C /* JjlinViewController.swift in Sources */,
+				8989EB0324B05CD0002DD71C /* JayViewController.swift in Sources */,
+				8989EB0124B0559C002DD71C /* AddTableViewCell.swift in Sources */,
 				8907A61724AF421500EEED09 /* AppDelegate.swift in Sources */,
+				8989EAFD24B03723002DD71C /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
