@@ -13,29 +13,40 @@ class FirstViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .yellow
-        let label = UILabel()
-        label.text = "Nice"
-        label.textColor = .darkGray
-        label.backgroundColor = .red
-        view.addSubview(label)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.widthAnchor.constraint(equalToConstant: 40).isActive = true
-        label.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 100).isActive = true
-        label.topAnchor.constraint(equalTo: view.topAnchor, constant: 300).isActive = true
-        
-        
-        let myView = UIView()
-        myView.backgroundColor = .red
-        view.addSubview(myView)
-        myView.translatesAutoresizingMaskIntoConstraints = false
-        myView.widthAnchor.constraint(equalToConstant: 30).isActive = true
-        myView.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        myView.leadingAnchor.constraint(equalTo: label.trailingAnchor, constant: 40 ).isActive = true
-        myView.topAnchor.constraint(equalTo: label.topAnchor, constant: 0 ).isActive = true
-        
-        
-        
+               let viewOne = UIImageView()
+               viewOne.backgroundColor = .red
+               view.addSubview(viewOne)
+               viewOne.translatesAutoresizingMaskIntoConstraints = false
+               viewOne.widthAnchor.constraint(equalToConstant: 50).isActive = true
+               viewOne.heightAnchor.constraint(equalToConstant: 44).isActive = true
+               viewOne.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true
+               viewOne.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
+               
+               
+               let labelOne = UILabel()
+               labelOne.backgroundColor = .red
+               labelOne.text = "      Hello"
+               labelOne.textColor = .white
+               view.addSubview(labelOne)
+               labelOne.translatesAutoresizingMaskIntoConstraints = false
+               labelOne.widthAnchor.constraint(equalToConstant: 100).isActive = true
+               labelOne.heightAnchor.constraint(equalToConstant: 44).isActive = true
+               labelOne.leadingAnchor.constraint(equalTo: viewOne.trailingAnchor, constant: 80 ).isActive = true
+               labelOne.topAnchor.constraint(equalTo: viewOne.topAnchor, constant: 0 ).isActive = true
+               
+               let buttonOne = UIButton()
+               buttonOne.backgroundColor = .red
+               buttonOne.setTitle("World", for: .normal)
+               buttonOne.setTitleColor(.blue, for: .normal)
+               view.addSubview(buttonOne)
+               //        buttonOne.tintColor = .black
+       //        buttonOne.titleLabel?.text = "World" 這兩行是舊的，無法使用
+               buttonOne.translatesAutoresizingMaskIntoConstraints = false
+               buttonOne.widthAnchor.constraint(equalToConstant: 100).isActive = true
+               buttonOne.heightAnchor.constraint(equalToConstant: 44).isActive = true
+               buttonOne.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+               buttonOne.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+               
 
     }
     
