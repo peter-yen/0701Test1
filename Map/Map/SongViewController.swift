@@ -71,7 +71,7 @@ class SongViewController: UIViewController , UITableViewDelegate , UITableViewDa
     func Imageone() {
         imageOne = UIImageView.init()
         view.addSubview(imageOne)
-            imageOne.backgroundColor = .black
+            imageOne.backgroundColor = .white
             imageOne.snp.makeConstraints { (make) -> Void in
             make.width.equalTo(40)
             make.height.equalTo(40)
@@ -92,6 +92,7 @@ class SongViewController: UIViewController , UITableViewDelegate , UITableViewDa
         tableView.addSubview(self.imageOne)
         let text = backOff[indexPath.row]
         cell.settitle(text: text)
+        
         
         
     
