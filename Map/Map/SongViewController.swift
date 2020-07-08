@@ -14,7 +14,7 @@ class SongViewController: UIViewController , UITableViewDelegate , UITableViewDa
     
     var mapLabel: UILabel!
     var songTableView: UITableView!
-    var backOff: [String] = ["天空灰的像哭過", "當我和世界不一樣", "如果那兩個字沒有顫抖", "愛要拐幾個彎才來", "他靜悄悄的來過"]
+    var backOff: [String] = ["      天空灰的像哭過", "      當我和世界不一樣", "      如果那兩個字沒有顫抖", "      愛要拐幾個彎才來", "     他靜悄悄的來過"]
     var imageOne: UIImageView!
 
     override func viewDidLoad() {
@@ -51,11 +51,13 @@ class SongViewController: UIViewController , UITableViewDelegate , UITableViewDa
 //        songTableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(songTableView)
         songTableView.backgroundColor = .cyan
+    
 //        songTableView.topAnchor.constraint(equalTo: mapLabel.bottomAnchor, constant: 0).isActive = true
 //        songTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
 //        songTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
 //        songTableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         songTableView.snp.makeConstraints { (make) -> Void in
+            
             make.top.equalTo(mapLabel.snp.bottom)
             make.bottom.equalToSuperview()
             make.leading.equalToSuperview()
@@ -73,21 +75,26 @@ class SongViewController: UIViewController , UITableViewDelegate , UITableViewDa
             imageOne.snp.makeConstraints { (make) -> Void in
             make.width.equalTo(40)
             make.height.equalTo(40)
-            make.leading.equalTo(view.snp.leading)
-            make.bottom.equalTo(songTableView.snp.top)
-                
+            make.leading.equalTo(songTableView.snp.leading)
+//            make.bottom.equalTo(songTableView.snp.top)
+//
         }
         
         
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return backOff.count
        }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! liyicTableViewCell
 //        cell = tableViewCell(style: UITableViewCell.CellStyle, reuseIdentifier: "cell") as! liyicTableViewCell
+        tableView.addSubview(self.imageOne)
         let text = backOff[indexPath.row]
         cell.settitle(text: text)
+        
+        
+    
         return cell
         
        }

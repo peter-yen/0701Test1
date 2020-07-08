@@ -13,7 +13,6 @@ class liyicTableViewCell: UITableViewCell {
 
     func settitle(text: String) {
         textLabel?.text = text
-        imageView
     }
     
 
