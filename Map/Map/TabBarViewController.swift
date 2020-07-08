@@ -12,7 +12,7 @@ class TabBarViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .green
+        view.backgroundColor = .white
         
         let vc = MapViewController()
         vc.tabBarItem.image = UIImage(named: "favorite")
@@ -22,10 +22,15 @@ class TabBarViewController: UITabBarController {
         vc2.tabBarItem.image = UIImage(named: "home")
         
         //功課2：AnimalTableViewController，顯示四種動物的table view
-        let vc3 = SearchTableViewController()
-        view.backgroundColor = .brown
+        let vc3 = SongViewController()
         vc3.tabBarItem.image = UIImage(named: "search")
-        viewControllers = [vc, vc2, vc3]
+        
+        
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        let vc4 = HappyCollectionViewController(collectionViewLayout: layout)
+        vc4.tabBarItem.image = UIImage(named: "iosph")
+        viewControllers = [vc, vc2, vc3, vc4]
         
         
         
