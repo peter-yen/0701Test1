@@ -22,7 +22,7 @@ class TabBarViewController: UITabBarController {
         vc2.tabBarItem.image = UIImage(named: "home")
         
         //功課2：AnimalTableViewController，顯示四種動物的table view
-        let vc3 = SongViewController()
+        let vc3 = NewSongViewController()
         vc3.tabBarItem.image = UIImage(named: "search")
         
         

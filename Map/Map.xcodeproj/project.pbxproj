@@ -22,6 +22,7 @@
 		8989EB0724B07367002DD71C /* EasonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8989EB0624B07367002DD71C /* EasonViewController.swift */; };
 		8989EB0924B077F2002DD71C /* SunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8989EB0824B077F2002DD71C /* SunViewController.swift */; };
 		8989EB0B24B07A4F002DD71C /* JjlinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8989EB0A24B07A4F002DD71C /* JjlinViewController.swift */; };
+		89A48C6724B6DE2C00981471 /* NewSongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A48C6624B6DE2C00981471 /* NewSongViewController.swift */; };
 		89DEEB2124B1C9BD004B1915 /* HappyCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89DEEB2024B1C9BD004B1915 /* HappyCollectionViewController.swift */; };
 		AFB5E0A878401C859F7F7431 /* Pods_Map.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 737FF6F4B73E864C90D43847 /* Pods_Map.framework */; };
 /* End PBXBuildFile section */
@@ -46,6 +47,7 @@
 		8989EB0624B07367002DD71C /* EasonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasonViewController.swift; sourceTree = "<group>"; };
 		8989EB0824B077F2002DD71C /* SunViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunViewController.swift; sourceTree = "<group>"; };
 		8989EB0A24B07A4F002DD71C /* JjlinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JjlinViewController.swift; sourceTree = "<group>"; };
+		89A48C6624B6DE2C00981471 /* NewSongViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSongViewController.swift; sourceTree = "<group>"; };
 		89DEEB2024B1C9BD004B1915 /* HappyCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HappyCollectionViewController.swift; sourceTree = "<group>"; };
 		CA2B0D2E029FE2A30261E3E9 /* Pods-Map.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Map.release.xcconfig"; path = "Target Support Files/Pods-Map/Pods-Map.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -99,6 +101,7 @@
 				8989EB0024B0559C002DD71C /* AddTableViewCell.swift */,
 				8917D03F24B1DC1A00464DC4 /* SongViewController.swift */,
 				89759AC824B30BBB00F2043F /* liyicTableViewCell.swift */,
+				89A48C6624B6DE2C00981471 /* NewSongViewController.swift */,
 				8907A61F24AF421A00EEED09 /* Assets.xcassets */,
 				8907A62124AF421A00EEED09 /* LaunchScreen.storyboard */,
 				8907A62424AF421A00EEED09 /* Info.plist */,
@@ -253,6 +256,7 @@
 				8989EB0324B05CD0002DD71C /* JayViewController.swift in Sources */,
 				89759AC924B30BBB00F2043F /* liyicTableViewCell.swift in Sources */,
 				8989EB0124B0559C002DD71C /* AddTableViewCell.swift in Sources */,
+				89A48C6724B6DE2C00981471 /* NewSongViewController.swift in Sources */,
 				8917D04024B1DC1A00464DC4 /* SongViewController.swift in Sources */,
 				8907A61724AF421500EEED09 /* AppDelegate.swift in Sources */,
 				8989EAFD24B03723002DD71C /* HomeViewController.swift in Sources */,
