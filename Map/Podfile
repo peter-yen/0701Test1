@@ -7,4 +7,7 @@ target 'Map' do
 
   # Pods for Map
   pod 'SnapKit'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Auth'
+  pod 'GoogleSignIn'
 end

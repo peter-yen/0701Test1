@@ -64,7 +64,7 @@ class SongViewController: UIViewController , UITableViewDelegate , UITableViewDa
             make.trailing.equalToSuperview()
             songTableView.delegate = self
             songTableView.dataSource = self
-            songTableView.register(liyicTableViewCell.self, forCellReuseIdentifier: "cell")
+            songTableView.register(LiyicTableViewCell.self, forCellReuseIdentifier: "cell")
         }
          
         }
@@ -87,7 +87,7 @@ class SongViewController: UIViewController , UITableViewDelegate , UITableViewDa
         return backOff.count
        }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! liyicTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! LiyicTableViewCell
 //        cell = tableViewCell(style: UITableViewCell.CellStyle, reuseIdentifier: "cell") as! liyicTableViewCell
 //        tableView.addSubview(self.imageOne)
         let text = backOff[indexPath.row]
