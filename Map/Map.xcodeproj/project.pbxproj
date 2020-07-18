@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4EDC41A924C2EB5B0060DE29 /* KenShi.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4EDC41A524C2EB5A0060DE29 /* KenShi.mp3 */; };
+		4EDC41AB24C2EB5B0060DE29 /* Jay.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4EDC41A724C2EB5B0060DE29 /* Jay.mp3 */; };
 		8907A61724AF421500EEED09 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8907A61624AF421500EEED09 /* AppDelegate.swift */; };
 		8907A62024AF421A00EEED09 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8907A61F24AF421A00EEED09 /* Assets.xcassets */; };
 		8907A62324AF421A00EEED09 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8907A62124AF421A00EEED09 /* LaunchScreen.storyboard */; };
@@ -37,6 +39,8 @@
 
 /* Begin PBXFileReference section */
 		33AE9D9D0C3FE3FEF74EF9AB /* Pods-Map.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Map.debug.xcconfig"; path = "Target Support Files/Pods-Map/Pods-Map.debug.xcconfig"; sourceTree = "<group>"; };
+		4EDC41A524C2EB5A0060DE29 /* KenShi.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = KenShi.mp3; sourceTree = "<group>"; };
+		4EDC41A724C2EB5B0060DE29 /* Jay.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Jay.mp3; sourceTree = "<group>"; };
 		737FF6F4B73E864C90D43847 /* Pods_Map.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Map.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8907A61324AF421500EEED09 /* Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Map.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8907A61624AF421500EEED09 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -129,6 +133,8 @@
 				8907A62124AF421A00EEED09 /* LaunchScreen.storyboard */,
 				89F8FFDD24B96B3100B25677 /* GoogleService-Info.plist */,
 				8907A62424AF421A00EEED09 /* Info.plist */,
+				4EDC41A724C2EB5B0060DE29 /* Jay.mp3 */,
+				4EDC41A524C2EB5A0060DE29 /* KenShi.mp3 */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -217,6 +223,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EDC41AB24C2EB5B0060DE29 /* Jay.mp3 in Resources */,
+				4EDC41A924C2EB5B0060DE29 /* KenShi.mp3 in Resources */,
 				8907A62324AF421A00EEED09 /* LaunchScreen.storyboard in Resources */,
 				8907A62024AF421A00EEED09 /* Assets.xcassets in Resources */,
 				89F8FFDE24B96B3100B25677 /* GoogleService-Info.plist in Resources */,
