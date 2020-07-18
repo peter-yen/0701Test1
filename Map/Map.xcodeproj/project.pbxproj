@@ -11,6 +11,7 @@
 		8907A62024AF421A00EEED09 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8907A61F24AF421A00EEED09 /* Assets.xcassets */; };
 		8907A62324AF421A00EEED09 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8907A62124AF421A00EEED09 /* LaunchScreen.storyboard */; };
 		8917D04024B1DC1A00464DC4 /* SongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8917D03F24B1DC1A00464DC4 /* SongViewController.swift */; };
+		892508AA24C2DB30007F68AF /* SongDetilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892508A924C2DB30007F68AF /* SongDetilViewController.swift */; };
 		8972CBBE24AF430500E94D81 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8972CBBD24AF430500E94D81 /* TabBarViewController.swift */; };
 		8972CBC024AF4A2700E94D81 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8972CBBF24AF4A2700E94D81 /* MapViewController.swift */; };
 		89759AC924B30BBB00F2043F /* LiyicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89759AC824B30BBB00F2043F /* LiyicTableViewCell.swift */; };
@@ -43,6 +44,7 @@
 		8907A62224AF421A00EEED09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8907A62424AF421A00EEED09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8917D03F24B1DC1A00464DC4 /* SongViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongViewController.swift; sourceTree = "<group>"; };
+		892508A924C2DB30007F68AF /* SongDetilViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongDetilViewController.swift; sourceTree = "<group>"; };
 		8972CBBD24AF430500E94D81 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		8972CBBF24AF4A2700E94D81 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		89759AC824B30BBB00F2043F /* LiyicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiyicTableViewCell.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				89D87E1624BC5A9200FD29A6 /* SongFiveViewController.swift */,
 				89D87E1224BC409000FD29A6 /* SongThreeViewController.swift */,
 				89D87E0E24BB008600FD29A6 /* SongOneViewController.swift */,
+				892508A924C2DB30007F68AF /* SongDetilViewController.swift */,
 				8907A61F24AF421A00EEED09 /* Assets.xcassets */,
 				8907A62124AF421A00EEED09 /* LaunchScreen.storyboard */,
 				89F8FFDD24B96B3100B25677 /* GoogleService-Info.plist */,
@@ -290,6 +293,7 @@
 				89D87E1524BC4C6000FD29A6 /* SongFourViewController.swift in Sources */,
 				8989EB0724B07367002DD71C /* EasonViewController.swift in Sources */,
 				89D87E1124BC00BC00FD29A6 /* SongTwoViewController.swift in Sources */,
+				892508AA24C2DB30007F68AF /* SongDetilViewController.swift in Sources */,
 				89D87E1324BC409000FD29A6 /* SongThreeViewController.swift in Sources */,
 				89D87E1724BC5A9200FD29A6 /* SongFiveViewController.swift in Sources */,
 				8972CBBE24AF430500E94D81 /* TabBarViewController.swift in Sources */,

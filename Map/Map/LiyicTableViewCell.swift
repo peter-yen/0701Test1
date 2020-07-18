@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 class LiyicTableViewCell: UITableViewCell {
-    var imageOne: UIImageView!
+    var singerImageView: UIImageView!
     var songLabel: UILabel!
     var singerLabel: UILabel!
     
@@ -32,13 +32,13 @@ class LiyicTableViewCell: UITableViewCell {
       
     }
     func setupImageView() {
-        imageOne = UIImageView()
-        addSubview(imageOne)
-        imageOne.image = UIImage(named: "song1")
-        imageOne.contentMode = .scaleAspectFill //調整比例
-        imageOne.clipsToBounds = true //擷取邊界 ＴＲＵＥ就是擷取
+        singerImageView = UIImageView()
+        addSubview(singerImageView)
+        singerImageView.image = UIImage(named: "song1")
+        singerImageView.contentMode = .scaleAspectFill //調整比例
+        singerImageView.clipsToBounds = true //擷取邊界 ＴＲＵＥ就是擷取
 //        imageOne.backgroundColor = .red
-        imageOne.snp.makeConstraints { (make) -> Void in
+        singerImageView.snp.makeConstraints { (make) -> Void in
             make.leading.equalToSuperview()
             make.width.height.equalTo(50)
 //            make.top.equalToSuperview()
@@ -53,7 +53,7 @@ class LiyicTableViewCell: UITableViewCell {
         songLabel.text = "歌名"
 //        songLabel.backgroundColor = .blue
         songLabel.snp.makeConstraints { (make) -> Void in
-            make.leading.equalTo(imageOne.snp.trailing).offset(15)
+            make.leading.equalTo(singerImageView.snp.trailing).offset(15)
             make.top.equalTo(self.snp.top).offset(15)
             make.trailing.equalTo(self.snp.trailing).offset(-15)
             make.height.equalTo(25)
