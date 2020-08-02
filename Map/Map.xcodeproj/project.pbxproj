@@ -12,26 +12,12 @@
 		8907A61724AF421500EEED09 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8907A61624AF421500EEED09 /* AppDelegate.swift */; };
 		8907A62024AF421A00EEED09 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8907A61F24AF421A00EEED09 /* Assets.xcassets */; };
 		8907A62324AF421A00EEED09 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8907A62124AF421A00EEED09 /* LaunchScreen.storyboard */; };
-		8917D04024B1DC1A00464DC4 /* SongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8917D03F24B1DC1A00464DC4 /* SongViewController.swift */; };
 		892508AA24C2DB30007F68AF /* SongDetilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892508A924C2DB30007F68AF /* SongDetilViewController.swift */; };
 		8972CBBE24AF430500E94D81 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8972CBBD24AF430500E94D81 /* TabBarViewController.swift */; };
-		8972CBC024AF4A2700E94D81 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8972CBBF24AF4A2700E94D81 /* MapViewController.swift */; };
 		89759AC924B30BBB00F2043F /* LiyicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89759AC824B30BBB00F2043F /* LiyicTableViewCell.swift */; };
-		8989EAFD24B03723002DD71C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8989EAFC24B03723002DD71C /* HomeViewController.swift */; };
-		8989EAFF24B03C0A002DD71C /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8989EAFE24B03C0A002DD71C /* SearchTableViewController.swift */; };
+		89883B8F24C931B900F76CFE /* TextFiledTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89883B8E24C931B900F76CFE /* TextFiledTestViewController.swift */; };
 		8989EB0124B0559C002DD71C /* AddTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8989EB0024B0559C002DD71C /* AddTableViewCell.swift */; };
-		8989EB0324B05CD0002DD71C /* JayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8989EB0224B05CD0002DD71C /* JayViewController.swift */; };
-		8989EB0524B06E43002DD71C /* MayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8989EB0424B06E43002DD71C /* MayViewController.swift */; };
-		8989EB0724B07367002DD71C /* EasonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8989EB0624B07367002DD71C /* EasonViewController.swift */; };
-		8989EB0924B077F2002DD71C /* SunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8989EB0824B077F2002DD71C /* SunViewController.swift */; };
-		8989EB0B24B07A4F002DD71C /* JjlinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8989EB0A24B07A4F002DD71C /* JjlinViewController.swift */; };
 		89A48C6724B6DE2C00981471 /* NewSongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A48C6624B6DE2C00981471 /* NewSongViewController.swift */; };
-		89D87E0F24BB008600FD29A6 /* SongOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D87E0E24BB008600FD29A6 /* SongOneViewController.swift */; };
-		89D87E1124BC00BC00FD29A6 /* SongTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D87E1024BC00BC00FD29A6 /* SongTwoViewController.swift */; };
-		89D87E1324BC409000FD29A6 /* SongThreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D87E1224BC409000FD29A6 /* SongThreeViewController.swift */; };
-		89D87E1524BC4C6000FD29A6 /* SongFourViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D87E1424BC4C6000FD29A6 /* SongFourViewController.swift */; };
-		89D87E1724BC5A9200FD29A6 /* SongFiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D87E1624BC5A9200FD29A6 /* SongFiveViewController.swift */; };
-		89DEEB2124B1C9BD004B1915 /* HappyCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89DEEB2024B1C9BD004B1915 /* HappyCollectionViewController.swift */; };
 		89F8FFDE24B96B3100B25677 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89F8FFDD24B96B3100B25677 /* GoogleService-Info.plist */; };
 		89F8FFE024B96FEB00B25677 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F8FFDF24B96FEB00B25677 /* SignInViewController.swift */; };
 		AFB5E0A878401C859F7F7431 /* Pods_Map.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 737FF6F4B73E864C90D43847 /* Pods_Map.framework */; };
@@ -47,26 +33,12 @@
 		8907A61F24AF421A00EEED09 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8907A62224AF421A00EEED09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8907A62424AF421A00EEED09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8917D03F24B1DC1A00464DC4 /* SongViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongViewController.swift; sourceTree = "<group>"; };
 		892508A924C2DB30007F68AF /* SongDetilViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongDetilViewController.swift; sourceTree = "<group>"; };
 		8972CBBD24AF430500E94D81 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
-		8972CBBF24AF4A2700E94D81 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		89759AC824B30BBB00F2043F /* LiyicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiyicTableViewCell.swift; sourceTree = "<group>"; };
-		8989EAFC24B03723002DD71C /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		8989EAFE24B03C0A002DD71C /* SearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
+		89883B8E24C931B900F76CFE /* TextFiledTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFiledTestViewController.swift; sourceTree = "<group>"; };
 		8989EB0024B0559C002DD71C /* AddTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTableViewCell.swift; sourceTree = "<group>"; };
-		8989EB0224B05CD0002DD71C /* JayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JayViewController.swift; sourceTree = "<group>"; };
-		8989EB0424B06E43002DD71C /* MayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MayViewController.swift; sourceTree = "<group>"; };
-		8989EB0624B07367002DD71C /* EasonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasonViewController.swift; sourceTree = "<group>"; };
-		8989EB0824B077F2002DD71C /* SunViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunViewController.swift; sourceTree = "<group>"; };
-		8989EB0A24B07A4F002DD71C /* JjlinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JjlinViewController.swift; sourceTree = "<group>"; };
 		89A48C6624B6DE2C00981471 /* NewSongViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSongViewController.swift; sourceTree = "<group>"; };
-		89D87E0E24BB008600FD29A6 /* SongOneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongOneViewController.swift; sourceTree = "<group>"; };
-		89D87E1024BC00BC00FD29A6 /* SongTwoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongTwoViewController.swift; sourceTree = "<group>"; };
-		89D87E1224BC409000FD29A6 /* SongThreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongThreeViewController.swift; sourceTree = "<group>"; };
-		89D87E1424BC4C6000FD29A6 /* SongFourViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongFourViewController.swift; sourceTree = "<group>"; };
-		89D87E1624BC5A9200FD29A6 /* SongFiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongFiveViewController.swift; sourceTree = "<group>"; };
-		89DEEB2024B1C9BD004B1915 /* HappyCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HappyCollectionViewController.swift; sourceTree = "<group>"; };
 		89F8FFDD24B96B3100B25677 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		89F8FFDF24B96FEB00B25677 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		CA2B0D2E029FE2A30261E3E9 /* Pods-Map.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Map.release.xcconfig"; path = "Target Support Files/Pods-Map/Pods-Map.release.xcconfig"; sourceTree = "<group>"; };
@@ -116,18 +88,11 @@
 			children = (
 				8907A61624AF421500EEED09 /* AppDelegate.swift */,
 				89F8FFDF24B96FEB00B25677 /* SignInViewController.swift */,
-				890F906924B1EEA50033B7CE /* 0703 */,
+				89883B8E24C931B900F76CFE /* TextFiledTestViewController.swift */,
 				8972CBBD24AF430500E94D81 /* TabBarViewController.swift */,
-				8989EAFE24B03C0A002DD71C /* SearchTableViewController.swift */,
 				8989EB0024B0559C002DD71C /* AddTableViewCell.swift */,
-				8917D03F24B1DC1A00464DC4 /* SongViewController.swift */,
 				89759AC824B30BBB00F2043F /* LiyicTableViewCell.swift */,
 				89A48C6624B6DE2C00981471 /* NewSongViewController.swift */,
-				89D87E1424BC4C6000FD29A6 /* SongFourViewController.swift */,
-				89D87E1024BC00BC00FD29A6 /* SongTwoViewController.swift */,
-				89D87E1624BC5A9200FD29A6 /* SongFiveViewController.swift */,
-				89D87E1224BC409000FD29A6 /* SongThreeViewController.swift */,
-				89D87E0E24BB008600FD29A6 /* SongOneViewController.swift */,
 				892508A924C2DB30007F68AF /* SongDetilViewController.swift */,
 				8907A61F24AF421A00EEED09 /* Assets.xcassets */,
 				8907A62124AF421A00EEED09 /* LaunchScreen.storyboard */,
@@ -137,21 +102,6 @@
 				4EDC41A524C2EB5A0060DE29 /* KenShi.mp3 */,
 			);
 			path = Map;
-			sourceTree = "<group>";
-		};
-		890F906924B1EEA50033B7CE /* 0703 */ = {
-			isa = PBXGroup;
-			children = (
-				8989EB0A24B07A4F002DD71C /* JjlinViewController.swift */,
-				8989EB0824B077F2002DD71C /* SunViewController.swift */,
-				8989EAFC24B03723002DD71C /* HomeViewController.swift */,
-				8989EB0624B07367002DD71C /* EasonViewController.swift */,
-				8989EB0424B06E43002DD71C /* MayViewController.swift */,
-				8989EB0224B05CD0002DD71C /* JayViewController.swift */,
-				8972CBBF24AF4A2700E94D81 /* MapViewController.swift */,
-				89DEEB2024B1C9BD004B1915 /* HappyCollectionViewController.swift */,
-			);
-			path = 0703;
 			sourceTree = "<group>";
 		};
 		A3031158DE5DCBCF63D88A44 /* Frameworks */ = {
@@ -297,28 +247,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8989EB0524B06E43002DD71C /* MayViewController.swift in Sources */,
-				89D87E1524BC4C6000FD29A6 /* SongFourViewController.swift in Sources */,
-				8989EB0724B07367002DD71C /* EasonViewController.swift in Sources */,
-				89D87E1124BC00BC00FD29A6 /* SongTwoViewController.swift in Sources */,
 				892508AA24C2DB30007F68AF /* SongDetilViewController.swift in Sources */,
-				89D87E1324BC409000FD29A6 /* SongThreeViewController.swift in Sources */,
-				89D87E1724BC5A9200FD29A6 /* SongFiveViewController.swift in Sources */,
 				8972CBBE24AF430500E94D81 /* TabBarViewController.swift in Sources */,
-				8989EB0924B077F2002DD71C /* SunViewController.swift in Sources */,
-				8972CBC024AF4A2700E94D81 /* MapViewController.swift in Sources */,
-				8989EAFF24B03C0A002DD71C /* SearchTableViewController.swift in Sources */,
-				8989EB0B24B07A4F002DD71C /* JjlinViewController.swift in Sources */,
-				8989EB0324B05CD0002DD71C /* JayViewController.swift in Sources */,
-				89D87E0F24BB008600FD29A6 /* SongOneViewController.swift in Sources */,
 				89759AC924B30BBB00F2043F /* LiyicTableViewCell.swift in Sources */,
 				8989EB0124B0559C002DD71C /* AddTableViewCell.swift in Sources */,
+				89883B8F24C931B900F76CFE /* TextFiledTestViewController.swift in Sources */,
 				89A48C6724B6DE2C00981471 /* NewSongViewController.swift in Sources */,
-				8917D04024B1DC1A00464DC4 /* SongViewController.swift in Sources */,
 				89F8FFE024B96FEB00B25677 /* SignInViewController.swift in Sources */,
 				8907A61724AF421500EEED09 /* AppDelegate.swift in Sources */,
-				8989EAFD24B03723002DD71C /* HomeViewController.swift in Sources */,
-				89DEEB2124B1C9BD004B1915 /* HappyCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -458,14 +394,15 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F74ZP5FC2A;
 				INFOPLIST_FILE = Map/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ntu.Map;
+				PRODUCT_BUNDLE_IDENTIFIER = "ntu-map";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -477,14 +414,15 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F74ZP5FC2A;
 				INFOPLIST_FILE = Map/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ntu.Map;
+				PRODUCT_BUNDLE_IDENTIFIER = "ntu-map";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

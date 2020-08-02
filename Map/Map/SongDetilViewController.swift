@@ -8,11 +8,17 @@
 
 import UIKit
 import SnapKit
+import AVFoundation
 
 class SongDetilViewController: UIViewController {
     var songTitleLabel: UILabel!
     var lyricTextView: UITextView!
     var singerImageView: UIImageView!
+    var playButton: UIButton!
+    var player: AVAudioPlayer?
+
+    
+    
     var songTitle: String = ""
     var songText: String = ""
     var singerImageTitle: String = ""
@@ -58,12 +64,60 @@ class SongDetilViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.top.equalTo(view.snp.top).offset(20)
         }
+        playButton = UIButton()
+        view.addSubview(playButton)
+        playButton.backgroundColor = .white
+        playButton.snp.makeConstraints { (make) -> Void in
+            make.width.height.equalTo(50)
+            make.centerY.equalTo(singerImageView.snp.centerY)
+            make.leading.equalTo(singerImageView.snp.trailing).offset(50)
+        }
+        
+        playButton.addTarget(self, action: #selector(playSound), for: .touchUpInside)
+        let playImage = UIImage(named: "play")
+        playButton.setImage(playImage, for: .normal)
+        let pauseImage = UIImage(named: "pause")
+        playButton.setImage(pauseImage, for: .selected)
         
         
+        
+        
+        setupMP3Player()
+        
+    }
+    func setupMP3Player() {
+          print("start playing mp3")
+          guard let url = Bundle.main.url(forResource: "Jay", withExtension: "mp3") else { return }
 
+          do {
+              try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+              try AVAudioSession.sharedInstance().setActive(true)
+
+              player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
+
+              
+
+          } catch let error {
+              print(error.localizedDescription)
+          }
+    }
+    
+    @objc func playSound() {
+        if playButton.isSelected == true {
+            print("pause Mp3")
+            playButton.isSelected = false
+            player?.pause()
+        }else if playButton.isSelected == false {
+            print("play Mp3")
+            playButton.isSelected = true
+            player?.play()
+        }
+        
+    }
+    
+   
     }
     
     
 
    
-}
