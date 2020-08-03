@@ -9,16 +9,16 @@
 import UIKit
 
 class AddTableViewCell: UITableViewCell {
-
-    func setTitle(text: String) { 
+    
+    func setTitle(text: String) {
         textLabel?.text = text
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         backgroundColor = .cyan
-
-             
+        
+        
     }
-
+    
 }

@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 
 class TextFiledTestViewController: UIViewController {
+    
     var oneTextFiled: UITextField!
     var twoTextFiled: UITextField!
     var oneButton: UIButton!
@@ -18,6 +19,7 @@ class TextFiledTestViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .white
+        
         
         oneTextFiled = UITextField()
         oneTextFiled.backgroundColor = .systemGray2
@@ -32,6 +34,8 @@ class TextFiledTestViewController: UIViewController {
             make.top.equalTo(view.snp.top).offset(70)
             
         }
+        
+        
         twoTextFiled = UITextField()
         twoTextFiled.backgroundColor = .systemGray2
         view.addSubview(twoTextFiled)
@@ -43,6 +47,8 @@ class TextFiledTestViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.top.equalTo(oneTextFiled.snp.bottom).offset(30)
         }
+        
+         
         oneButton = UIButton()
         oneButton.backgroundColor = .systemBlue
         view.addSubview(oneButton)
