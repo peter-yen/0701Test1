@@ -9,36 +9,22 @@
 import UIKit
 
 class TabBarViewController: UITabBarController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .white
-        
-//        let vc = MapViewController()
-//        vc.tabBarItem.image = UIImage(named: "favorite")
-//
-//        //功課：完成0701的作業，於HomeViewController做auto layout
-//        let vc2 = HomeViewController()
-//        vc2.tabBarItem.image = UIImage(named: "home")
-//
-        //功課2：AnimalTableViewController，顯示四種動物的table view
-        let vc1 = NewSongViewController()
-        vc1.tabBarItem.image = UIImage(named: "search")
-        
-        
-//        let layout = UICollectionViewFlowLayout()
-//        layout.scrollDirection = .vertical
-        let vc2 = TextFiledTestViewController()
-        //(collectionViewLayout: layout)
-        vc2.tabBarItem.image = UIImage(named: "iosph")
-        viewControllers = [vc1, vc2]
-//
-        
-        
-        
-    }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    view.backgroundColor = .white
     
-
-   
+    let vc1 = NewSongViewController()
+    print(vc1.navigationController)
+    vc1.tabBarItem.image = UIImage(named: "search")
+    
+    let vc2 = UINavigationController(rootViewController: TextFiledTestViewController())
+    print(vc2.navigationController)
+//    vc2.navigationController?.pushViewController(<#T##viewController: UIViewController##UIViewController#>, animated: <#T##Bool#>)
+    vc2.tabBarItem.image = UIImage(named: "iosph")
+    
+    viewControllers = [vc1, vc2]
+    
+  }
 
 }

@@ -9,6 +9,7 @@
 import UIKit
 import SnapKit
 
+//delegate拉出去做 extension
 class NewSongViewController: UIViewController , UITableViewDataSource , UITableViewDelegate {
     var singer = ["米津玄師", "A-Lin", "張惠妹", "李宗盛", "田馥甄"]
     var song = ["Loser", "好朋友的祝福", "掉了", "山丘", "我想我不會愛你"]
@@ -101,11 +102,12 @@ class NewSongViewController: UIViewController , UITableViewDataSource , UITableV
     override func viewDidLoad() {
     super.viewDidLoad()
     setTableView()
+//      navigationController?.pushViewController(<#T##viewController: UIViewController##UIViewController#>, animated: <#T##Bool#>)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         song.count
-        
+      
     }
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
