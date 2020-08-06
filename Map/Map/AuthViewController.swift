@@ -80,6 +80,7 @@ class AuthViewController: UIViewController {
   
   @objc func loginButtonDidTap() {
     navigationController?.pushViewController(RegisterNavigationController(), animated: true)
+
   }
 }
 

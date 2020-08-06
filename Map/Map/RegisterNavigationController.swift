@@ -69,12 +69,17 @@ class RegisterNavigationController: UIViewController {
             make.top.equalTo(passwordTextField.snp.bottom).offset(50)
         }
         
-        
+        registerButton.addTarget(self, action: #selector(registerButtonDidTap), for: .touchUpInside)
         
 
         
     }
     
+    @objc func registerButtonDidTap() {
+
+        print(11111)
+
+    }
     
     
 
