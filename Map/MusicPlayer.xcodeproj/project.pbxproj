@@ -15,7 +15,8 @@
 		892508AA24C2DB30007F68AF /* SongDetilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892508A924C2DB30007F68AF /* SongDetilViewController.swift */; };
 		8972CBBE24AF430500E94D81 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8972CBBD24AF430500E94D81 /* TabBarViewController.swift */; };
 		89759AC924B30BBB00F2043F /* LiyicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89759AC824B30BBB00F2043F /* LiyicTableViewCell.swift */; };
-		89883B8F24C931B900F76CFE /* TextFiledTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89883B8E24C931B900F76CFE /* TextFiledTestViewController.swift */; };
+		8987BC8B24DA86AA00815F0A /* RegisterNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8987BC8A24DA86AA00815F0A /* RegisterNavigationController.swift */; };
+		89883B8F24C931B900F76CFE /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89883B8E24C931B900F76CFE /* AuthViewController.swift */; };
 		8989EB0124B0559C002DD71C /* AddTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8989EB0024B0559C002DD71C /* AddTableViewCell.swift */; };
 		89A48C6724B6DE2C00981471 /* NewSongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A48C6624B6DE2C00981471 /* NewSongViewController.swift */; };
 		89F8FFDE24B96B3100B25677 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89F8FFDD24B96B3100B25677 /* GoogleService-Info.plist */; };
@@ -28,7 +29,7 @@
 		4EDC41A524C2EB5A0060DE29 /* KenShi.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = KenShi.mp3; sourceTree = "<group>"; };
 		4EDC41A724C2EB5B0060DE29 /* Jay.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Jay.mp3; sourceTree = "<group>"; };
 		737FF6F4B73E864C90D43847 /* Pods_Map.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Map.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8907A61324AF421500EEED09 /* Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Map.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8907A61324AF421500EEED09 /* MusicPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8907A61624AF421500EEED09 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8907A61F24AF421A00EEED09 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8907A62224AF421A00EEED09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -36,7 +37,8 @@
 		892508A924C2DB30007F68AF /* SongDetilViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongDetilViewController.swift; sourceTree = "<group>"; };
 		8972CBBD24AF430500E94D81 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		89759AC824B30BBB00F2043F /* LiyicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiyicTableViewCell.swift; sourceTree = "<group>"; };
-		89883B8E24C931B900F76CFE /* TextFiledTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFiledTestViewController.swift; sourceTree = "<group>"; };
+		8987BC8A24DA86AA00815F0A /* RegisterNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterNavigationController.swift; sourceTree = "<group>"; };
+		89883B8E24C931B900F76CFE /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		8989EB0024B0559C002DD71C /* AddTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTableViewCell.swift; sourceTree = "<group>"; };
 		89A48C6624B6DE2C00981471 /* NewSongViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSongViewController.swift; sourceTree = "<group>"; };
 		89F8FFDD24B96B3100B25677 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -78,7 +80,7 @@
 		8907A61424AF421500EEED09 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8907A61324AF421500EEED09 /* Map.app */,
+				8907A61324AF421500EEED09 /* MusicPlayer.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -88,7 +90,8 @@
 			children = (
 				8907A61624AF421500EEED09 /* AppDelegate.swift */,
 				89F8FFDF24B96FEB00B25677 /* SignInViewController.swift */,
-				89883B8E24C931B900F76CFE /* TextFiledTestViewController.swift */,
+				89883B8E24C931B900F76CFE /* AuthViewController.swift */,
+				8987BC8A24DA86AA00815F0A /* RegisterNavigationController.swift */,
 				8972CBBD24AF430500E94D81 /* TabBarViewController.swift */,
 				8989EB0024B0559C002DD71C /* AddTableViewCell.swift */,
 				89759AC824B30BBB00F2043F /* LiyicTableViewCell.swift */,
@@ -115,9 +118,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8907A61224AF421500EEED09 /* Map */ = {
+		8907A61224AF421500EEED09 /* MusicPlayer */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8907A62724AF421A00EEED09 /* Build configuration list for PBXNativeTarget "Map" */;
+			buildConfigurationList = 8907A62724AF421A00EEED09 /* Build configuration list for PBXNativeTarget "MusicPlayer" */;
 			buildPhases = (
 				ECD0B92E28D553A8B51DC85F /* [CP] Check Pods Manifest.lock */,
 				8907A60F24AF421500EEED09 /* Sources */,
@@ -130,9 +133,9 @@
 			);
 			dependencies = (
 			);
-			name = Map;
+			name = MusicPlayer;
 			productName = Map;
-			productReference = 8907A61324AF421500EEED09 /* Map.app */;
+			productReference = 8907A61324AF421500EEED09 /* MusicPlayer.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -150,7 +153,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8907A60E24AF421500EEED09 /* Build configuration list for PBXProject "Map" */;
+			buildConfigurationList = 8907A60E24AF421500EEED09 /* Build configuration list for PBXProject "MusicPlayer" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -163,7 +166,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8907A61224AF421500EEED09 /* Map */,
+				8907A61224AF421500EEED09 /* MusicPlayer */,
 			);
 		};
 /* End PBXProject section */
@@ -247,11 +250,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8987BC8B24DA86AA00815F0A /* RegisterNavigationController.swift in Sources */,
 				892508AA24C2DB30007F68AF /* SongDetilViewController.swift in Sources */,
 				8972CBBE24AF430500E94D81 /* TabBarViewController.swift in Sources */,
 				89759AC924B30BBB00F2043F /* LiyicTableViewCell.swift in Sources */,
 				8989EB0124B0559C002DD71C /* AddTableViewCell.swift in Sources */,
-				89883B8F24C931B900F76CFE /* TextFiledTestViewController.swift in Sources */,
+				89883B8F24C931B900F76CFE /* AuthViewController.swift in Sources */,
 				89A48C6724B6DE2C00981471 /* NewSongViewController.swift in Sources */,
 				89F8FFE024B96FEB00B25677 /* SignInViewController.swift in Sources */,
 				8907A61724AF421500EEED09 /* AppDelegate.swift in Sources */,
@@ -429,7 +433,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8907A60E24AF421500EEED09 /* Build configuration list for PBXProject "Map" */ = {
+		8907A60E24AF421500EEED09 /* Build configuration list for PBXProject "MusicPlayer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8907A62524AF421A00EEED09 /* Debug */,
@@ -438,7 +442,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8907A62724AF421A00EEED09 /* Build configuration list for PBXNativeTarget "Map" */ = {
+		8907A62724AF421A00EEED09 /* Build configuration list for PBXNativeTarget "MusicPlayer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8907A62824AF421A00EEED09 /* Debug */,

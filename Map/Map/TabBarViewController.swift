@@ -18,7 +18,7 @@ class TabBarViewController: UITabBarController {
     print(vc1.navigationController)
     vc1.tabBarItem.image = UIImage(named: "search")
     
-    let vc2 = UINavigationController(rootViewController: TextFiledTestViewController())
+    let vc2 = UINavigationController(rootViewController: AuthViewController())
     print(vc2.navigationController)
 //    vc2.navigationController?.pushViewController(<#T##viewController: UIViewController##UIViewController#>, animated: <#T##Bool#>)
     vc2.tabBarItem.image = UIImage(named: "iosph")
