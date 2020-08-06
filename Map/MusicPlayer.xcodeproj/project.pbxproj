@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4EDC41A924C2EB5B0060DE29 /* KenShi.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4EDC41A524C2EB5A0060DE29 /* KenShi.mp3 */; };
 		4EDC41AB24C2EB5B0060DE29 /* Jay.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4EDC41A724C2EB5B0060DE29 /* Jay.mp3 */; };
+		6E8CB6C5B444E7E1264C5B5C /* Pods_MusicPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAA08731A1A19761A8BB5D8F /* Pods_MusicPlayer.framework */; };
 		8907A61724AF421500EEED09 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8907A61624AF421500EEED09 /* AppDelegate.swift */; };
 		8907A62024AF421A00EEED09 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8907A61F24AF421A00EEED09 /* Assets.xcassets */; };
 		8907A62324AF421A00EEED09 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8907A62124AF421A00EEED09 /* LaunchScreen.storyboard */; };
@@ -21,14 +22,14 @@
 		89A48C6724B6DE2C00981471 /* NewSongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A48C6624B6DE2C00981471 /* NewSongViewController.swift */; };
 		89F8FFDE24B96B3100B25677 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89F8FFDD24B96B3100B25677 /* GoogleService-Info.plist */; };
 		89F8FFE024B96FEB00B25677 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F8FFDF24B96FEB00B25677 /* SignInViewController.swift */; };
-		AFB5E0A878401C859F7F7431 /* Pods_Map.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 737FF6F4B73E864C90D43847 /* Pods_Map.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		31E3A6C374E72560FFC41FA1 /* Pods-MusicPlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicPlayer.debug.xcconfig"; path = "Target Support Files/Pods-MusicPlayer/Pods-MusicPlayer.debug.xcconfig"; sourceTree = "<group>"; };
 		33AE9D9D0C3FE3FEF74EF9AB /* Pods-Map.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Map.debug.xcconfig"; path = "Target Support Files/Pods-Map/Pods-Map.debug.xcconfig"; sourceTree = "<group>"; };
 		4EDC41A524C2EB5A0060DE29 /* KenShi.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = KenShi.mp3; sourceTree = "<group>"; };
 		4EDC41A724C2EB5B0060DE29 /* Jay.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Jay.mp3; sourceTree = "<group>"; };
-		737FF6F4B73E864C90D43847 /* Pods_Map.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Map.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A2842F64A39CD6CC7473DEC /* Pods-MusicPlayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicPlayer.release.xcconfig"; path = "Target Support Files/Pods-MusicPlayer/Pods-MusicPlayer.release.xcconfig"; sourceTree = "<group>"; };
 		8907A61324AF421500EEED09 /* MusicPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8907A61624AF421500EEED09 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8907A61F24AF421A00EEED09 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -43,6 +44,7 @@
 		89A48C6624B6DE2C00981471 /* NewSongViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSongViewController.swift; sourceTree = "<group>"; };
 		89F8FFDD24B96B3100B25677 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		89F8FFDF24B96FEB00B25677 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		BAA08731A1A19761A8BB5D8F /* Pods_MusicPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MusicPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA2B0D2E029FE2A30261E3E9 /* Pods-Map.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Map.release.xcconfig"; path = "Target Support Files/Pods-Map/Pods-Map.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -51,7 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AFB5E0A878401C859F7F7431 /* Pods_Map.framework in Frameworks */,
+				6E8CB6C5B444E7E1264C5B5C /* Pods_MusicPlayer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +65,8 @@
 			children = (
 				33AE9D9D0C3FE3FEF74EF9AB /* Pods-Map.debug.xcconfig */,
 				CA2B0D2E029FE2A30261E3E9 /* Pods-Map.release.xcconfig */,
+				31E3A6C374E72560FFC41FA1 /* Pods-MusicPlayer.debug.xcconfig */,
+				6A2842F64A39CD6CC7473DEC /* Pods-MusicPlayer.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -70,7 +74,7 @@
 		8907A60A24AF421500EEED09 = {
 			isa = PBXGroup;
 			children = (
-				8907A61524AF421500EEED09 /* Map */,
+				8907A61524AF421500EEED09 /* MusicPlayer */,
 				8907A61424AF421500EEED09 /* Products */,
 				2282BF0379E42F748D12B8BC /* Pods */,
 				A3031158DE5DCBCF63D88A44 /* Frameworks */,
@@ -85,7 +89,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8907A61524AF421500EEED09 /* Map */ = {
+		8907A61524AF421500EEED09 /* MusicPlayer */ = {
 			isa = PBXGroup;
 			children = (
 				8907A61624AF421500EEED09 /* AppDelegate.swift */,
@@ -104,13 +108,13 @@
 				4EDC41A724C2EB5B0060DE29 /* Jay.mp3 */,
 				4EDC41A524C2EB5A0060DE29 /* KenShi.mp3 */,
 			);
-			path = Map;
+			path = MusicPlayer;
 			sourceTree = "<group>";
 		};
 		A3031158DE5DCBCF63D88A44 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				737FF6F4B73E864C90D43847 /* Pods_Map.framework */,
+				BAA08731A1A19761A8BB5D8F /* Pods_MusicPlayer.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -193,15 +197,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Map/Pods-Map-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-MusicPlayer/Pods-MusicPlayer-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Map/Pods-Map-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-MusicPlayer/Pods-MusicPlayer-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Map/Pods-Map-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MusicPlayer/Pods-MusicPlayer-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B0E8108247E300B8FF013435 /* [CP] Embed Pods Frameworks */ = {
@@ -210,15 +214,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Map/Pods-Map-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-MusicPlayer/Pods-MusicPlayer-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Map/Pods-Map-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-MusicPlayer/Pods-MusicPlayer-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Map/Pods-Map-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MusicPlayer/Pods-MusicPlayer-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		ECD0B92E28D553A8B51DC85F /* [CP] Check Pods Manifest.lock */ = {
@@ -236,7 +240,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Map-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-MusicPlayer-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -392,19 +396,19 @@
 		};
 		8907A62824AF421A00EEED09 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 33AE9D9D0C3FE3FEF74EF9AB /* Pods-Map.debug.xcconfig */;
+			baseConfigurationReference = 31E3A6C374E72560FFC41FA1 /* Pods-MusicPlayer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F74ZP5FC2A;
-				INFOPLIST_FILE = Map/Info.plist;
+				INFOPLIST_FILE = MusicPlayer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "ntu-map";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = MusicPlayer;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -412,19 +416,19 @@
 		};
 		8907A62924AF421A00EEED09 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CA2B0D2E029FE2A30261E3E9 /* Pods-Map.release.xcconfig */;
+			baseConfigurationReference = 6A2842F64A39CD6CC7473DEC /* Pods-MusicPlayer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F74ZP5FC2A;
-				INFOPLIST_FILE = Map/Info.plist;
+				INFOPLIST_FILE = MusicPlayer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "ntu-map";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = MusicPlayer;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

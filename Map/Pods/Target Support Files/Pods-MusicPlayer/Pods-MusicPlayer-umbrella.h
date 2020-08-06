@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_MapVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_MapVersionString[];
+FOUNDATION_EXPORT double Pods_MusicPlayerVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_MusicPlayerVersionString[];
 
