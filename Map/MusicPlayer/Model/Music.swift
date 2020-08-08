@@ -17,6 +17,5 @@ class Music {
         self.song = song
         self.imangeArray = imangeArray
         self.lyric = lyric
-        
     }
 }

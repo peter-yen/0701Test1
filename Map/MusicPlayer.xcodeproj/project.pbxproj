@@ -19,7 +19,6 @@
 		8987BC8B24DA86AA00815F0A /* RegisterNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8987BC8A24DA86AA00815F0A /* RegisterNavigationController.swift */; };
 		89883B8F24C931B900F76CFE /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89883B8E24C931B900F76CFE /* AuthViewController.swift */; };
 		8989B8A824DD35030084F984 /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8989B8A724DD35030084F984 /* Music.swift */; };
-		8989EB0124B0559C002DD71C /* AddTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8989EB0024B0559C002DD71C /* AddTableViewCell.swift */; };
 		89A48C6724B6DE2C00981471 /* NewSongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A48C6624B6DE2C00981471 /* NewSongViewController.swift */; };
 		89F8FFDE24B96B3100B25677 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89F8FFDD24B96B3100B25677 /* GoogleService-Info.plist */; };
 		89F8FFE024B96FEB00B25677 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F8FFDF24B96FEB00B25677 /* SignInViewController.swift */; };
@@ -42,7 +41,6 @@
 		8987BC8A24DA86AA00815F0A /* RegisterNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterNavigationController.swift; sourceTree = "<group>"; };
 		89883B8E24C931B900F76CFE /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		8989B8A724DD35030084F984 /* Music.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
-		8989EB0024B0559C002DD71C /* AddTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTableViewCell.swift; sourceTree = "<group>"; };
 		89A48C6624B6DE2C00981471 /* NewSongViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSongViewController.swift; sourceTree = "<group>"; };
 		89F8FFDD24B96B3100B25677 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		89F8FFDF24B96FEB00B25677 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -73,6 +71,34 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		4E6F404D24DE430B00B55B46 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8989B8A724DD35030084F984 /* Music.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4E6F404E24DE434300B55B46 /* Song */ = {
+			isa = PBXGroup;
+			children = (
+				892508A924C2DB30007F68AF /* SongDetilViewController.swift */,
+				89A48C6624B6DE2C00981471 /* NewSongViewController.swift */,
+				89759AC824B30BBB00F2043F /* LiyicTableViewCell.swift */,
+			);
+			path = Song;
+			sourceTree = "<group>";
+		};
+		4E6F404F24DE437800B55B46 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				8987BC8A24DA86AA00815F0A /* RegisterNavigationController.swift */,
+				89F8FFDF24B96FEB00B25677 /* SignInViewController.swift */,
+				89883B8E24C931B900F76CFE /* AuthViewController.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
 		8907A60A24AF421500EEED09 = {
 			isa = PBXGroup;
 			children = (
@@ -95,15 +121,10 @@
 			isa = PBXGroup;
 			children = (
 				8907A61624AF421500EEED09 /* AppDelegate.swift */,
-				89F8FFDF24B96FEB00B25677 /* SignInViewController.swift */,
-				89883B8E24C931B900F76CFE /* AuthViewController.swift */,
-				8987BC8A24DA86AA00815F0A /* RegisterNavigationController.swift */,
 				8972CBBD24AF430500E94D81 /* TabBarViewController.swift */,
-				8989EB0024B0559C002DD71C /* AddTableViewCell.swift */,
-				89759AC824B30BBB00F2043F /* LiyicTableViewCell.swift */,
-				89A48C6624B6DE2C00981471 /* NewSongViewController.swift */,
-				8989B8A724DD35030084F984 /* Music.swift */,
-				892508A924C2DB30007F68AF /* SongDetilViewController.swift */,
+				4E6F404F24DE437800B55B46 /* Auth */,
+				4E6F404E24DE434300B55B46 /* Song */,
+				4E6F404D24DE430B00B55B46 /* Model */,
 				8907A61F24AF421A00EEED09 /* Assets.xcassets */,
 				8907A62124AF421A00EEED09 /* LaunchScreen.storyboard */,
 				89F8FFDD24B96B3100B25677 /* GoogleService-Info.plist */,
@@ -261,7 +282,6 @@
 				892508AA24C2DB30007F68AF /* SongDetilViewController.swift in Sources */,
 				8972CBBE24AF430500E94D81 /* TabBarViewController.swift in Sources */,
 				89759AC924B30BBB00F2043F /* LiyicTableViewCell.swift in Sources */,
-				8989EB0124B0559C002DD71C /* AddTableViewCell.swift in Sources */,
 				89883B8F24C931B900F76CFE /* AuthViewController.swift in Sources */,
 				89A48C6724B6DE2C00981471 /* NewSongViewController.swift in Sources */,
 				8989B8A824DD35030084F984 /* Music.swift in Sources */,
