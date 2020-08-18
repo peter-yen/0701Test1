@@ -8,7 +8,10 @@
 
 import UIKit
 import SnapKit
-//AuthViewController
+import Firebase
+import Toast_Swift
+
+
 class AuthViewController: UIViewController {
   var emailTextField: UITextField! //emailTextField
   var passwordTextField: UITextField! //passwordTextField
@@ -18,11 +21,14 @@ class AuthViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    
+    
     view.backgroundColor = .white
     
     emailTextField = UITextField()
     emailTextField.backgroundColor = .systemGray2
     emailTextField.delegate = self
+    
     view.addSubview(emailTextField)
     emailTextField.borderStyle = .roundedRect
     emailTextField.placeholder = "電話號碼、用戶名稱或電子郵件"
@@ -57,6 +63,7 @@ class AuthViewController: UIViewController {
       make.centerX.equalToSuperview()
       make.top.equalTo(passwordTextField.snp.bottom).offset(50)
     }
+    loginButton.addTarget(self, action: #selector(loginButtonDidTap), for: .touchUpInside)
     
     registerButton = UIButton()
     view.addSubview(registerButton)
@@ -70,15 +77,29 @@ class AuthViewController: UIViewController {
     
     
     
-    registerButton.addTarget(self, action: #selector(loginButtonDidTap), for: .touchUpInside)
-//    navigationController?.pushViewController(RegisterNavigationController(), animated: true)
-//    present(RegisterNavigationController(), animated: true) {
-//        <#code#>
-//    }
+    registerButton.addTarget(self, action: #selector(registerButtonDidTap), for: .touchUpInside)
+
   }
+    
+    @objc func loginButtonDidTap() {
+        if let email = emailTextField.text,
+            let password = passwordTextField.text {
+            
+            Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
+                if let err = error {
+                    self.view.makeToast(err.localizedDescription)
+                }else {
+                    self.view.makeToast("登入成功")
+                    let tabBar = TabBarViewController()
+                    self.present(tabBar, animated: true, completion: nil)
+                }
+            }
+        }
+
+    }
   
   
-  @objc func loginButtonDidTap() {
+  @objc func registerButtonDidTap() {
     navigationController?.pushViewController(RegisterNavigationController(), animated: true)
 
   }

@@ -11,5 +11,5 @@ target 'MusicPlayer' do
   pod 'Firebase/Analytics'
   pod 'Firebase/Auth'
   pod 'GoogleSignIn'
-
+  pod 'Toast-Swift'
 end

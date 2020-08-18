@@ -47,10 +47,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate , GIDSignInDelegate{
         GIDSignIn.sharedInstance().delegate = self
         window = UIWindow()
         window?.makeKeyAndVisible()
-        let vc = TabBarViewController()
+//        let vc = TabBarViewController()
 //        let vc = SignInViewController()
+        let vc = AuthViewController()
 
-        window?.rootViewController = vc
+        window?.rootViewController = UINavigationController(rootViewController: vc)
         return true
             }
     @available(iOS 9.0, *)

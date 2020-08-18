@@ -8,6 +8,8 @@
 
 import UIKit
 import SnapKit
+import Firebase
+import Toast_Swift
 
 class RegisterNavigationController: UIViewController {
     var nameTextfield: UITextField!
@@ -18,6 +20,8 @@ class RegisterNavigationController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        
+        self.view.makeToast("HElloooooo")
         
         nameTextfield = UITextField()
         view.addSubview(nameTextfield)
@@ -76,6 +80,21 @@ class RegisterNavigationController: UIViewController {
     }
     
     @objc func registerButtonDidTap() {
+        
+        if let name = nameTextfield.text ,
+            let email = emailTextField.text ,
+            let password = passwordTextField.text {
+            Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
+                print("result: \(result), error: \(error)")
+                if let error = error {
+                    self.view.makeToast(error.localizedDescription)
+                } else {
+                    self.view.makeToast("Succes")
+                    self.navigationController?.popViewController(animated: true)
+                }
+                
+            }
+        }
 
         print(11111)
 
