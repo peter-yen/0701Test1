@@ -7,23 +7,36 @@
 //
 
 import UIKit
+import FirebaseAuth
+import Firebase
 
 class TabBarViewController: UITabBarController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .white
+
+    var vc: UIViewController?
+    if let user = Auth.auth().currentUser {
+//               let tabbarVC = TabBarViewController()
+//               vc = tabbarVC
+        view.makeToast("Nice to meet you")
+           }else {
+               let authVC = AuthViewController()
+          vc =  UINavigationController(rootViewController: authVC)
+        present(vc!, animated: true, completion: nil)
+           }
     
-    let vc1 = NewSongViewController()
-    print(vc1.navigationController)
-    vc1.tabBarItem.image = UIImage(named: "search")
     
-    let vc2 = UINavigationController(rootViewController: AuthViewController())
-    print(vc2.navigationController)
-//    vc2.navigationController?.pushViewController(<#T##viewController: UIViewController##UIViewController#>, animated: <#T##Bool#>)
-    vc2.tabBarItem.image = UIImage(named: "iosph")
+    let newSongViewController = NewSongViewController()
+    print(newSongViewController.navigationController)
+    newSongViewController.tabBarItem.image = UIImage(named: "search")
     
-    viewControllers = [vc1, vc2]
+    let profileViewController = ProfileViewController()
+
+    profileViewController.tabBarItem.image = UIImage(named: "iosph")
+    
+    viewControllers = [newSongViewController, profileViewController]
     
   }
 

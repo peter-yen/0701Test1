@@ -6,7 +6,7 @@ target 'MusicPlayer' do
   use_frameworks!
 
   # Pods for MusicPlayer
-
+  pod 'Firebase/Firestore'
   pod 'SnapKit'
   pod 'Firebase/Analytics'
   pod 'Firebase/Auth'

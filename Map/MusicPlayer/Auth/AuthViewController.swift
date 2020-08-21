@@ -44,6 +44,7 @@ class AuthViewController: UIViewController {
     passwordTextField = UITextField()
     passwordTextField.backgroundColor = .systemGray2
     view.addSubview(passwordTextField)
+    passwordTextField.isSecureTextEntry = true
     passwordTextField.borderStyle = .roundedRect
     passwordTextField.placeholder = "密碼"
     passwordTextField.snp.makeConstraints { (make) -> Void in
@@ -74,9 +75,6 @@ class AuthViewController: UIViewController {
         make.top.equalTo(loginButton.snp.bottom).offset(50)
         make.trailing.equalTo(view.snp.trailing).offset(-50)
     }
-    
-    
-    
     registerButton.addTarget(self, action: #selector(registerButtonDidTap), for: .touchUpInside)
 
   }

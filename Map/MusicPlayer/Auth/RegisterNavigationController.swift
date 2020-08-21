@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 import Firebase
 import Toast_Swift
+import FirebaseFirestore
 
 class RegisterNavigationController: UIViewController {
     var nameTextfield: UITextField!
@@ -21,7 +22,7 @@ class RegisterNavigationController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        self.view.makeToast("HElloooooo")
+        self.view.makeToast("HEllO")
         
         nameTextfield = UITextField()
         view.addSubview(nameTextfield)
@@ -51,6 +52,7 @@ class RegisterNavigationController: UIViewController {
         
         passwordTextField = UITextField()
         view.addSubview(passwordTextField)
+        passwordTextField.isSecureTextEntry = true
         passwordTextField.backgroundColor = .systemGray2
         passwordTextField.borderStyle = .roundedRect
         passwordTextField.placeholder = "密碼"
@@ -89,8 +91,18 @@ class RegisterNavigationController: UIViewController {
                 if let error = error {
                     self.view.makeToast(error.localizedDescription)
                 } else {
-                    self.view.makeToast("Succes")
-                    self.navigationController?.popViewController(animated: true)
+                    
+                    let dictionary: [String:Any] = ["email": email,
+                                                    "password": password,
+                                                    "name": name]
+                    if let uid = Auth.auth().currentUser?.uid {
+                        Firestore.firestore().collection("Users").document(uid).setData(dictionary) { (error) in
+                            print("error: \(error)")
+                            self.view.makeToast("Succes")
+                            self.navigationController?.popViewController(animated: true)
+                        }
+                    }
+                    
                 }
                 
             }
