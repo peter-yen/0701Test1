@@ -63,7 +63,7 @@ class ProfileViewController: UIViewController {
           }
         signOutButton = UIButton()
         view.addSubview(signOutButton)
-        signOutButton.setTitle("Button", for: .normal)
+        signOutButton.setTitle("Sign Out", for: .normal)
         signOutButton.addTarget(self, action: #selector(signOut), for: .touchUpInside)
         signOutButton.snp.makeConstraints { (m) in
             m.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-20)
@@ -75,9 +75,9 @@ class ProfileViewController: UIViewController {
         do {
             try Auth.auth().signOut()
             self.view.makeToast("成功登出")
-            let authVC = UINavigationController(rootViewController: AuthViewController())
-//            authVC.modalPresentationStyle = .fullScreen
-            self.present(authVC, animated: true, completion: nil)
+            let authNavigationController = UINavigationController(rootViewController: AuthViewController())
+            authNavigationController.isModalInPresentation = true
+            self.present(authNavigationController, animated: true, completion: nil)
             
         } catch {
             self.view.makeToast("無法登出")

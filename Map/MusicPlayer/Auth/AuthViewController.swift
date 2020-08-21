@@ -89,8 +89,7 @@ class AuthViewController: UIViewController {
                 }else {
                     self.view.makeToast("登入成功")
                     let tabBar = TabBarViewController()
-                    self.present(tabBar, animated: true, completion: nil)
-                }
+                    self.dismiss(animated: true, completion: nil)                }
             }
         }
 
