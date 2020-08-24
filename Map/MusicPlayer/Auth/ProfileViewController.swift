@@ -91,8 +91,8 @@ class ProfileViewController: UIViewController {
             try Auth.auth().signOut()
             self.view.makeToast("成功登出")
             let authNavigationController = UINavigationController(rootViewController: AuthViewController())
-            authNavigationController.modalPresentationStyle = .fullScreen
-//            authNavigationController.isModalInPresentation = true
+//            authNavigationController.modalPresentationStyle = .fullScreen
+            authNavigationController.isModalInPresentation = true
             self.present(authNavigationController, animated: true, completion: nil)
             
         } catch {
