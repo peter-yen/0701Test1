@@ -9,6 +9,7 @@
 import UIKit
 import SnapKit
 import Firebase
+import FirebaseAuth
 import Toast_Swift
 
 
@@ -88,7 +89,6 @@ class AuthViewController: UIViewController {
                     self.view.makeToast(err.localizedDescription)
                 }else {
                     self.view.makeToast("登入成功")
-                    let tabBar = TabBarViewController()
                     self.dismiss(animated: true, completion: nil)                }
             }
         }
@@ -97,7 +97,9 @@ class AuthViewController: UIViewController {
   
   
   @objc func registerButtonDidTap() {
-    navigationController?.pushViewController(RegisterNavigationController(), animated: true)
+    let stepOneViewController = StepOneViewController()
+    navigationController?.pushViewController(stepOneViewController, animated: true)
+//    present(stepOneViewController, animated: true, completion: nil)
 
   }
 }

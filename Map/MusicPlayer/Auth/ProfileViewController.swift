@@ -9,58 +9,63 @@
 import UIKit
 import SnapKit
 import FirebaseAuth
+import FirebaseFirestore
 
 class ProfileViewController: UIViewController {
     
-    var emailLabel: UILabel!
-    var nameLabel: UILabel!
+    var navigationView: UIView!
+    var tableView: UITableView!
+    var avatarImageView: UIImageView!
     var signOutButton: UIButton!
-    var profileImageButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureLayout()
         view.backgroundColor = .red
-        
-        
-        
+    
+    }
+    override func viewWillAppear(_ animated: Bool) {
         if let user = Auth.auth().currentUser {
-            emailLabel.text = user.email
+//            emailLabel.text = user.email
         }
         
-  
-        
     }
+          
     
     func configureLayout() {
         
-        profileImageButton = UIButton()
-        view.addSubview(profileImageButton)
-        profileImageButton.backgroundColor = .white
-        profileImageButton.snp.makeConstraints { (m) in
-            m.width.height.equalTo(50)
-            m.left.equalToSuperview().offset(20)
-            m.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(10)
+        navigationView = UIView()
+        navigationView.backgroundColor = .green
+        view.addSubview(navigationView)
+        navigationView.snp.makeConstraints { (m) in
+            m.top.left.right.equalToSuperview()
+            m.height.equalTo(250)
         }
-        profileImageButton.addTarget(self, action: #selector(profileImageButtonDidTap), for: .touchUpInside)
+        avatarImageView = UIImageView()
+        view.addSubview(avatarImageView)
+        avatarImageView.image = UIImage(named: "Hebe")
+        avatarImageView.contentMode = .scaleAspectFill
+        avatarImageView.clipsToBounds = true
+        avatarImageView.layer.cornerRadius = 60
+        avatarImageView.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(avatarImageViewDidTap))
+        avatarImageView.addGestureRecognizer(tap)
+        avatarImageView.snp.makeConstraints { (m) in
+            m.centerX.centerY.equalTo(navigationView)
+            m.height.width.equalTo(120)
+        }
         
-        
-        
-          emailLabel = UILabel()
-          view.addSubview(emailLabel)
-          emailLabel.text = "test@email.com"
-          emailLabel.snp.makeConstraints { (m)  in
-            m.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(20)
-              m.centerX.equalToSuperview()
-          }
-          
-          nameLabel = UILabel()
-          view.addSubview(nameLabel)
-          nameLabel.text = "Name"
-          nameLabel.snp.makeConstraints { (m) in
-              m.top.equalTo(emailLabel.snp.bottom).offset(20)
-              m.centerX.equalToSuperview()
-          }
+        tableView = UITableView()
+        tableView.backgroundColor = .blue
+        view.addSubview(tableView)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.snp.makeConstraints { (m) in
+            m.top.equalTo(navigationView.snp.bottom)
+            m.bottom.right.left.equalToSuperview()
+        }
+         
         signOutButton = UIButton()
         view.addSubview(signOutButton)
         signOutButton.setTitle("Sign Out", for: .normal)
@@ -70,13 +75,24 @@ class ProfileViewController: UIViewController {
             m.centerX.equalToSuperview()
         }
     }
+    @objc func avatarImageViewDidTap() {
+        
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        self.present(imagePickerController, animated: true, completion: nil)
+        
+        
+        
+        
+    }
     
     @objc func signOut() {
         do {
             try Auth.auth().signOut()
             self.view.makeToast("成功登出")
             let authNavigationController = UINavigationController(rootViewController: AuthViewController())
-            authNavigationController.isModalInPresentation = true
+            authNavigationController.modalPresentationStyle = .fullScreen
+//            authNavigationController.isModalInPresentation = true
             self.present(authNavigationController, animated: true, completion: nil)
             
         } catch {
@@ -84,8 +100,90 @@ class ProfileViewController: UIViewController {
         }
         
       }
-    @objc func profileImageButtonDidTap() {
-        print(1111)
-    }
+    
+    
    
+}
+
+
+extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate { //這個是能讀取本地相簿的方法
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[.originalImage] as? UIImage {
+            self.avatarImageView.image = image
+        }
+        self.dismiss(animated: true, completion: nil )
+    }
+    
+    
+}
+
+
+extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")!
+        cell.backgroundColor = .white
+        if indexPath.row == 0 {
+            cell.textLabel?.text = "Email"
+            if let user = Auth.auth().currentUser {
+                if let email = user.email {
+                    let view = UIView()
+                    view.frame = CGRect(x: 0, y: 0, width: 200, height: cell.frame.height) //accessory意思為右邊的意思
+                    let label = UILabel()
+                    label.text = email
+                    view.addSubview(label)
+                    label.textAlignment = .center
+                    label.snp.makeConstraints { (m) in
+                        m.margins.equalToSuperview()
+                    }
+                    cell.accessoryView = view
+
+                }
+            }
+        } else if indexPath.row == 1 {
+            cell.textLabel?.text = "Name"
+            if let user = Auth.auth().currentUser {
+            if let email = user.email {
+                let view = UIView()
+                view.frame = CGRect(x: 0, y: 0, width: 200, height: cell.frame.height) //accessory意思為右邊的意思
+                let label = UILabel()
+                label.text = email
+                view.addSubview(label)
+                label.textAlignment = .center
+                label.snp.makeConstraints { (m) in
+                    m.margins.equalToSuperview()
+                }
+                cell.accessoryView = view
+                }
+            }
+        } else {
+            
+            cell.textLabel?.text = "sdf"
+        }
+        return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if let uid = Auth.auth().currentUser?.uid { //Get是拿資料，Set是存資料
+            Firestore.firestore().collection("Users").document(uid).getDocument { (snapshot, err) in
+                if let err = err {
+                    self.view.makeToast(err.localizedDescription)
+                    return
+            }
+                if let dictionary = snapshot?.data() {
+                    if let email = dictionary["email"] as? String,
+                        let name = dictionary["name"] as? String {
+                        print("email: \(email),\nname:\(name)")
+                    }
+                }
+            }
+        }
+        
+    }
+    
+    
 }

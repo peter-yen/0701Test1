@@ -31,7 +31,7 @@ class TabBarViewController: UITabBarController {
     }
 
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) { //程式跑的時間太快，在viewDidLoad打會出現不及
         super.viewDidAppear(animated)
         print("viewDidApear")
         
@@ -41,6 +41,8 @@ class TabBarViewController: UITabBarController {
             let authViewController = AuthViewController()
             let authNavigationController = UINavigationController(rootViewController: authViewController)
                     authNavigationController.isModalInPresentation = true
+                    //上面的是，present的視窗不會被拉下來
+//                    authViewController.modalPresentationStyle = .fullScreen
             present(authNavigationController, animated: true, completion: nil)
         }
 

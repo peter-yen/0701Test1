@@ -14,6 +14,7 @@
 		8907A62024AF421A00EEED09 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8907A61F24AF421A00EEED09 /* Assets.xcassets */; };
 		8907A62324AF421A00EEED09 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8907A62124AF421A00EEED09 /* LaunchScreen.storyboard */; };
 		892508AA24C2DB30007F68AF /* SongDetilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892508A924C2DB30007F68AF /* SongDetilViewController.swift */; };
+		89281A3C24F17D3F00212D0A /* StepThreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89281A3B24F17D3F00212D0A /* StepThreeViewController.swift */; };
 		8972CBBE24AF430500E94D81 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8972CBBD24AF430500E94D81 /* TabBarViewController.swift */; };
 		89759AC924B30BBB00F2043F /* LiyicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89759AC824B30BBB00F2043F /* LiyicTableViewCell.swift */; };
 		8987BC8B24DA86AA00815F0A /* RegisterNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8987BC8A24DA86AA00815F0A /* RegisterNavigationController.swift */; };
@@ -23,6 +24,7 @@
 		89BC905624EB7DB00048C2C4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BC905524EB7DB00048C2C4 /* ProfileViewController.swift */; };
 		89BC905824EC20600048C2C4 /* StepOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BC905724EC20600048C2C4 /* StepOneViewController.swift */; };
 		89BC905A24ED7C1F0048C2C4 /* StepTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BC905924ED7C1F0048C2C4 /* StepTwoViewController.swift */; };
+		89E64F1D24EF9BEC005C2773 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E64F1C24EF9BEC005C2773 /* User.swift */; };
 		89F8FFDE24B96B3100B25677 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89F8FFDD24B96B3100B25677 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +40,7 @@
 		8907A62224AF421A00EEED09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8907A62424AF421A00EEED09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		892508A924C2DB30007F68AF /* SongDetilViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongDetilViewController.swift; sourceTree = "<group>"; };
+		89281A3B24F17D3F00212D0A /* StepThreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepThreeViewController.swift; sourceTree = "<group>"; };
 		8972CBBD24AF430500E94D81 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		89759AC824B30BBB00F2043F /* LiyicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiyicTableViewCell.swift; sourceTree = "<group>"; };
 		8987BC8A24DA86AA00815F0A /* RegisterNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterNavigationController.swift; sourceTree = "<group>"; };
@@ -47,6 +50,7 @@
 		89BC905524EB7DB00048C2C4 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		89BC905724EC20600048C2C4 /* StepOneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepOneViewController.swift; sourceTree = "<group>"; };
 		89BC905924ED7C1F0048C2C4 /* StepTwoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepTwoViewController.swift; sourceTree = "<group>"; };
+		89E64F1C24EF9BEC005C2773 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		89F8FFDD24B96B3100B25677 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BAA08731A1A19761A8BB5D8F /* Pods_MusicPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MusicPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA2B0D2E029FE2A30261E3E9 /* Pods-Map.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Map.release.xcconfig"; path = "Target Support Files/Pods-Map/Pods-Map.release.xcconfig"; sourceTree = "<group>"; };
@@ -78,6 +82,7 @@
 		4E6F404D24DE430B00B55B46 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				89E64F1C24EF9BEC005C2773 /* User.swift */,
 				8989B8A724DD35030084F984 /* Music.swift */,
 			);
 			path = Model;
@@ -98,6 +103,7 @@
 			children = (
 				89BC905724EC20600048C2C4 /* StepOneViewController.swift */,
 				89BC905924ED7C1F0048C2C4 /* StepTwoViewController.swift */,
+				89281A3B24F17D3F00212D0A /* StepThreeViewController.swift */,
 				89BC905524EB7DB00048C2C4 /* ProfileViewController.swift */,
 				8987BC8A24DA86AA00815F0A /* RegisterNavigationController.swift */,
 				89883B8E24C931B900F76CFE /* AuthViewController.swift */,
@@ -134,9 +140,9 @@
 				8907A61F24AF421A00EEED09 /* Assets.xcassets */,
 				8907A62124AF421A00EEED09 /* LaunchScreen.storyboard */,
 				89F8FFDD24B96B3100B25677 /* GoogleService-Info.plist */,
-				8907A62424AF421A00EEED09 /* Info.plist */,
 				4EDC41A724C2EB5B0060DE29 /* Jay.mp3 */,
 				4EDC41A524C2EB5A0060DE29 /* KenShi.mp3 */,
+				8907A62424AF421A00EEED09 /* Info.plist */,
 			);
 			path = MusicPlayer;
 			sourceTree = "<group>";
@@ -290,8 +296,10 @@
 				8972CBBE24AF430500E94D81 /* TabBarViewController.swift in Sources */,
 				89759AC924B30BBB00F2043F /* LiyicTableViewCell.swift in Sources */,
 				89BC905824EC20600048C2C4 /* StepOneViewController.swift in Sources */,
+				89281A3C24F17D3F00212D0A /* StepThreeViewController.swift in Sources */,
 				89883B8F24C931B900F76CFE /* AuthViewController.swift in Sources */,
 				89A48C6724B6DE2C00981471 /* NewSongViewController.swift in Sources */,
+				89E64F1D24EF9BEC005C2773 /* User.swift in Sources */,
 				8989B8A824DD35030084F984 /* Music.swift in Sources */,
 				89BC905A24ED7C1F0048C2C4 /* StepTwoViewController.swift in Sources */,
 				8907A61724AF421500EEED09 /* AppDelegate.swift in Sources */,

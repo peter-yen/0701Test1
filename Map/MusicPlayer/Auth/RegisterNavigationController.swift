@@ -83,7 +83,7 @@ class RegisterNavigationController: UIViewController {
     
     @objc func registerButtonDidTap() {
         
-        if let name = nameTextfield.text ,
+        if let name =  nameTextfield.text ,
             let email = emailTextField.text ,
             let password = passwordTextField.text {
             Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
@@ -91,15 +91,12 @@ class RegisterNavigationController: UIViewController {
                 if let error = error {
                     self.view.makeToast(error.localizedDescription)
                 } else {
-                    
-                    let dictionary: [String:Any] = ["email": email,
-                                                    "password": password,
-                                                    "name": name]
-                    if let uid = Auth.auth().currentUser?.uid {
-                        Firestore.firestore().collection("Users").document(uid).setData(dictionary) { (error) in
+                    let user = User(email: email, name: name, password: password)
+                                        if let uid = Auth.auth().currentUser?.uid {
+                                            Firestore.firestore().collection("Users").document(uid).setData(user.dictionary()) { (error) in
                             print("error: \(error)")
                             self.view.makeToast("Succes")
-                            self.navigationController?.popViewController(animated: true)
+                            self.dismiss(animated: true, completion: nil)
                         }
                     }
                     
