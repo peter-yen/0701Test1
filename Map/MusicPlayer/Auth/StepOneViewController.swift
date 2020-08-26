@@ -24,6 +24,9 @@ class StepOneViewController: RegisterBasicViewController {
     
     @objc func finishButtonDidTap() {
         let stepTwoViewController = StepTwoViewController()
+        if let text = textField.text {
+            stepTwoViewController.email = text
+        }
         self.navigationController?.pushViewController(stepTwoViewController, animated: true)
         
     }

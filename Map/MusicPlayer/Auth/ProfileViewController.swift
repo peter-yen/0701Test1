@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 import FirebaseAuth
 import FirebaseFirestore
+import FirebaseStorage
 
 class ProfileViewController: UIViewController {
     
@@ -21,21 +22,41 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureLayout()
-        view.backgroundColor = .red
-    
+        
+        view.backgroundColor = .systemRed
+        
+        if let uid = Auth.auth().currentUser?.uid {
+            Firestore.firestore().collection("Users").document(uid).getDocument { (snapshot, err) in
+                if let err = err {
+                    self.view.makeToast(err.localizedDescription)
+                    return
+                }
+                if let dictionary = snapshot?.data() {
+                    if let profileImageURL = dictionary["profileImageURL"] as? String {
+                        // String -> URL -> Data -> UIImage
+                        if let url = URL(string: profileImageURL) {
+                            if let data = try? Data(contentsOf: url) {
+                                self.avatarImageView.image = UIImage(data: data)
+                            }
+                        }
+                        
+                    }
+                }
+            }
+        }
     }
     override func viewWillAppear(_ animated: Bool) {
         if let user = Auth.auth().currentUser {
-//            emailLabel.text = user.email
+            //            emailLabel.text = user.email
         }
         
     }
-          
+    
     
     func configureLayout() {
         
         navigationView = UIView()
-        navigationView.backgroundColor = .green
+        navigationView.backgroundColor = .systemPink
         view.addSubview(navigationView)
         navigationView.snp.makeConstraints { (m) in
             m.top.left.right.equalToSuperview()
@@ -56,7 +77,7 @@ class ProfileViewController: UIViewController {
         }
         
         tableView = UITableView()
-        tableView.backgroundColor = .blue
+        tableView.backgroundColor = .systemFill
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
@@ -65,7 +86,7 @@ class ProfileViewController: UIViewController {
             m.top.equalTo(navigationView.snp.bottom)
             m.bottom.right.left.equalToSuperview()
         }
-         
+        
         signOutButton = UIButton()
         view.addSubview(signOutButton)
         signOutButton.setTitle("Sign Out", for: .normal)
@@ -81,9 +102,6 @@ class ProfileViewController: UIViewController {
         imagePickerController.delegate = self
         self.present(imagePickerController, animated: true, completion: nil)
         
-        
-        
-        
     }
     
     @objc func signOut() {
@@ -91,7 +109,7 @@ class ProfileViewController: UIViewController {
             try Auth.auth().signOut()
             self.view.makeToast("成功登出")
             let authNavigationController = UINavigationController(rootViewController: AuthViewController())
-//            authNavigationController.modalPresentationStyle = .fullScreen
+            //            authNavigationController.modalPresentationStyle = .fullScreen
             authNavigationController.isModalInPresentation = true
             self.present(authNavigationController, animated: true, completion: nil)
             
@@ -99,10 +117,10 @@ class ProfileViewController: UIViewController {
             self.view.makeToast("無法登出")
         }
         
-      }
+    }
     
     
-   
+    
 }
 
 
@@ -110,8 +128,44 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[.originalImage] as? UIImage {
             self.avatarImageView.image = image
+            saveToStorage(image: image)
         }
         self.dismiss(animated: true, completion: nil )
+    }
+    
+    func saveToStorage(image: UIImage) {
+        if let uid = Auth.auth().currentUser?.uid {
+            // Storage 路徑
+            let ref = Storage.storage().reference(withPath: "users/\(uid)/")
+            // image -> Data
+            if let imageData = image.jpegData(compressionQuality: 0.5) {
+                ref.putData(imageData, metadata: nil) { (metadata, err) in
+                    if let err = err {
+                        self.view.makeToast(err.localizedDescription)
+                        return
+                    }
+                    // 取得url
+                    ref.downloadURL { (url, err) in
+                        if let err = err {
+                            self.view.makeToast(err.localizedDescription)
+                            return
+                        }
+                        print("image url: \(url)")  //url轉換成String
+                        if let urlString = url?.absoluteString {
+                            let dictionary = ["profileImageURL": urlString]
+                            Firestore.firestore().collection("Users").document(uid).updateData(dictionary) { (err) in
+                                if let err = err {
+                                    self.view.makeToast(err.localizedDescription)
+                                    return
+                                } // document 文件 collection
+                                self.view.makeToast("成功上傳圖片")
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
     }
     
     
@@ -129,40 +183,59 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         cell.backgroundColor = .white
         if indexPath.row == 0 {
             cell.textLabel?.text = "Email"
-            if let user = Auth.auth().currentUser {
-                if let email = user.email {
-                    let view = UIView()
-                    view.frame = CGRect(x: 0, y: 0, width: 200, height: cell.frame.height) //accessory意思為右邊的意思
-                    let label = UILabel()
-                    label.text = email
-                    view.addSubview(label)
-                    label.textAlignment = .center
-                    label.snp.makeConstraints { (m) in
-                        m.margins.equalToSuperview()
+            if let uid = Auth.auth().currentUser?.uid{
+                Firestore.firestore().collection("Users").document(uid).getDocument { (snapshot, error) in
+                    if let error = error {
+                        self.view.makeToast(error.localizedDescription)
+                        return
                     }
-                    cell.accessoryView = view
-
+                    if let dictionary = snapshot?.data() {
+                        if let email = dictionary["email"] as? String {
+                            let view = UIView()
+                            view.frame = CGRect(x: 0, y: 0, width: 200, height: cell.frame.height)
+                            let label = UILabel()
+                            label.text = email
+                            view.addSubview(label)
+                            label.textAlignment = .center
+                            label.snp.makeConstraints { (m) in
+                                m.margins.equalToSuperview()
+                            }
+                            cell.accessoryView = view
+                        } // accessory 為右邊得意思
+                    }
                 }
+                
             }
+            
+            
         } else if indexPath.row == 1 {
             cell.textLabel?.text = "Name"
-            if let user = Auth.auth().currentUser {
-            if let email = user.email {
-                let view = UIView()
-                view.frame = CGRect(x: 0, y: 0, width: 200, height: cell.frame.height) //accessory意思為右邊的意思
-                let label = UILabel()
-                label.text = email
-                view.addSubview(label)
-                label.textAlignment = .center
-                label.snp.makeConstraints { (m) in
-                    m.margins.equalToSuperview()
+            if let uid = Auth.auth().currentUser?.uid{
+                Firestore.firestore().collection("Users").document(uid).getDocument { (snapshot, error) in
+                    if let error = error {
+                        self.view.makeToast(error.localizedDescription)
+                        return
+                    }
+                    if let dictionary = snapshot?.data() {
+                        if let name = dictionary["name"] as? String {
+                            let view = UIView()
+                            view.frame = CGRect(x: 0, y: 0, width: 200, height: cell.frame.height)
+                            let label = UILabel()
+                            label.text = name
+                            view.addSubview(label)
+                            label.textAlignment = .center
+                            label.snp.makeConstraints { (m) in
+                                m.margins.equalToSuperview()
+                            }
+                            cell.accessoryView = view //accessorView為右邊
+                        }
+                    }
                 }
-                cell.accessoryView = view
-                }
+                
             }
         } else {
             
-            cell.textLabel?.text = "sdf"
+            cell.textLabel?.text = "您好，歡迎光臨"
         }
         return cell
     }
@@ -173,7 +246,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
                 if let err = err {
                     self.view.makeToast(err.localizedDescription)
                     return
-            }
+                }
                 if let dictionary = snapshot?.data() {
                     if let email = dictionary["email"] as? String,
                         let name = dictionary["name"] as? String {

@@ -27,7 +27,7 @@ class AuthViewController: UIViewController {
     view.backgroundColor = .white
     
     emailTextField = UITextField()
-    emailTextField.backgroundColor = .systemGray2
+    emailTextField.backgroundColor = .systemGray3
     emailTextField.delegate = self
     
     view.addSubview(emailTextField)
@@ -43,7 +43,7 @@ class AuthViewController: UIViewController {
     }
     
     passwordTextField = UITextField()
-    passwordTextField.backgroundColor = .systemGray2
+    passwordTextField.backgroundColor = .systemGray3
     view.addSubview(passwordTextField)
     passwordTextField.isSecureTextEntry = true
     passwordTextField.borderStyle = .roundedRect

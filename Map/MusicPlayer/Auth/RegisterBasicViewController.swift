@@ -22,9 +22,7 @@ class RegisterBasicViewController: UIViewController {
         configureLayout()
         
     }
-    
-    
-    
+
     func configureLayout() {
         titleLabel = UILabel()
         view.addSubview(titleLabel)
@@ -42,9 +40,6 @@ class RegisterBasicViewController: UIViewController {
         textField.delegate = self
         textField.addTarget(self, action: #selector(emailTextFieldEditingChanged), for: .editingChanged)
         textField.snp.makeConstraints { (m) in
-            //            m.height.equalTo(50)
-            //            m.width.equalTo(390)
-            //            m.centerX.equalToSuperview()
             m.leading.equalTo(titleLabel.snp.leading)
             m.top.equalTo(titleLabel.snp.bottom).offset(10)
         }
@@ -91,17 +86,17 @@ class RegisterBasicViewController: UIViewController {
         
     }
 }
+
+extension RegisterBasicViewController: UITextFieldDelegate {
     
-    extension RegisterBasicViewController: UITextFieldDelegate {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
         
-        override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-            view.endEditing(true)
-            
-        }
-        func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-            view.endEditing(true)
-            return true
-        }
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        view.endEditing(true)
+        return true
+    }
 }
 
 

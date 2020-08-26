@@ -108,8 +108,8 @@
 				89BC905924ED7C1F0048C2C4 /* StepTwoViewController.swift */,
 				89281A3B24F17D3F00212D0A /* StepThreeViewController.swift */,
 				89BC905524EB7DB00048C2C4 /* ProfileViewController.swift */,
-				8987BC8A24DA86AA00815F0A /* RegisterNavigationController.swift */,
 				89883B8E24C931B900F76CFE /* AuthViewController.swift */,
+				8987BC8A24DA86AA00815F0A /* RegisterNavigationController.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
