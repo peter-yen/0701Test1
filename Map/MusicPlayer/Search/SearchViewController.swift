@@ -79,8 +79,8 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         return size
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let postViewController = PostViewController()
-        navigationController?.pushViewController(postViewController, animated: true)
+        let spotsViewController = SpotsViewController()
+        navigationController?.pushViewController(spotsViewController, animated: true)
     }
     
     

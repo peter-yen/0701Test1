@@ -218,20 +218,6 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if let uid = Auth.auth().currentUser?.uid { //Get是拿資料，Set是存資料
-            Firestore.firestore().collection("Users").document(uid).getDocument { (snapshot, err) in
-                if let err = err {
-                    self.view.makeToast(err.localizedDescription)
-                    return
-                }
-                if let dictionary = snapshot?.data() {
-                    if let email = dictionary["email"] as? String,
-                        let name = dictionary["name"] as? String {
-                        print("email: \(email),\nname:\(name)")
-                    }
-                }
-            }
-        }
         
     }
     

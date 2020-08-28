@@ -14,8 +14,9 @@
 		8907A62024AF421A00EEED09 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8907A61F24AF421A00EEED09 /* Assets.xcassets */; };
 		8907A62324AF421A00EEED09 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8907A62124AF421A00EEED09 /* LaunchScreen.storyboard */; };
 		890EB8C824F6288500DB0329 /* CityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890EB8C724F6288500DB0329 /* CityCollectionViewCell.swift */; };
-		890EB8CA24F6331D00DB0329 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890EB8C924F6331D00DB0329 /* PostViewController.swift */; };
+		890EB8CA24F6331D00DB0329 /* SpotsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890EB8C924F6331D00DB0329 /* SpotsViewController.swift */; };
 		890EB8CD24F63D1C00DB0329 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890EB8CC24F63D1C00DB0329 /* ProfileTableViewCell.swift */; };
+		890EB8CF24F8BE9E00DB0329 /* Spot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890EB8CE24F8BE9E00DB0329 /* Spot.swift */; };
 		89281A3C24F17D3F00212D0A /* StepThreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89281A3B24F17D3F00212D0A /* StepThreeViewController.swift */; };
 		8954B14924F3687A00ADCB8A /* RegisterBasicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8954B14824F3687A00ADCB8A /* RegisterBasicViewController.swift */; };
 		8972CBBE24AF430500E94D81 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8972CBBD24AF430500E94D81 /* TabBarViewController.swift */; };
@@ -41,8 +42,9 @@
 		8907A62224AF421A00EEED09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8907A62424AF421A00EEED09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		890EB8C724F6288500DB0329 /* CityCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityCollectionViewCell.swift; sourceTree = "<group>"; };
-		890EB8C924F6331D00DB0329 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		890EB8C924F6331D00DB0329 /* SpotsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotsViewController.swift; sourceTree = "<group>"; };
 		890EB8CC24F63D1C00DB0329 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
+		890EB8CE24F8BE9E00DB0329 /* Spot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spot.swift; sourceTree = "<group>"; };
 		89281A3B24F17D3F00212D0A /* StepThreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepThreeViewController.swift; sourceTree = "<group>"; };
 		8954B14824F3687A00ADCB8A /* RegisterBasicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterBasicViewController.swift; sourceTree = "<group>"; };
 		8972CBBD24AF430500E94D81 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 			children = (
 				89E64F1C24EF9BEC005C2773 /* User.swift */,
 				8989B8A724DD35030084F984 /* Music.swift */,
+				890EB8CE24F8BE9E00DB0329 /* Spot.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -152,7 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				89A05A0724F61D2E009E3379 /* SearchViewController.swift */,
-				890EB8C924F6331D00DB0329 /* PostViewController.swift */,
+				890EB8C924F6331D00DB0329 /* SpotsViewController.swift */,
 				890EB8C724F6288500DB0329 /* CityCollectionViewCell.swift */,
 			);
 			path = Search;
@@ -306,8 +309,9 @@
 				89BC905824EC20600048C2C4 /* StepOneViewController.swift in Sources */,
 				89281A3C24F17D3F00212D0A /* StepThreeViewController.swift in Sources */,
 				89883B8F24C931B900F76CFE /* AuthViewController.swift in Sources */,
-				890EB8CA24F6331D00DB0329 /* PostViewController.swift in Sources */,
+				890EB8CA24F6331D00DB0329 /* SpotsViewController.swift in Sources */,
 				89A05A0824F61D2E009E3379 /* SearchViewController.swift in Sources */,
+				890EB8CF24F8BE9E00DB0329 /* Spot.swift in Sources */,
 				89E64F1D24EF9BEC005C2773 /* User.swift in Sources */,
 				890EB8CD24F63D1C00DB0329 /* ProfileTableViewCell.swift in Sources */,
 				8954B14924F3687A00ADCB8A /* RegisterBasicViewController.swift in Sources */,
