@@ -13,15 +13,15 @@
 		8907A61724AF421500EEED09 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8907A61624AF421500EEED09 /* AppDelegate.swift */; };
 		8907A62024AF421A00EEED09 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8907A61F24AF421A00EEED09 /* Assets.xcassets */; };
 		8907A62324AF421A00EEED09 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8907A62124AF421A00EEED09 /* LaunchScreen.storyboard */; };
-		892508AA24C2DB30007F68AF /* SongDetilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892508A924C2DB30007F68AF /* SongDetilViewController.swift */; };
+		890EB8C824F6288500DB0329 /* CityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890EB8C724F6288500DB0329 /* CityCollectionViewCell.swift */; };
+		890EB8CA24F6331D00DB0329 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890EB8C924F6331D00DB0329 /* PostViewController.swift */; };
+		890EB8CD24F63D1C00DB0329 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890EB8CC24F63D1C00DB0329 /* ProfileTableViewCell.swift */; };
 		89281A3C24F17D3F00212D0A /* StepThreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89281A3B24F17D3F00212D0A /* StepThreeViewController.swift */; };
 		8954B14924F3687A00ADCB8A /* RegisterBasicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8954B14824F3687A00ADCB8A /* RegisterBasicViewController.swift */; };
 		8972CBBE24AF430500E94D81 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8972CBBD24AF430500E94D81 /* TabBarViewController.swift */; };
-		89759AC924B30BBB00F2043F /* LiyicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89759AC824B30BBB00F2043F /* LiyicTableViewCell.swift */; };
-		8987BC8B24DA86AA00815F0A /* RegisterNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8987BC8A24DA86AA00815F0A /* RegisterNavigationController.swift */; };
 		89883B8F24C931B900F76CFE /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89883B8E24C931B900F76CFE /* AuthViewController.swift */; };
 		8989B8A824DD35030084F984 /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8989B8A724DD35030084F984 /* Music.swift */; };
-		89A48C6724B6DE2C00981471 /* NewSongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A48C6624B6DE2C00981471 /* NewSongViewController.swift */; };
+		89A05A0824F61D2E009E3379 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A05A0724F61D2E009E3379 /* SearchViewController.swift */; };
 		89BC905624EB7DB00048C2C4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BC905524EB7DB00048C2C4 /* ProfileViewController.swift */; };
 		89BC905824EC20600048C2C4 /* StepOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BC905724EC20600048C2C4 /* StepOneViewController.swift */; };
 		89BC905A24ED7C1F0048C2C4 /* StepTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BC905924ED7C1F0048C2C4 /* StepTwoViewController.swift */; };
@@ -40,15 +40,15 @@
 		8907A61F24AF421A00EEED09 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8907A62224AF421A00EEED09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8907A62424AF421A00EEED09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		892508A924C2DB30007F68AF /* SongDetilViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongDetilViewController.swift; sourceTree = "<group>"; };
+		890EB8C724F6288500DB0329 /* CityCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityCollectionViewCell.swift; sourceTree = "<group>"; };
+		890EB8C924F6331D00DB0329 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		890EB8CC24F63D1C00DB0329 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		89281A3B24F17D3F00212D0A /* StepThreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepThreeViewController.swift; sourceTree = "<group>"; };
 		8954B14824F3687A00ADCB8A /* RegisterBasicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterBasicViewController.swift; sourceTree = "<group>"; };
 		8972CBBD24AF430500E94D81 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
-		89759AC824B30BBB00F2043F /* LiyicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiyicTableViewCell.swift; sourceTree = "<group>"; };
-		8987BC8A24DA86AA00815F0A /* RegisterNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterNavigationController.swift; sourceTree = "<group>"; };
 		89883B8E24C931B900F76CFE /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		8989B8A724DD35030084F984 /* Music.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
-		89A48C6624B6DE2C00981471 /* NewSongViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSongViewController.swift; sourceTree = "<group>"; };
+		89A05A0724F61D2E009E3379 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		89BC905524EB7DB00048C2C4 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		89BC905724EC20600048C2C4 /* StepOneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepOneViewController.swift; sourceTree = "<group>"; };
 		89BC905924ED7C1F0048C2C4 /* StepTwoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepTwoViewController.swift; sourceTree = "<group>"; };
@@ -90,16 +90,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		4E6F404E24DE434300B55B46 /* Song */ = {
-			isa = PBXGroup;
-			children = (
-				892508A924C2DB30007F68AF /* SongDetilViewController.swift */,
-				89A48C6624B6DE2C00981471 /* NewSongViewController.swift */,
-				89759AC824B30BBB00F2043F /* LiyicTableViewCell.swift */,
-			);
-			path = Song;
-			sourceTree = "<group>";
-		};
 		4E6F404F24DE437800B55B46 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
@@ -107,9 +97,7 @@
 				89BC905724EC20600048C2C4 /* StepOneViewController.swift */,
 				89BC905924ED7C1F0048C2C4 /* StepTwoViewController.swift */,
 				89281A3B24F17D3F00212D0A /* StepThreeViewController.swift */,
-				89BC905524EB7DB00048C2C4 /* ProfileViewController.swift */,
 				89883B8E24C931B900F76CFE /* AuthViewController.swift */,
-				8987BC8A24DA86AA00815F0A /* RegisterNavigationController.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -137,8 +125,9 @@
 			children = (
 				8907A61624AF421500EEED09 /* AppDelegate.swift */,
 				8972CBBD24AF430500E94D81 /* TabBarViewController.swift */,
+				890EB8CB24F63CBA00DB0329 /* Profile */,
+				89A4CD4E24F61EEB00A6F8FD /* Search */,
 				4E6F404F24DE437800B55B46 /* Auth */,
-				4E6F404E24DE434300B55B46 /* Song */,
 				4E6F404D24DE430B00B55B46 /* Model */,
 				8907A61F24AF421A00EEED09 /* Assets.xcassets */,
 				8907A62124AF421A00EEED09 /* LaunchScreen.storyboard */,
@@ -148,6 +137,25 @@
 				8907A62424AF421A00EEED09 /* Info.plist */,
 			);
 			path = MusicPlayer;
+			sourceTree = "<group>";
+		};
+		890EB8CB24F63CBA00DB0329 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				89BC905524EB7DB00048C2C4 /* ProfileViewController.swift */,
+				890EB8CC24F63D1C00DB0329 /* ProfileTableViewCell.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		89A4CD4E24F61EEB00A6F8FD /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				89A05A0724F61D2E009E3379 /* SearchViewController.swift */,
+				890EB8C924F6331D00DB0329 /* PostViewController.swift */,
+				890EB8C724F6288500DB0329 /* CityCollectionViewCell.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 		A3031158DE5DCBCF63D88A44 /* Frameworks */ = {
@@ -293,19 +301,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8987BC8B24DA86AA00815F0A /* RegisterNavigationController.swift in Sources */,
-				892508AA24C2DB30007F68AF /* SongDetilViewController.swift in Sources */,
 				89BC905624EB7DB00048C2C4 /* ProfileViewController.swift in Sources */,
 				8972CBBE24AF430500E94D81 /* TabBarViewController.swift in Sources */,
-				89759AC924B30BBB00F2043F /* LiyicTableViewCell.swift in Sources */,
 				89BC905824EC20600048C2C4 /* StepOneViewController.swift in Sources */,
 				89281A3C24F17D3F00212D0A /* StepThreeViewController.swift in Sources */,
 				89883B8F24C931B900F76CFE /* AuthViewController.swift in Sources */,
-				89A48C6724B6DE2C00981471 /* NewSongViewController.swift in Sources */,
+				890EB8CA24F6331D00DB0329 /* PostViewController.swift in Sources */,
+				89A05A0824F61D2E009E3379 /* SearchViewController.swift in Sources */,
 				89E64F1D24EF9BEC005C2773 /* User.swift in Sources */,
+				890EB8CD24F63D1C00DB0329 /* ProfileTableViewCell.swift in Sources */,
 				8954B14924F3687A00ADCB8A /* RegisterBasicViewController.swift in Sources */,
 				8989B8A824DD35030084F984 /* Music.swift in Sources */,
 				89BC905A24ED7C1F0048C2C4 /* StepTwoViewController.swift in Sources */,
+				890EB8C824F6288500DB0329 /* CityCollectionViewCell.swift in Sources */,
 				8907A61724AF421500EEED09 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -15,16 +15,16 @@ class TabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-
-        let newSongViewController = NewSongViewController()
-        print(newSongViewController.navigationController)
-        newSongViewController.tabBarItem.image = UIImage(named: "search")
+        let searchViewController = SearchViewController()
+        searchViewController.tabBarItem.image = UIImage(named: "search")
+        let searchNavigationController = UINavigationController(rootViewController: searchViewController)
+        
         
         let profileViewController = ProfileViewController()
         
         profileViewController.tabBarItem.image = UIImage(named: "iosph")
         
-        viewControllers = [newSongViewController, profileViewController]
+        viewControllers = [searchNavigationController , profileViewController]
         
 
         

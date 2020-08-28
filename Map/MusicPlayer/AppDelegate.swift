@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import GoogleSignIn
+import Toast_Swift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate , GIDSignInDelegate{
@@ -45,21 +46,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate , GIDSignInDelegate{
         FirebaseApp.configure()
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
+        
+        var style = ToastStyle()
+        style.messageFont = UIFont.systemFont(ofSize: 30)
+        ToastManager.shared.style = style
+        
         window = UIWindow()
         window?.makeKeyAndVisible()
-        
         var vc: UIViewController?
         let tabvc = TabBarViewController()
         vc = tabvc
-//        if let user = Auth.auth().currentUser {
-//            let tabbarVC = TabBarViewController()
-//            vc = tabbarVC
-//
-//        }else {
-//            let authVC = AuthViewController()
-//       vc =  UINavigationController(rootViewController: authVC)
-//        }
-        
         window?.rootViewController = vc
         return true
             }

@@ -47,6 +47,8 @@ class RegisterBasicViewController: UIViewController {
         finishButton = UIButton()
         view.addSubview(finishButton)
         finishButton.backgroundColor = .systemRed
+        finishButton.clipsToBounds = true
+        finishButton.layer.cornerRadius = 20
         finishButton.setTitle("下一步", for: .normal)
         
         finishButton.isEnabled = false //按的開關

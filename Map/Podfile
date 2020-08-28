@@ -13,4 +13,5 @@ target 'MusicPlayer' do
   pod 'GoogleSignIn'
   pod 'Toast-Swift'
   pod 'Firebase/Storage'
+  pod 'JGProgressHUD'
 end

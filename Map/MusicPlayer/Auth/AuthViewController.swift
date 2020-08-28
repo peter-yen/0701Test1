@@ -58,6 +58,8 @@ class AuthViewController: UIViewController {
     loginButton = UIButton()
     loginButton.backgroundColor = .systemBlue
     view.addSubview(loginButton)
+    loginButton.clipsToBounds = true
+    loginButton.layer.cornerRadius = 20
     loginButton.setTitle("登入", for: .normal)
     loginButton.snp.makeConstraints { (make) -> Void in
       make.width.equalTo(300)

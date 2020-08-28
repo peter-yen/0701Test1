@@ -11,6 +11,7 @@ import SnapKit
 import FirebaseAuth
 import FirebaseFirestore
 import FirebaseStorage
+import JGProgressHUD
 
 class ProfileViewController: UIViewController {
     
@@ -19,11 +20,20 @@ class ProfileViewController: UIViewController {
     var avatarImageView: UIImageView!
     var signOutButton: UIButton!
     
+    var name: String = ""
+    var email: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureLayout()
         
         view.backgroundColor = .systemRed
+        
+        let hud = JGProgressHUD(style: .extraLight)
+        hud.progress = 0.5 
+        hud.textLabel.text = "Loading"
+        hud.show(in: self.view)
+       
         
         if let uid = Auth.auth().currentUser?.uid {
             Firestore.firestore().collection("Users").document(uid).getDocument { (snapshot, err) in
@@ -32,14 +42,25 @@ class ProfileViewController: UIViewController {
                     return
                 }
                 if let dictionary = snapshot?.data() {
+                    
+                    if let name = dictionary["name"] as? String,
+                        let email = dictionary["email"] as? String {
+                        self.name = name
+                        self.email = email
+                        self.tableView.reloadData()
+                    }
+                    
                     if let profileImageURL = dictionary["profileImageURL"] as? String {
                         // String -> URL -> Data -> UIImage
                         if let url = URL(string: profileImageURL) {
                             if let data = try? Data(contentsOf: url) {
                                 self.avatarImageView.image = UIImage(data: data)
+                                hud.dismiss(afterDelay: 0.5)
                             }
                         }
                         
+                    } else {
+                        hud.dismiss(afterDelay: 0.5)
                     }
                 }
             }
@@ -81,7 +102,7 @@ class ProfileViewController: UIViewController {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.snp.makeConstraints { (m) in
             m.top.equalTo(navigationView.snp.bottom)
             m.bottom.right.left.equalToSuperview()
@@ -179,60 +200,16 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")!
-        cell.backgroundColor = .white
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! ProfileTableViewCell
+
         if indexPath.row == 0 {
             cell.textLabel?.text = "Email"
-            if let uid = Auth.auth().currentUser?.uid{
-                Firestore.firestore().collection("Users").document(uid).getDocument { (snapshot, error) in
-                    if let error = error {
-                        self.view.makeToast(error.localizedDescription)
-                        return
-                    }
-                    if let dictionary = snapshot?.data() {
-                        if let email = dictionary["email"] as? String {
-                            let view = UIView()
-                            view.frame = CGRect(x: 0, y: 0, width: 200, height: cell.frame.height)
-                            let label = UILabel()
-                            label.text = email
-                            view.addSubview(label)
-                            label.textAlignment = .center
-                            label.snp.makeConstraints { (m) in
-                                m.margins.equalToSuperview()
-                            }
-                            cell.accessoryView = view
-                        } // accessory 為右邊得意思
-                    }
-                }
-                
-            }
-            
+            cell.customAccessoryLabel.text = email
             
         } else if indexPath.row == 1 {
             cell.textLabel?.text = "Name"
-            if let uid = Auth.auth().currentUser?.uid{
-                Firestore.firestore().collection("Users").document(uid).getDocument { (snapshot, error) in
-                    if let error = error {
-                        self.view.makeToast(error.localizedDescription)
-                        return
-                    }
-                    if let dictionary = snapshot?.data() {
-                        if let name = dictionary["name"] as? String {
-                            let view = UIView()
-                            view.frame = CGRect(x: 0, y: 0, width: 200, height: cell.frame.height)
-                            let label = UILabel()
-                            label.text = name
-                            view.addSubview(label)
-                            label.textAlignment = .center
-                            label.snp.makeConstraints { (m) in
-                                m.margins.equalToSuperview()
-                            }
-                            cell.accessoryView = view //accessorView為右邊
-                        }
-                    }
-                }
-                
-            }
+            cell.customAccessoryLabel.text = name
+         
         } else {
             
             cell.textLabel?.text = "您好，歡迎光臨"

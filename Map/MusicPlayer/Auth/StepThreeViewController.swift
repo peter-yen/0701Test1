@@ -30,17 +30,23 @@ class StepThreeViewController: RegisterBasicViewController {
                 
                 print("\(user.dictionary())")
                 Auth.auth().createUser(withEmail: user.email, password: user.password) { (result, error) in
+                    
                     print("result: \(result), error: \(error)")
                     if let error = error {
                         self.view.makeToast(error.localizedDescription)
                     } else {
-                        
+                        // user.dictionary(): User -> Dictionary
                         if let uid = Auth.auth().currentUser?.uid {
-                            Firestore.firestore().collection("Users").document(uid).setData(user.dictionary()) { (error) in
-                                print("error: \(error)")
+                            let userDict = user.dictionary()
+                            Firestore.firestore().collection("Users").document(uid).setData(userDict) { (error) in
+                                if let error = error {
+                                    self.view.makeToast(error.localizedDescription)
+                                } else {
+                                
                                 self.view.makeToast("Succes")
                                 self.dismiss(animated: true, completion: nil)
-                            } // user.dictionary 自創的 UserModel 屬性有name, 所以 Firebase 有存到name
+                                }
+                            } // setData 型別只吃 [String: Any]
                         }
                         
                     }
