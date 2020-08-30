@@ -17,6 +17,9 @@
 		890EB8CA24F6331D00DB0329 /* SpotsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890EB8C924F6331D00DB0329 /* SpotsViewController.swift */; };
 		890EB8CD24F63D1C00DB0329 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890EB8CC24F63D1C00DB0329 /* ProfileTableViewCell.swift */; };
 		890EB8CF24F8BE9E00DB0329 /* Spot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890EB8CE24F8BE9E00DB0329 /* Spot.swift */; };
+		8916281224F8D5F200112A5D /* SpotCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8916281124F8D5F200112A5D /* SpotCollectionViewCell.swift */; };
+		8916281424F8DA4400112A5D /* SpotDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8916281324F8DA4400112A5D /* SpotDetailViewController.swift */; };
+		8916281624F8E56100112A5D /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8916281524F8E56100112A5D /* HUD.swift */; };
 		89281A3C24F17D3F00212D0A /* StepThreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89281A3B24F17D3F00212D0A /* StepThreeViewController.swift */; };
 		8954B14924F3687A00ADCB8A /* RegisterBasicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8954B14824F3687A00ADCB8A /* RegisterBasicViewController.swift */; };
 		8972CBBE24AF430500E94D81 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8972CBBD24AF430500E94D81 /* TabBarViewController.swift */; };
@@ -45,6 +48,9 @@
 		890EB8C924F6331D00DB0329 /* SpotsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotsViewController.swift; sourceTree = "<group>"; };
 		890EB8CC24F63D1C00DB0329 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		890EB8CE24F8BE9E00DB0329 /* Spot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spot.swift; sourceTree = "<group>"; };
+		8916281124F8D5F200112A5D /* SpotCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotCollectionViewCell.swift; sourceTree = "<group>"; };
+		8916281324F8DA4400112A5D /* SpotDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailViewController.swift; sourceTree = "<group>"; };
+		8916281524F8E56100112A5D /* HUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
 		89281A3B24F17D3F00212D0A /* StepThreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepThreeViewController.swift; sourceTree = "<group>"; };
 		8954B14824F3687A00ADCB8A /* RegisterBasicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterBasicViewController.swift; sourceTree = "<group>"; };
 		8972CBBD24AF430500E94D81 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -126,6 +132,7 @@
 		8907A61524AF421500EEED09 /* MusicPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				8916281724F8E57E00112A5D /* Extension */,
 				8907A61624AF421500EEED09 /* AppDelegate.swift */,
 				8972CBBD24AF430500E94D81 /* TabBarViewController.swift */,
 				890EB8CB24F63CBA00DB0329 /* Profile */,
@@ -151,11 +158,21 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		8916281724F8E57E00112A5D /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				8916281524F8E56100112A5D /* HUD.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		89A4CD4E24F61EEB00A6F8FD /* Search */ = {
 			isa = PBXGroup;
 			children = (
 				89A05A0724F61D2E009E3379 /* SearchViewController.swift */,
 				890EB8C924F6331D00DB0329 /* SpotsViewController.swift */,
+				8916281324F8DA4400112A5D /* SpotDetailViewController.swift */,
+				8916281124F8D5F200112A5D /* SpotCollectionViewCell.swift */,
 				890EB8C724F6288500DB0329 /* CityCollectionViewCell.swift */,
 			);
 			path = Search;
@@ -307,7 +324,9 @@
 				89BC905624EB7DB00048C2C4 /* ProfileViewController.swift in Sources */,
 				8972CBBE24AF430500E94D81 /* TabBarViewController.swift in Sources */,
 				89BC905824EC20600048C2C4 /* StepOneViewController.swift in Sources */,
+				8916281424F8DA4400112A5D /* SpotDetailViewController.swift in Sources */,
 				89281A3C24F17D3F00212D0A /* StepThreeViewController.swift in Sources */,
+				8916281224F8D5F200112A5D /* SpotCollectionViewCell.swift in Sources */,
 				89883B8F24C931B900F76CFE /* AuthViewController.swift in Sources */,
 				890EB8CA24F6331D00DB0329 /* SpotsViewController.swift in Sources */,
 				89A05A0824F61D2E009E3379 /* SearchViewController.swift in Sources */,
@@ -317,6 +336,7 @@
 				8954B14924F3687A00ADCB8A /* RegisterBasicViewController.swift in Sources */,
 				8989B8A824DD35030084F984 /* Music.swift in Sources */,
 				89BC905A24ED7C1F0048C2C4 /* StepTwoViewController.swift in Sources */,
+				8916281624F8E56100112A5D /* HUD.swift in Sources */,
 				890EB8C824F6288500DB0329 /* CityCollectionViewCell.swift in Sources */,
 				8907A61724AF421500EEED09 /* AppDelegate.swift in Sources */,
 			);

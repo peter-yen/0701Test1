@@ -23,6 +23,8 @@ class SearchViewController: UIViewController {
     }
     
     func configurLayout() {
+        title = "搜尋城市"
+        
         searchTextField = UISearchTextField()
         view.addSubview(searchTextField)
         searchTextField.delegate = self

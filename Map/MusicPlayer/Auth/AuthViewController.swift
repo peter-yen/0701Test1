@@ -22,15 +22,12 @@ class AuthViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    
-    
     view.backgroundColor = .white
     
     emailTextField = UITextField()
+    view.addSubview(emailTextField)
     emailTextField.backgroundColor = .systemGray3
     emailTextField.delegate = self
-    
-    view.addSubview(emailTextField)
     emailTextField.borderStyle = .roundedRect
     emailTextField.placeholder = "電話號碼、用戶名稱或電子郵件"
     emailTextField.keyboardType = .emailAddress
@@ -43,8 +40,8 @@ class AuthViewController: UIViewController {
     }
     
     passwordTextField = UITextField()
-    passwordTextField.backgroundColor = .systemGray3
     view.addSubview(passwordTextField)
+    passwordTextField.backgroundColor = .systemGray3
     passwordTextField.isSecureTextEntry = true
     passwordTextField.borderStyle = .roundedRect
     passwordTextField.placeholder = "密碼"
@@ -56,8 +53,8 @@ class AuthViewController: UIViewController {
     }
     
     loginButton = UIButton()
-    loginButton.backgroundColor = .systemBlue
     view.addSubview(loginButton)
+    loginButton.backgroundColor = .systemBlue
     loginButton.clipsToBounds = true
     loginButton.layer.cornerRadius = 20
     loginButton.setTitle("登入", for: .normal)
@@ -67,7 +64,9 @@ class AuthViewController: UIViewController {
       make.centerX.equalToSuperview()
       make.top.equalTo(passwordTextField.snp.bottom).offset(50)
     }
+    
     loginButton.addTarget(self, action: #selector(loginButtonDidTap), for: .touchUpInside)
+    
     
     registerButton = UIButton()
     view.addSubview(registerButton)
@@ -78,6 +77,7 @@ class AuthViewController: UIViewController {
         make.top.equalTo(loginButton.snp.bottom).offset(50)
         make.trailing.equalTo(view.snp.trailing).offset(-50)
     }
+    
     registerButton.addTarget(self, action: #selector(registerButtonDidTap), for: .touchUpInside)
 
   }
@@ -97,12 +97,9 @@ class AuthViewController: UIViewController {
 
     }
   
-  
   @objc func registerButtonDidTap() {
     let stepOneViewController = StepOneViewController()
     navigationController?.pushViewController(stepOneViewController, animated: true)
-//    present(stepOneViewController, animated: true, completion: nil)
-
   }
 }
 

@@ -7,15 +7,19 @@
 //
 
 import UIKit
+import JGProgressHUD
+import SDWebImage
 
 class SpotsViewController: UIViewController {
     var collectionView: UICollectionView!
     var name: String = ""
-    
+    var spots: [Spot] = []
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .red
+        title = "台北市"
         
         setupCollectionView()
         
@@ -23,55 +27,47 @@ class SpotsViewController: UIViewController {
         let text = "https://gis.taiwan.net.tw/XMLReleaseALL_public/scenic_spot_C_f.json"
         let url = URL(string: text)
         if let url = url {
+            
+            HUD.shared.showLoading(view: view)
+            
             URLSession.shared.dataTask(with: url) { (data, response, error) in
                 if let data = data {
                     let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String:Any]
                     if let json = json ,
                         let xmlHead = json["XML_Head"] as? [String:Any],
                         let infos = xmlHead["Infos"] as? [String:Any] ,
-                        let info = infos["Info"] as? [Any],
-                        let infoArray = info[0] as? [String:Any],
-                        let id = infoArray["Id"] as? String ,
-                        let name = infoArray["Name"] as? String ,
-                        let toldescribe = infoArray["Toldescribe"] as? String ,
-                        let tel = infoArray["Tel"] as? String ,
-                        let region = infoArray["Region"] as? String ,
-                        let town = infoArray["Town"] as? String ,
-                        let px = infoArray["Px"] as? Double ,
-                        let py = infoArray["Py"] as? Double  ,
-                        let keyword = infoArray["Keyword"] as? String {
-                        self.name = name
-                        DispatchQueue.main.async {
+                        let info = infos["Info"] as? [Any] {
+                        for dictionary in info {
+                            if let dictionary = dictionary as? [String: Any] {
+                                let spot = Spot(dictionary: dictionary)
+                                self.spots.append(spot)
+                            }
+                            
+                        }
+                        DispatchQueue.main.async { //執行緒
                             self.collectionView.reloadData()
                         }
-                        print("""
-                            Id: \(id),
-                            Name: \(name),
-                            Toldescribe: \(toldescribe),
-                            Tel: \(tel),
-                            Region: \(region),
-                            Town: \(town),
-                            Px: \(px),
-                            Py: \(py),
-                            Keyword: \(keyword)
-                            """)
+                       
                     }
-                    
-                }
-            }.resume()
+                    HUD.shared.hideLoading()
+
+                }            }.resume()
             
         }
         
     }
+  
+ 
     func setupCollectionView() {
            let layout = UICollectionViewFlowLayout()
            layout.scrollDirection = .vertical // vertical 垂直的意思，   horizontal 橫向的意思
+        layout.minimumLineSpacing = CGFloat.init(integerLiteral: 40)
+        // 上面是調整垂直滑動，每個cell上下之間的間距方法
            collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-           
            collectionView.delegate = self
            collectionView.dataSource = self
-           collectionView.register(CityCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
-           collectionView.backgroundColor = .green
+           collectionView.register(SpotCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.backgroundColor = .black
            view.addSubview(collectionView)
            collectionView.snp.makeConstraints { (m) in
                m.leading.equalToSuperview().offset(10)
@@ -86,30 +82,35 @@ class SpotsViewController: UIViewController {
 
 extension SpotsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return spots.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CityCollectionViewCell
-        cell.nameLabel.text = name
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! SpotCollectionViewCell
+        let spot = spots[indexPath.item]
+        let url = URL(string: spot.picture1)
+        cell.backgroundImageView.sd_setImage(with: url, completed: nil)
+        cell.nameLabel.text = spot.name
+        cell.addLabel.text = spot.add
+        cell.townLabel.text = spot.town
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.frame.width / 2 - 10
-//        var hight: CGFloat = 0
-//        if indexPath.item % 2 == 1 {
-//            hight = 150
-//        } else {
-//            hight = 90
-//        }
+        let width = collectionView.frame.width - 10
         let size = CGSize(width: width, height: 150)
+        
         return size
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let spot = spots[indexPath.item]
+        let spotDetailViewController = SpotDetailViewController()
+        spotDetailViewController.spot = spot
+        navigationController?.pushViewController(spotDetailViewController, animated: true)
+        
        
     }
-    
-    
+ 
+
 }
 extension SpotsViewController: UISearchTextFieldDelegate {
     

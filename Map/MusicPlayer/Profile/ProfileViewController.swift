@@ -12,6 +12,7 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseStorage
 import JGProgressHUD
+import SDWebImage
 
 class ProfileViewController: UIViewController {
     
@@ -29,12 +30,7 @@ class ProfileViewController: UIViewController {
         
         view.backgroundColor = .systemRed
         
-        let hud = JGProgressHUD(style: .extraLight)
-        hud.progress = 0.5 
-        hud.textLabel.text = "Loading"
-        hud.show(in: self.view)
-       
-        
+        HUD.shared.showLoading(view: view)
         if let uid = Auth.auth().currentUser?.uid {
             Firestore.firestore().collection("Users").document(uid).getDocument { (snapshot, err) in
                 if let err = err {
@@ -52,15 +48,19 @@ class ProfileViewController: UIViewController {
                     
                     if let profileImageURL = dictionary["profileImageURL"] as? String {
                         // String -> URL -> Data -> UIImage
-                        if let url = URL(string: profileImageURL) {
-                            if let data = try? Data(contentsOf: url) {
-                                self.avatarImageView.image = UIImage(data: data)
-                                hud.dismiss(afterDelay: 0.5)
-                            }
+//                        if let url = URL(string: profileImageURL) {
+//                            if let data = try? Data(contentsOf: url) {
+//                                self.avatarImageView.image = UIImage(data:data)
+                        self.avatarImageView.sd_setImage(with: URL(string: profileImageURL)) { (_, _, _, _) in
+                            HUD.shared.hideLoading()
+                            
                         }
+//                            }
+//                        }
                         
                     } else {
-                        hud.dismiss(afterDelay: 0.5)
+                        HUD.shared.hideLoading()
+
                     }
                 }
             }
