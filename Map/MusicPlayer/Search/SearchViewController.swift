@@ -27,6 +27,7 @@ class SearchViewController: UIViewController {
         
         searchTextField = UISearchTextField()
         view.addSubview(searchTextField)
+//        searchTextField.keyboardType = .asciiCapable
         searchTextField.delegate = self
         searchTextField.snp.makeConstraints { (m) in
             m.trailing.equalTo(view.snp.trailing).offset(-10)

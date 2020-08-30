@@ -61,7 +61,7 @@ class SpotsViewController: UIViewController {
     func setupCollectionView() {
            let layout = UICollectionViewFlowLayout()
            layout.scrollDirection = .vertical // vertical 垂直的意思，   horizontal 橫向的意思
-        layout.minimumLineSpacing = CGFloat.init(integerLiteral: 40)
+        layout.minimumLineSpacing = 40.0
         // 上面是調整垂直滑動，每個cell上下之間的間距方法
            collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
            collectionView.delegate = self
@@ -91,7 +91,7 @@ extension SpotsViewController: UICollectionViewDelegate, UICollectionViewDataSou
         let url = URL(string: spot.picture1)
         cell.backgroundImageView.sd_setImage(with: url, completed: nil)
         cell.nameLabel.text = spot.name
-        cell.addLabel.text = spot.add
+        cell.addressLabel.text = spot.add
         cell.townLabel.text = spot.town
         return cell
     }
