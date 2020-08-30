@@ -8,12 +8,14 @@
 
 import UIKit
 import FirebaseAuth
-import Firebase
+import FirebaseFirestore
 
 class TabBarViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//       updateAPI()
         view.backgroundColor = .white
         let searchViewController = SearchViewController()
         searchViewController.tabBarItem.image = UIImage(named: "search")
@@ -23,8 +25,9 @@ class TabBarViewController: UITabBarController {
         let profileViewController = ProfileViewController()
         
         profileViewController.tabBarItem.image = UIImage(named: "iosph")
+        let profileNavigationController = UINavigationController(rootViewController: profileViewController)
         
-        viewControllers = [searchNavigationController , profileViewController]
+        viewControllers = [searchNavigationController , profileNavigationController]
         
 
         
@@ -46,6 +49,46 @@ class TabBarViewController: UITabBarController {
             present(authNavigationController, animated: true, completion: nil)
         }
 
+    }
+    func updateAPI() {
+        let text = "https://gis.taiwan.net.tw/XMLReleaseALL_public/scenic_spot_C_f.json"
+        let url = URL(string: text)
+        if let url = url {
+            
+            HUD.shared.showLoading(view: view)
+            
+            URLSession.shared.dataTask(with: url) { (data, response, error) in
+                if let data = data {
+                    let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String:Any]
+                    if let json = json ,
+                        let xmlHead = json["XML_Head"] as? [String:Any],
+                        let infos = xmlHead["Infos"] as? [String:Any] ,
+                        let info = infos["Info"] as? [Any] {
+                        for dictionary in info {
+                            if let dictionary = dictionary as? [String: Any] {
+                                let spot = Spot(dictionary: dictionary)
+                                let dictionary = spot.dictionary()
+//                                print("dict: \(dictionary)")
+                                Firestore.firestore().collection("Spots").document(spot.id).setData(dictionary) { (error) in
+                                    if let error = error {
+                                        self.view.makeToast(error.localizedDescription)
+                                        print("失敗上傳 :\(error.localizedDescription)")
+                                        return
+                                    }
+                                    self.view.makeToast("成功上傳API")
+                                    print("成功上傳: \(spot.id)")
+                                }
+                                
+                            }
+                            
+                        }
+                      
+                    }
+                    HUD.shared.hideLoading()
+
+                }            }.resume()
+            
+        }
     }
     
 }

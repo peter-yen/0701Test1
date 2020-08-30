@@ -48,19 +48,19 @@ class ProfileViewController: UIViewController {
                     
                     if let profileImageURL = dictionary["profileImageURL"] as? String {
                         // String -> URL -> Data -> UIImage
-//                        if let url = URL(string: profileImageURL) {
-//                            if let data = try? Data(contentsOf: url) {
-//                                self.avatarImageView.image = UIImage(data:data)
+                        //                        if let url = URL(string: profileImageURL) {
+                        //                            if let data = try? Data(contentsOf: url) {
+                        //                                self.avatarImageView.image = UIImage(data:data)
                         self.avatarImageView.sd_setImage(with: URL(string: profileImageURL)) { (_, _, _, _) in
                             HUD.shared.hideLoading()
                             
                         }
-//                            }
-//                        }
+                        //                            }
+                        //                        }
                         
                     } else {
                         HUD.shared.hideLoading()
-
+                        
                     }
                 }
             }
@@ -201,23 +201,32 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! ProfileTableViewCell
-
-        if indexPath.row == 0 {
+        switch indexPath.row {
+        case 0:
             cell.textLabel?.text = "Email"
-            cell.customAccessoryLabel.text = email
-            
-        } else if indexPath.row == 1 {
+            cell.setupCustomAccessoryText(text: email)
+        case 1:
             cell.textLabel?.text = "Name"
-            cell.customAccessoryLabel.text = name
-         
-        } else {
-            
+            cell.setupCustomAccessoryText(text: name)
+        case 2:
+            cell.textLabel?.text = "我的收藏"
+            cell.accessoryView = nil
+            cell.accessoryType = .disclosureIndicator
+        default:
             cell.textLabel?.text = "您好，歡迎光臨"
         }
+        
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        switch indexPath.row {
+        case 2:
+            let spotViewController = SpotsViewController()
+            navigationController?.pushViewController(spotViewController, animated: true)
+        default:
+            break
+        }
         
     }
     

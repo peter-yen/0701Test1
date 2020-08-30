@@ -59,7 +59,7 @@ class SpotDetailViewController: UIViewController {
     func setupLabel() {
         townLabel = UILabel()
         scrollView.addSubview(townLabel)
-        townLabel.text = "台灣 \(spot.town)"
+        townLabel.text = "台灣 \(spot.district)"
         townLabel.font = UIFont.boldSystemFont(ofSize: 20)
         townLabel.snp.makeConstraints { (m) in
             m.width.equalToSuperview()
@@ -68,7 +68,7 @@ class SpotDetailViewController: UIViewController {
         }
         addressLabel = UILabel()
         scrollView.addSubview(addressLabel)
-        addressLabel.text = "地址： \(spot.add)"
+        addressLabel.text = "地址： \(spot.address)"
         addressLabel.font = UIFont.boldSystemFont(ofSize: 17)
         addressLabel.snp.makeConstraints { (m) in
             m.width.equalToSuperview()
@@ -86,7 +86,7 @@ class SpotDetailViewController: UIViewController {
         }
         telLabel = UILabel()
         scrollView.addSubview(telLabel)
-        telLabel.text = "電話： \(spot.tel)"
+        telLabel.text = "電話： \(spot.phone)"
         telLabel.font = UIFont.boldSystemFont(ofSize: 17)
         telLabel.snp.makeConstraints { (m) in
             m.width.equalToSuperview()
@@ -103,7 +103,7 @@ class SpotDetailViewController: UIViewController {
         descriptionTextView.isEditable = false  //不能編輯開關
         descriptionTextView.backgroundColor = .systemGray3
         descriptionTextView.text = """
-        景點介紹： \(spot.toldescribe)
+        景點介紹： \(spot.introduction)
         
         \(spot.description)
         

@@ -23,14 +23,15 @@ class SpotCollectionViewCell: UICollectionViewCell {
         
         backgroundColor = .systemBlue
         setupBackgroundImage()
-        setupLabel()
+        setupNameLabel()
         setupAdressLabel()
         setupTownLabel()
-        
+        setupFavoriteButton()
         
         
     }
-    func setupLabel() {
+    
+    func setupNameLabel() {
         nameLabel = UILabel()
         addSubview(nameLabel)
         nameLabel.text = "城市"
@@ -39,14 +40,6 @@ class SpotCollectionViewCell: UICollectionViewCell {
         nameLabel.snp.makeConstraints { (m) in
             m.bottom.trailing.equalToSuperview().offset(-5)
         }
-        favoriteButton = UIButton()
-        addSubview(favoriteButton)
-        favoriteButton.backgroundColor = .black
-        favoriteButton.snp.makeConstraints { (m) in
-            m.top.equalToSuperview().offset(5)
-            m.trailing.equalToSuperview().offset(-5)
-        }
-        
         
         
     }
@@ -88,9 +81,26 @@ class SpotCollectionViewCell: UICollectionViewCell {
         
     }
     
+    func setupFavoriteButton() {
+        favoriteButton = UIButton()
+        addSubview(favoriteButton)
+        
+        let selectedImage = UIImage(named: "favorite_selected")
+        let unselectedImage = UIImage(named: "favorite_unselected")
+        favoriteButton.setImage(selectedImage, for: .selected)
+        favoriteButton.setImage(unselectedImage, for: .normal)
+        favoriteButton.addTarget(self, action: #selector(favoriteButtonDidTap), for: .touchUpInside)
     
-    
-    
+        favoriteButton.snp.makeConstraints { (m) in
+            m.top.equalToSuperview().offset(5)
+            m.trailing.equalToSuperview().offset(-5)
+            m.width.height.equalTo(40)
+        }
+    }
+    @objc func favoriteButtonDidTap() {
+        favoriteButton.isSelected = !favoriteButton.isSelected
+        
+    }
     
     
     

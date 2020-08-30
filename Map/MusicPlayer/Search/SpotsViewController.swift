@@ -24,40 +24,19 @@ class SpotsViewController: UIViewController {
         setupCollectionView()
         
         
-        let text = "https://gis.taiwan.net.tw/XMLReleaseALL_public/scenic_spot_C_f.json"
-        let url = URL(string: text)
-        if let url = url {
-            
-            HUD.shared.showLoading(view: view)
-            
-            URLSession.shared.dataTask(with: url) { (data, response, error) in
-                if let data = data {
-                    let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String:Any]
-                    if let json = json ,
-                        let xmlHead = json["XML_Head"] as? [String:Any],
-                        let infos = xmlHead["Infos"] as? [String:Any] ,
-                        let info = infos["Info"] as? [Any] {
-                        for dictionary in info {
-                            if let dictionary = dictionary as? [String: Any] {
-                                let spot = Spot(dictionary: dictionary)
-                                self.spots.append(spot)
-                            }
-                            
-                        }
-                        DispatchQueue.main.async { //執行緒
-                            self.collectionView.reloadData()
-                        }
-                       
-                    }
-                    HUD.shared.hideLoading()
-
-                }            }.resume()
-            
-        }
         
     }
   
- 
+//    for dictionary in info {
+//        if let dictionary = dictionary as? [String: Any] {
+//            let spot = Spot(dictionary: dictionary)
+//            self.spots.append(spot)
+//        }
+//
+//    }
+//    DispatchQueue.main.async { //執行緒
+//        self.collectionView.reloadData()
+//    }
     func setupCollectionView() {
            let layout = UICollectionViewFlowLayout()
            layout.scrollDirection = .vertical // vertical 垂直的意思，   horizontal 橫向的意思
@@ -91,8 +70,8 @@ extension SpotsViewController: UICollectionViewDelegate, UICollectionViewDataSou
         let url = URL(string: spot.picture1)
         cell.backgroundImageView.sd_setImage(with: url, completed: nil)
         cell.nameLabel.text = spot.name
-        cell.addressLabel.text = spot.add
-        cell.townLabel.text = spot.town
+        cell.addressLabel.text = spot.address
+        cell.townLabel.text = spot.district
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

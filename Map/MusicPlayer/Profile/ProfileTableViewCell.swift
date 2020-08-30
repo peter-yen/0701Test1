@@ -10,8 +10,9 @@ import UIKit
 import SnapKit
 
 class ProfileTableViewCell: UITableViewCell {
-    var customAccessoryLabel: UILabel!
-    var customAccessoryView: UIView!
+    private var customAccessoryLabel: UILabel!
+    private var customAccessoryView: UIView!
+    
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -30,6 +31,10 @@ class ProfileTableViewCell: UITableViewCell {
     m.margins.equalToSuperview()
     }
     
+    }
+    func setupCustomAccessoryText(text: String) {
+        customAccessoryLabel.text = text
+        
     }
     
     required init?(coder: NSCoder) {
