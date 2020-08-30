@@ -25,6 +25,30 @@ class Spot {
     var travellinginfo: String
     var opentime: String
    
+    init(firestoreDictionary: [String: Any]) {
+        self.id = firestoreDictionary["id"] as! String
+        self.name = firestoreDictionary["name"] as! String
+        self.city = firestoreDictionary["city"] as! String
+        self.introduction = firestoreDictionary["introduction"] as! String
+        self.phone = firestoreDictionary["phone"] as! String
+        self.district = firestoreDictionary["district"] as! String
+        self.px = firestoreDictionary["px"] as! Double
+        self.py = firestoreDictionary["py"] as! Double
+        self.keyword = firestoreDictionary["keyword"] as! String
+        self.picture1 = firestoreDictionary["picture1"] as! String
+        self.address = firestoreDictionary["address"] as! String
+        self.description = firestoreDictionary["description"] as! String
+        self.travellinginfo = firestoreDictionary["travellinginfo"] as! String
+        self.opentime = firestoreDictionary["opentime"] as! String
+        
+        
+        
+    }
+    
+    
+    
+    
+    
     init(dictionary: [String: Any]) {
         self.id = dictionary["Id"] as! String
         self.name = dictionary["Name"] as! String

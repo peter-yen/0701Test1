@@ -9,6 +9,7 @@
 import UIKit
 import JGProgressHUD
 import SDWebImage
+import FirebaseFirestore
 
 class SpotsViewController: UIViewController {
     var collectionView: UICollectionView!
@@ -23,9 +24,22 @@ class SpotsViewController: UIViewController {
         
         setupCollectionView()
         
-        
+        Firestore.firestore().collection("Spot").getDocuments { (snapshots, error) in
+            if let error = error {
+                self.view.makeToast(error.localizedDescription)
+                return
+            }
+            if let snapshots = snapshots?.documents {
+                for snapshot in snapshots {
+                    let dictionary = snapshot.data()
+                    let spot = Spot(dictionary: dictionary)
+                }
+            }
+        }
         
     }
+    
+    
   
 //    for dictionary in info {
 //        if let dictionary = dictionary as? [String: Any] {
