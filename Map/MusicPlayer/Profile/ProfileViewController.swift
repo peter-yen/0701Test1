@@ -23,6 +23,7 @@ class ProfileViewController: UIViewController {
     
     var name: String = ""
     var email: String = ""
+    var isAdmin: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +34,18 @@ class ProfileViewController: UIViewController {
         
         HUD.shared.showLoading(view: view)
         if let uid = Auth.auth().currentUser?.uid {
+            
+/*
+同步 sync: 發出A請求 -> 收到A回應 -> 才能發出B請求  就是一個跑完才能跑下一個（照著流程）
+非同步 async: 發出A請求 -> 發出B請求 -> 收到 A or B 回應 （誰做好誰先回來，不需要等）
+Client: 客戶端， ex:網頁、手機
+Server: 伺服器， ex:Firestore , Database , https
+https請求類型： Get , Post , Delete , Put ...
+https回應種類： 404, 400 , 200 ...
+有 completion block(閉包) 的方法通常為非同步請求
+             
+             */
+            
             Firestore.firestore().collection("Users").document(uid).getDocument { (snapshot, err) in
                 if let err = err {
                     self.view.makeToast(err.localizedDescription)
@@ -44,20 +57,19 @@ class ProfileViewController: UIViewController {
                         let email = dictionary["email"] as? String {
                         self.name = name
                         self.email = email
+                        if let isAdmin = dictionary["isAdmin"] as? Bool {
+                            self.isAdmin = isAdmin
+                        }
                         self.tableView.reloadData()
                     }
                     
                     if let profileImageURL = dictionary["profileImageURL"] as? String {
-                        // String -> URL -> Data -> UIImage
-                        //                        if let url = URL(string: profileImageURL) {
-                        //                            if let data = try? Data(contentsOf: url) {
-                        //                                self.avatarImageView.image = UIImage(data:data)
+                        
                         self.avatarImageView.sd_setImage(with: URL(string: profileImageURL)) { (_, _, _, _) in
                             HUD.shared.hideLoading()
                             
                         }
-                        //                            }
-                        //                        }
+                                       
                         
                     } else {
                         HUD.shared.hideLoading()
@@ -201,7 +213,11 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        if isAdmin == true {
+            return 6
+        } else {
+            return 5
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -220,6 +236,11 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             cell.accessoryType = .disclosureIndicator
         default:
             cell.textLabel?.text = "您好，歡迎光臨"
+        }
+        if isAdmin == true {
+            if indexPath.row == 5 {
+            cell.textLabel?.text = "更新資料庫"
+            }
         }
         
         return cell
