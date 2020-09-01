@@ -28,7 +28,8 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         configureLayout()
         
-        view.backgroundColor = .systemRed
+        view.backgroundColor = .white
+        
         
         HUD.shared.showLoading(view: view)
         if let uid = Auth.auth().currentUser?.uid {
@@ -77,7 +78,7 @@ class ProfileViewController: UIViewController {
     func configureLayout() {
         
         navigationView = UIView()
-        navigationView.backgroundColor = .systemPink
+        navigationView.backgroundColor = .systemGray
         view.addSubview(navigationView)
         navigationView.snp.makeConstraints { (m) in
             m.top.left.right.equalToSuperview()
@@ -93,13 +94,16 @@ class ProfileViewController: UIViewController {
         let tap = UITapGestureRecognizer(target: self, action: #selector(avatarImageViewDidTap))
         avatarImageView.addGestureRecognizer(tap)
         avatarImageView.snp.makeConstraints { (m) in
-            m.centerX.centerY.equalTo(navigationView)
+            m.centerX.equalTo(navigationView)
+            m.centerY.equalTo(navigationView).offset(30)
             m.height.width.equalTo(120)
         }
         
         tableView = UITableView()
-        tableView.backgroundColor = .systemFill
         view.addSubview(tableView)
+        tableView.backgroundColor = .white
+        tableView.separatorColor = .systemGray3
+        // separatorColor為tableView 底線的顏色
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: "cell")
@@ -111,6 +115,7 @@ class ProfileViewController: UIViewController {
         signOutButton = UIButton()
         view.addSubview(signOutButton)
         signOutButton.setTitle("Sign Out", for: .normal)
+        signOutButton.setTitleColor(.black, for: .normal)
         signOutButton.addTarget(self, action: #selector(signOut), for: .touchUpInside)
         signOutButton.snp.makeConstraints { (m) in
             m.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-20)
@@ -201,6 +206,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! ProfileTableViewCell
+        cell.backgroundColor = .white
         switch indexPath.row {
         case 0:
             cell.textLabel?.text = "Email"
@@ -210,7 +216,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             cell.setupCustomAccessoryText(text: name)
         case 2:
             cell.textLabel?.text = "我的收藏"
-            cell.accessoryView = nil
+            cell.accessoryView = nil // accessory 屬性只能存在一個
             cell.accessoryType = .disclosureIndicator
         default:
             cell.textLabel?.text = "您好，歡迎光臨"

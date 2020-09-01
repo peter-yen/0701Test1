@@ -29,6 +29,7 @@
 		89BC905624EB7DB00048C2C4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BC905524EB7DB00048C2C4 /* ProfileViewController.swift */; };
 		89BC905824EC20600048C2C4 /* StepOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BC905724EC20600048C2C4 /* StepOneViewController.swift */; };
 		89BC905A24ED7C1F0048C2C4 /* StepTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BC905924ED7C1F0048C2C4 /* StepTwoViewController.swift */; };
+		89C396F324FD42880066DC93 /* IsAdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C396F224FD42880066DC93 /* IsAdminViewController.swift */; };
 		89E64F1D24EF9BEC005C2773 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E64F1C24EF9BEC005C2773 /* User.swift */; };
 		89F8FFDE24B96B3100B25677 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89F8FFDD24B96B3100B25677 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
@@ -60,6 +61,7 @@
 		89BC905524EB7DB00048C2C4 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		89BC905724EC20600048C2C4 /* StepOneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepOneViewController.swift; sourceTree = "<group>"; };
 		89BC905924ED7C1F0048C2C4 /* StepTwoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepTwoViewController.swift; sourceTree = "<group>"; };
+		89C396F224FD42880066DC93 /* IsAdminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsAdminViewController.swift; sourceTree = "<group>"; };
 		89E64F1C24EF9BEC005C2773 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		89F8FFDD24B96B3100B25677 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BAA08731A1A19761A8BB5D8F /* Pods_MusicPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MusicPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -135,6 +137,7 @@
 				8916281724F8E57E00112A5D /* Extension */,
 				8907A61624AF421500EEED09 /* AppDelegate.swift */,
 				8972CBBD24AF430500E94D81 /* TabBarViewController.swift */,
+				89C396F224FD42880066DC93 /* IsAdminViewController.swift */,
 				890EB8CB24F63CBA00DB0329 /* Profile */,
 				89A4CD4E24F61EEB00A6F8FD /* Search */,
 				4E6F404F24DE437800B55B46 /* Auth */,
@@ -327,6 +330,7 @@
 				8916281424F8DA4400112A5D /* SpotDetailViewController.swift in Sources */,
 				89281A3C24F17D3F00212D0A /* StepThreeViewController.swift in Sources */,
 				8916281224F8D5F200112A5D /* SpotCollectionViewCell.swift in Sources */,
+				89C396F324FD42880066DC93 /* IsAdminViewController.swift in Sources */,
 				89883B8F24C931B900F76CFE /* AuthViewController.swift in Sources */,
 				890EB8CA24F6331D00DB0329 /* SpotsViewController.swift in Sources */,
 				89A05A0824F61D2E009E3379 /* SearchViewController.swift in Sources */,

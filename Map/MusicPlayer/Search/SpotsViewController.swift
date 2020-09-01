@@ -19,10 +19,12 @@ class SpotsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .red
+        view.backgroundColor = .black
         title = "台北市"
         
         setupCollectionView()
+        
+        HUD.shared.showLoading(view: view)
         
         Firestore.firestore().collection("Spot").getDocuments { (snapshots, error) in
             if let error = error {
@@ -32,8 +34,14 @@ class SpotsViewController: UIViewController {
             if let snapshots = snapshots?.documents {
                 for snapshot in snapshots {
                     let dictionary = snapshot.data()
-                    let spot = Spot(dictionary: dictionary)
+                    let spot = Spot(firestoreDictionary: dictionary)
+                    self.spots.append(spot)
+                    
                 }
+                DispatchQueue.main.async { //執行緒
+                self.collectionView.reloadData()
+                }
+                HUD.shared.hideLoading()
             }
         }
         
@@ -48,13 +56,12 @@ class SpotsViewController: UIViewController {
 //        }
 //
 //    }
-//    DispatchQueue.main.async { //執行緒
-//        self.collectionView.reloadData()
+    
 //    }
     func setupCollectionView() {
            let layout = UICollectionViewFlowLayout()
            layout.scrollDirection = .vertical // vertical 垂直的意思，   horizontal 橫向的意思
-        layout.minimumLineSpacing = 40.0
+        layout.minimumLineSpacing = 80.0
         // 上面是調整垂直滑動，每個cell上下之間的間距方法
            collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
            collectionView.delegate = self
@@ -63,9 +70,9 @@ class SpotsViewController: UIViewController {
         collectionView.backgroundColor = .black
            view.addSubview(collectionView)
            collectionView.snp.makeConstraints { (m) in
-               m.leading.equalToSuperview().offset(10)
-               m.bottom.trailing.equalToSuperview().offset(-10)
-               m.top.equalTo(view.snp.top).offset(20)
+               m.leading.equalToSuperview().offset(5)
+               m.bottom.trailing.equalToSuperview().offset(-5)
+            m.top.equalTo(view.safeAreaLayoutGuide.snp.top)
                
            }
            
@@ -89,8 +96,8 @@ extension SpotsViewController: UICollectionViewDelegate, UICollectionViewDataSou
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.frame.width - 10
-        let size = CGSize(width: width, height: 150)
+        let width = collectionView.frame.width - 5
+        let size = CGSize(width: width, height: 160)
         
         return size
     }

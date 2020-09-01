@@ -21,11 +21,11 @@ class SpotCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .systemBlue
+        backgroundColor = .darkGray
         setupBackgroundImage()
         setupNameLabel()
-        setupAdressLabel()
         setupTownLabel()
+        setupAdressLabel()
         setupFavoriteButton()
         
         
@@ -36,9 +36,10 @@ class SpotCollectionViewCell: UICollectionViewCell {
         addSubview(nameLabel)
         nameLabel.text = "城市"
         nameLabel.font = UIFont.boldSystemFont(ofSize: 20)
-        nameLabel.textColor = .white
+        nameLabel.textColor = .red
         nameLabel.snp.makeConstraints { (m) in
-            m.bottom.trailing.equalToSuperview().offset(-5)
+            m.left.equalTo(backgroundImageView)
+            m.top.equalTo(backgroundImageView.snp.bottom)
         }
         
         
@@ -60,10 +61,10 @@ class SpotCollectionViewCell: UICollectionViewCell {
         addSubview(addressLabel)
         addressLabel.text = "Helllo"
         addressLabel.textAlignment = .right
-        addressLabel.textColor = .systemYellow
+        addressLabel.textColor = .white
         addressLabel.snp.makeConstraints { (m) in
             m.width.equalToSuperview()
-            m.top.equalTo(backgroundImageView.snp.bottom).offset(5)
+            m.top.equalTo(townLabel)
             m.centerX.equalToSuperview()
         }
         
@@ -72,10 +73,10 @@ class SpotCollectionViewCell: UICollectionViewCell {
         townLabel = UILabel()
         addSubview(townLabel)
         townLabel.text = "所在地"
-        townLabel.textColor = .cyan
+        townLabel.textColor = .white
         townLabel.snp.makeConstraints { (m) in
             m.width.equalTo(60)
-            m.top.equalTo(addressLabel)
+            m.top.equalTo(nameLabel.snp.bottom).offset(10)
             m.left.equalTo(backgroundImageView.snp.left)
         }
         
