@@ -16,6 +16,7 @@ class StepOneViewController: RegisterBasicViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         titleLabel.text = "電子郵件"
         textField.placeholder = "請輸入電子郵件"
         progressView.progress = 0.33

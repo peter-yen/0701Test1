@@ -28,7 +28,7 @@ class CityCollectionViewCell: UICollectionViewCell {
         addSubview(nameLabel)
         nameLabel.text = "城市"
         nameLabel.font = UIFont.boldSystemFont(ofSize: 20)
-        nameLabel.textColor = .white
+        nameLabel.textColor = .red
         nameLabel.snp.makeConstraints { (m) in
             m.bottom.trailing.equalToSuperview().offset(-5)
         }

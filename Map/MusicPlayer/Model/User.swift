@@ -12,11 +12,13 @@ class User {
     var email: String
     var name: String
     var password: String
+    var isAdmin: Bool
     
     init (email: String, name: String, password: String) {
         self.email = email
         self.name = name
         self.password = password
+        self.isAdmin = false
         
     }
     func dictionary() -> [String:Any] {

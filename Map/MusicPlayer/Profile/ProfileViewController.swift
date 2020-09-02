@@ -20,30 +20,30 @@ class ProfileViewController: UIViewController {
     var tableView: UITableView!
     var avatarImageView: UIImageView!
     var signOutButton: UIButton!
+    var user: User!
     
-    var name: String = ""
-    var email: String = ""
-    var isAdmin: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureLayout()
         
         view.backgroundColor = .white
+        setupData()
+        user = User(email: "", name: "", password: "")
         
-        
+    }
+    func setupData() {
         HUD.shared.showLoading(view: view)
         if let uid = Auth.auth().currentUser?.uid {
             
-/*
-同步 sync: 發出A請求 -> 收到A回應 -> 才能發出B請求  就是一個跑完才能跑下一個（照著流程）
-非同步 async: 發出A請求 -> 發出B請求 -> 收到 A or B 回應 （誰做好誰先回來，不需要等）
-Client: 客戶端， ex:網頁、手機
-Server: 伺服器， ex:Firestore , Database , https
-https請求類型： Get , Post , Delete , Put ...
-https回應種類： 404, 400 , 200 ...
-有 completion block(閉包) 的方法通常為非同步請求
-             
+            /*
+             同步 sync: 發出A請求 -> 收到A回應 -> 才能發出B請求  就是一個跑完才能跑下一個（照著流程）
+             非同步 async: 發出A請求 -> 發出B請求 -> 收到 A or B 回應 （誰做好誰先回來，不需要等）
+             Client: 客戶端， ex:網頁、手機
+             Server: 伺服器， ex:Firestore , Database , https
+             https請求類型： Get , Post , Delete , Put ...
+             https回應種類： 404, 400 , 200 ...
+             有 completion block(閉包) 的方法通常為非同步請求
              */
             
             Firestore.firestore().collection("Users").document(uid).getDocument { (snapshot, err) in
@@ -55,10 +55,10 @@ https回應種類： 404, 400 , 200 ...
                     
                     if let name = dictionary["name"] as? String,
                         let email = dictionary["email"] as? String {
-                        self.name = name
-                        self.email = email
+                        self.user.name = name
+                        self.user.email = email
                         if let isAdmin = dictionary["isAdmin"] as? Bool {
-                            self.isAdmin = isAdmin
+                            self.user.isAdmin = isAdmin
                         }
                         self.tableView.reloadData()
                     }
@@ -67,9 +67,7 @@ https回應種類： 404, 400 , 200 ...
                         
                         self.avatarImageView.sd_setImage(with: URL(string: profileImageURL)) { (_, _, _, _) in
                             HUD.shared.hideLoading()
-                            
                         }
-                                       
                         
                     } else {
                         HUD.shared.hideLoading()
@@ -79,13 +77,6 @@ https回應種類： 404, 400 , 200 ...
             }
         }
     }
-    override func viewWillAppear(_ animated: Bool) {
-        if let user = Auth.auth().currentUser {
-            //            emailLabel.text = user.email
-        }
-        
-    }
-    
     
     func configureLayout() {
         
@@ -146,8 +137,11 @@ https回應種類： 404, 400 , 200 ...
         do {
             try Auth.auth().signOut()
             self.view.makeToast("成功登出")
-            let authNavigationController = UINavigationController(rootViewController: AuthViewController())
-            //            authNavigationController.modalPresentationStyle = .fullScreen
+            let authViewController = AuthViewController()
+            user.isAdmin = false
+            authViewController.profileViewController = self
+            
+            let authNavigationController =  UINavigationController(rootViewController: authViewController)
             authNavigationController.isModalInPresentation = true
             self.present(authNavigationController, animated: true, completion: nil)
             
@@ -157,7 +151,58 @@ https回應種類： 404, 400 , 200 ...
         
     }
     
-    
+    func updateAPI() {
+        let text = "https://gis.taiwan.net.tw/XMLReleaseALL_public/scenic_spot_C_f.json"
+        let url = URL(string: text)
+        if let url = url {
+            
+            //            HUD.shared.showLoading(view: view)
+            let hud = JGProgressHUD()
+            hud.indicatorView = JGProgressHUDPieIndicatorView()
+            hud.progress = 0
+            hud.show(in: self.view)
+            var currentCount: CGFloat = 0
+            
+            URLSession.shared.dataTask(with: url) { (data, response, error) in
+                if let data = data {
+                    let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String:Any]
+                    if let json = json ,
+                        let xmlHead = json["XML_Head"] as? [String:Any],
+                        let infos = xmlHead["Infos"] as? [String:Any] ,
+                        let info = infos["Info"] as? [Any] {
+                        for dictionary in info {
+                            if let dictionary = dictionary as? [String: Any] {
+                                let progressIndex = currentCount / CGFloat(info.count)
+                                currentCount += 1.0
+                                DispatchQueue.main.async {
+                                hud.setProgress(Float(progressIndex) * 50, animated: true)
+                                    hud.textLabel.text = "更新中"
+                                    hud.detailTextLabel.text = String(format: "%.2f", progressIndex) + "%"
+                                }
+                                
+                                let spot = Spot(dictionary: dictionary)
+                                let dictionary = spot.dictionary()
+                                //                                print("dict: \(dictionary)")
+                                Firestore.firestore().collection("Spots").document(spot.id).setData(dictionary) { (error) in
+                                    if let error = error {
+                                        self.view.makeToast(error.localizedDescription)
+                                        print("失敗上傳 :\(error.localizedDescription)")
+                                        return
+                                    }
+                                    self.view.makeToast("成功上傳API")
+                                    print("成功上傳: \(spot.id)")
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    HUD.shared.hideLoading()
+                    
+                }            }.resume()
+        }
+    }
     
 }
 
@@ -206,14 +251,13 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         
     }
     
-    
 }
 
 
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isAdmin == true {
+        if user.isAdmin {
             return 6
         } else {
             return 5
@@ -226,10 +270,10 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         switch indexPath.row {
         case 0:
             cell.textLabel?.text = "Email"
-            cell.setupCustomAccessoryText(text: email)
+            cell.setupCustomAccessoryText(text: user.email)
         case 1:
             cell.textLabel?.text = "Name"
-            cell.setupCustomAccessoryText(text: name)
+            cell.setupCustomAccessoryText(text: user.name)
         case 2:
             cell.textLabel?.text = "我的收藏"
             cell.accessoryView = nil // accessory 屬性只能存在一個
@@ -237,10 +281,8 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         default:
             cell.textLabel?.text = "您好，歡迎光臨"
         }
-        if isAdmin == true {
-            if indexPath.row == 5 {
+        if user.isAdmin && indexPath.row == 5 {
             cell.textLabel?.text = "更新資料庫"
-            }
         }
         
         return cell
@@ -251,6 +293,10 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         case 2:
             let spotViewController = SpotsViewController()
             navigationController?.pushViewController(spotViewController, animated: true)
+        case 5:
+            if user.isAdmin {
+                self.updateAPI()
+            }
         default:
             break
         }

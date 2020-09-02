@@ -7,9 +7,13 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseFirestore
+import Toast_Swift
 
 class SpotCollectionViewCell: UICollectionViewCell {
     
+    var spot: Spot!
     var nameLabel: UILabel!
     var backgroundImageView: UIImageView!
     var addressLabel: UILabel!
@@ -21,7 +25,7 @@ class SpotCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .darkGray
+        backgroundColor = .white
         setupBackgroundImage()
         setupNameLabel()
         setupTownLabel()
@@ -35,7 +39,7 @@ class SpotCollectionViewCell: UICollectionViewCell {
         nameLabel = UILabel()
         addSubview(nameLabel)
         nameLabel.text = "城市"
-        nameLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        nameLabel.font = UIFont.boldSystemFont(ofSize: 18)
         nameLabel.textColor = .red
         nameLabel.snp.makeConstraints { (m) in
             m.left.equalTo(backgroundImageView)
@@ -50,6 +54,7 @@ class SpotCollectionViewCell: UICollectionViewCell {
         addSubview(backgroundImageView)
         backgroundImageView.contentMode = .scaleAspectFill
         backgroundImageView.clipsToBounds = true
+        backgroundImageView.backgroundColor = .systemBlue
         backgroundImageView.image = UIImage(named: "Hebe")
         backgroundImageView.snp.makeConstraints { (m) in
             m.edges.equalToSuperview()
@@ -61,7 +66,8 @@ class SpotCollectionViewCell: UICollectionViewCell {
         addSubview(addressLabel)
         addressLabel.text = "Helllo"
         addressLabel.textAlignment = .right
-        addressLabel.textColor = .white
+        addressLabel.font = UIFont.boldSystemFont(ofSize: 15)
+        addressLabel.textColor = .black
         addressLabel.snp.makeConstraints { (m) in
             m.width.equalToSuperview()
             m.top.equalTo(townLabel)
@@ -73,10 +79,11 @@ class SpotCollectionViewCell: UICollectionViewCell {
         townLabel = UILabel()
         addSubview(townLabel)
         townLabel.text = "所在地"
-        townLabel.textColor = .white
+        townLabel.font = UIFont.boldSystemFont(ofSize: 15)
+        townLabel.textColor = .black
         townLabel.snp.makeConstraints { (m) in
             m.width.equalTo(60)
-            m.top.equalTo(nameLabel.snp.bottom).offset(10)
+            m.top.equalTo(nameLabel.snp.bottom).offset(6)
             m.left.equalTo(backgroundImageView.snp.left)
         }
         
@@ -91,7 +98,7 @@ class SpotCollectionViewCell: UICollectionViewCell {
         favoriteButton.setImage(selectedImage, for: .selected)
         favoriteButton.setImage(unselectedImage, for: .normal)
         favoriteButton.addTarget(self, action: #selector(favoriteButtonDidTap), for: .touchUpInside)
-    
+        
         favoriteButton.snp.makeConstraints { (m) in
             m.top.equalToSuperview().offset(5)
             m.trailing.equalToSuperview().offset(-5)
@@ -100,9 +107,36 @@ class SpotCollectionViewCell: UICollectionViewCell {
     }
     @objc func favoriteButtonDidTap() {
         favoriteButton.isSelected = !favoriteButton.isSelected
-        
+        let id = spot.id
+        if let uid = Auth.auth().currentUser?.uid {
+            Firestore.firestore().collection("Users").document(uid).getDocument { (snapshot, error) in
+                if let error = error {
+                    self.makeToast(error.localizedDescription)
+                    return
+                }
+                if let dictionary = snapshot?.data() {
+                    if let favoriteaArray = dictionary["favoriteSpots"] as? [Any] {
+                        if self.favoriteButton.isSelected == true {
+                            Firestore.firestore().collection("Users").document(uid).updateData([favoriteaArray : id])
+                            
+                            
+                            
+                        
+                            
+                                
+                        }
+                    }
+                    
+                }
+            }
+            
+
+            
+            // 1. 存入（updetedata） User 中 favoriteSpots [陣列] 中
+            
+            
+        }
     }
-    
     
     
     
@@ -111,6 +145,6 @@ class SpotCollectionViewCell: UICollectionViewCell {
     }
     
     
+    
+    
 }
-
-

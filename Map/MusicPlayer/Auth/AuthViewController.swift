@@ -18,6 +18,7 @@ class AuthViewController: UIViewController {
   var passwordTextField: UITextField! //passwordTextField
   var loginButton: UIButton! //loginButton
     var registerButton: UIButton!
+    var profileViewController: ProfileViewController?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -91,6 +92,7 @@ class AuthViewController: UIViewController {
                     self.view.makeToast(err.localizedDescription)
                 }else {
                     self.view.makeToast("登入成功")
+                    self.profileViewController?.setupData()
                     self.dismiss(animated: true, completion: nil)                }
             }
         }

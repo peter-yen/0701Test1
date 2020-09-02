@@ -16,7 +16,7 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemYellow
+        view.backgroundColor = .white
         
         configurLayout()
         setupCollectionView()
@@ -46,7 +46,7 @@ class SearchViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(CityCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
-        collectionView.backgroundColor = .green
+        collectionView.backgroundColor = .cyan
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { (m) in
             m.leading.equalToSuperview().offset(10)

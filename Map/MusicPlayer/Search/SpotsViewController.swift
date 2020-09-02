@@ -19,14 +19,14 @@ class SpotsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .black
+        view.backgroundColor = .systemGray4
         title = "台北市"
         
         setupCollectionView()
         
         HUD.shared.showLoading(view: view)
         
-        Firestore.firestore().collection("Spot").getDocuments { (snapshots, error) in
+        Firestore.firestore().collection("Spots").getDocuments { (snapshots, error) in
             if let error = error {
                 self.view.makeToast(error.localizedDescription)
                 return
@@ -67,7 +67,7 @@ class SpotsViewController: UIViewController {
            collectionView.delegate = self
            collectionView.dataSource = self
            collectionView.register(SpotCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
-        collectionView.backgroundColor = .black
+        collectionView.backgroundColor = .white
            view.addSubview(collectionView)
            collectionView.snp.makeConstraints { (m) in
                m.leading.equalToSuperview().offset(5)
@@ -93,11 +93,12 @@ extension SpotsViewController: UICollectionViewDelegate, UICollectionViewDataSou
         cell.nameLabel.text = spot.name
         cell.addressLabel.text = spot.address
         cell.townLabel.text = spot.district
+        cell.spot = spot
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.frame.width - 5
-        let size = CGSize(width: width, height: 160)
+        let size = CGSize(width: width, height: 180)
         
         return size
     }

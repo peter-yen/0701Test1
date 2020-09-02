@@ -25,7 +25,7 @@ class SpotDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .black
+        view.backgroundColor = .white
         
         title = spot.name
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -34,7 +34,7 @@ class SpotDetailViewController: UIViewController {
         //上面設置title的顏色和大小
         scrollView = UIScrollView()
         view.addSubview(scrollView)
-        scrollView.backgroundColor = .black
+        scrollView.backgroundColor = .white
         scrollView.contentSize = CGSize(width: view.frame.width, height: 2000)
         scrollView.snp.makeConstraints { (m) in
             m.edges.equalToSuperview()
@@ -66,7 +66,7 @@ class SpotDetailViewController: UIViewController {
         scrollView.addSubview(townLabel)
         townLabel.text = " 台灣 \(spot.district)"
         townLabel.font = UIFont.boldSystemFont(ofSize: 20)
-        townLabel.textColor = .yellow
+        townLabel.textColor = .systemBlue
         townLabel.snp.makeConstraints { (m) in
             m.width.equalToSuperview()
             m.top.equalTo(backgroundImageView.snp.bottom)
@@ -76,7 +76,7 @@ class SpotDetailViewController: UIViewController {
         scrollView.addSubview(addressLabel)
         addressLabel.text = "地址： \(spot.address)"
         addressLabel.font = UIFont.boldSystemFont(ofSize: 18)
-        addressLabel.textColor = .yellow
+        addressLabel.textColor = .systemBlue
         addressLabel.snp.makeConstraints { (m) in
             m.width.equalToSuperview()
             m.top.equalTo(townLabel.snp.bottom).offset(5)
@@ -86,7 +86,7 @@ class SpotDetailViewController: UIViewController {
         scrollView.addSubview(opentimeLabel)
         opentimeLabel.text = "開放時間： \(spot.opentime)"
         opentimeLabel.font = UIFont.boldSystemFont(ofSize: 18)
-        opentimeLabel.textColor = .yellow
+        opentimeLabel.textColor = .systemBlue
         opentimeLabel.snp.makeConstraints { (m) in
             m.width.equalToSuperview()
             m.top.equalTo(addressLabel.snp.bottom).offset(5)
@@ -96,7 +96,7 @@ class SpotDetailViewController: UIViewController {
         scrollView.addSubview(telLabel)
         telLabel.text = "電話： \(spot.phone)"
         telLabel.font = UIFont.boldSystemFont(ofSize: 18)
-        telLabel.textColor = .yellow
+        telLabel.textColor = .systemBlue
         telLabel.snp.makeConstraints { (m) in
             m.width.equalToSuperview()
             m.top.equalTo(opentimeLabel.snp.bottom).offset(5)
@@ -106,7 +106,7 @@ class SpotDetailViewController: UIViewController {
         scrollView.addSubview(introductionLabel)
         introductionLabel.text = "- 景點介紹 -"
         introductionLabel.font = UIFont.boldSystemFont(ofSize: 18)
-        introductionLabel.textColor = .green
+        introductionLabel.textColor = .systemIndigo
         introductionLabel.snp.makeConstraints { (m) in
             m.left.equalTo(telLabel)
             m.top.equalTo(telLabel.snp.bottom).offset(30)
@@ -121,8 +121,8 @@ class SpotDetailViewController: UIViewController {
         descriptionTextView.isEditable = false  //不能編輯開關
         
         descriptionTextView.font = UIFont.boldSystemFont(ofSize: 18)
-        descriptionTextView.textColor = .white
-        descriptionTextView.backgroundColor = .black
+        descriptionTextView.textColor = .black
+        
         descriptionTextView.text = """
         \(spot.introduction)
         """
@@ -135,7 +135,7 @@ class SpotDetailViewController: UIViewController {
         travellingLabel = UILabel()
         scrollView.addSubview(travellingLabel)
         travellingLabel.font = UIFont.boldSystemFont(ofSize: 18)
-        travellingLabel.textColor = .green
+        travellingLabel.textColor = .systemIndigo
         travellingLabel.text = "- 交通資訊 -"
         travellingLabel.snp.makeConstraints { (m) in
             m.left.equalTo(introductionLabel)
@@ -148,8 +148,8 @@ class SpotDetailViewController: UIViewController {
         travellinginfoTextView.isEditable = false  //不能編輯開關
         
         travellinginfoTextView.font = UIFont.boldSystemFont(ofSize: 18)
-        travellinginfoTextView.textColor = .white
-        travellinginfoTextView.backgroundColor = .black
+        travellinginfoTextView.textColor = .black
+        
         travellinginfoTextView.text = """
         \(spot.travellinginfo)
         """
