@@ -38,7 +38,7 @@ class StepThreeViewController: RegisterBasicViewController {
                         // user.dictionary(): User -> Dictionary
                         if let uid = Auth.auth().currentUser?.uid {
                             let userDict = user.dictionary()
-                            Firestore.firestore().collection("Users").document(uid).setData(userDict) { (error) in
+                             API.shared.userRef(uid: uid).setData(userDict) { (error) in
                                 if let error = error {
                                     self.view.makeToast(error.localizedDescription)
                                 } else {

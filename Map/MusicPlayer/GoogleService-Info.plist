@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>457911551293-njh9rqeb0qdcbo05uv497i74ni0qe0ht.apps.googleusercontent.com</string>
+	<string>1088406402397-0k075epkmnrtgcba4n3q5kt9hdf83vk8.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.457911551293-njh9rqeb0qdcbo05uv497i74ni0qe0ht</string>
+	<string>com.googleusercontent.apps.1088406402397-0k075epkmnrtgcba4n3q5kt9hdf83vk8</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAFkKARtPT0lo_1ULTIvleh5QYilnnGdCQ</string>
+	<string>AIzaSyB-4ZrTw73f8gLkO28HEv4MIqMK27trrsk</string>
 	<key>GCM_SENDER_ID</key>
-	<string>457911551293</string>
+	<string>1088406402397</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>garyray.hometeach01</string>
+	<string>ntu.Map</string>
 	<key>PROJECT_ID</key>
-	<string>hometeach01-9fa46</string>
+	<string>song-87dbb</string>
 	<key>STORAGE_BUCKET</key>
-	<string>hometeach01-9fa46.appspot.com</string>
+	<string>song-87dbb.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:457911551293:ios:3882f5e761e8f2e66bf154</string>
+	<string>1:1088406402397:ios:37a050aa42633a087324b4</string>
 	<key>DATABASE_URL</key>
-	<string>https://hometeach01-9fa46.firebaseio.com</string>
+	<string>https://song-87dbb.firebaseio.com</string>
 </dict>
 </plist>

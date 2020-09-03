@@ -10,11 +10,13 @@ import UIKit
 import JGProgressHUD
 import SDWebImage
 import FirebaseFirestore
+import FirebaseAuth
 
 class SpotsViewController: UIViewController {
     var collectionView: UICollectionView!
     var name: String = ""
     var spots: [Spot] = []
+    var favoriteSpotsIDs: [String] = []
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +27,10 @@ class SpotsViewController: UIViewController {
         setupCollectionView()
         
         HUD.shared.showLoading(view: view)
+        
+        let dispatchGroup = DispatchGroup()
+        
+        dispatchGroup.enter()
         
         Firestore.firestore().collection("Spots").getDocuments { (snapshots, error) in
             if let error = error {
@@ -38,26 +44,37 @@ class SpotsViewController: UIViewController {
                     self.spots.append(spot)
                     
                 }
-                DispatchQueue.main.async { //執行緒
-                self.collectionView.reloadData()
+                
+            }
+            dispatchGroup.leave()
+        }
+        if let uid = Auth.auth().currentUser?.uid {
+            
+            dispatchGroup.enter()
+            
+             API.shared.userRef(uid: uid).getDocument { (snapshot, err) in
+                if let err = err {
+                    self.view.makeToast(err.localizedDescription)
+                    return
                 }
-                HUD.shared.hideLoading()
+                if let data = snapshot?.data() {
+                    if let favoriteSpotsArray = data["favoriteSpots"] as? [String] {
+                        self.favoriteSpotsIDs = favoriteSpotsArray
+                       
+                    }
+                 }
+                dispatchGroup.leave()
             }
         }
         
+        dispatchGroup.notify(queue: .main) {
+            self.collectionView.reloadData()
+            HUD.shared.hideLoading()
+        }
     }
     
     
   
-//    for dictionary in info {
-//        if let dictionary = dictionary as? [String: Any] {
-//            let spot = Spot(dictionary: dictionary)
-//            self.spots.append(spot)
-//        }
-//
-//    }
-    
-//    }
     func setupCollectionView() {
            let layout = UICollectionViewFlowLayout()
            layout.scrollDirection = .vertical // vertical 垂直的意思，   horizontal 橫向的意思
@@ -88,12 +105,11 @@ extension SpotsViewController: UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! SpotCollectionViewCell
         let spot = spots[indexPath.item]
-        let url = URL(string: spot.picture1)
-        cell.backgroundImageView.sd_setImage(with: url, completed: nil)
-        cell.nameLabel.text = spot.name
-        cell.addressLabel.text = spot.address
-        cell.townLabel.text = spot.district
+        cell.spotViewController = self
+        // 把自己給 SpotCollectionViewCell 裡面 SpotViewController 這個值
+        
         cell.spot = spot
+        
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

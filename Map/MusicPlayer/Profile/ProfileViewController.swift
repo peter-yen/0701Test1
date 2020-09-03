@@ -46,7 +46,7 @@ class ProfileViewController: UIViewController {
              有 completion block(閉包) 的方法通常為非同步請求
              */
             
-            Firestore.firestore().collection("Users").document(uid).getDocument { (snapshot, err) in
+            API.shared.userRef(uid: uid).getDocument { (snapshot, err) in
                 if let err = err {
                     self.view.makeToast(err.localizedDescription)
                     return
@@ -170,17 +170,17 @@ class ProfileViewController: UIViewController {
                         let xmlHead = json["XML_Head"] as? [String:Any],
                         let infos = xmlHead["Infos"] as? [String:Any] ,
                         let info = infos["Info"] as? [Any] {
-                        for dictionary in info {
-                            if let dictionary = dictionary as? [String: Any] {
+                        for i in 0...9 {
+                            if let dictionary = info[i] as? [String: Any] {
                                 let progressIndex = currentCount / CGFloat(info.count)
                                 currentCount += 1.0
                                 DispatchQueue.main.async {
-                                hud.setProgress(Float(progressIndex) * 50, animated: true)
+                                    hud.setProgress(Float(progressIndex) * 50, animated: true)
                                     hud.textLabel.text = "更新中"
                                     hud.detailTextLabel.text = String(format: "%.2f", progressIndex) + "%"
                                 }
                                 
-                                let spot = Spot(dictionary: dictionary)
+                                let spot = Spot(dictionary: dictionary as! [String : Any])
                                 let dictionary = spot.dictionary()
                                 //                                print("dict: \(dictionary)")
                                 Firestore.firestore().collection("Spots").document(spot.id).setData(dictionary) { (error) in
@@ -192,17 +192,19 @@ class ProfileViewController: UIViewController {
                                     self.view.makeToast("成功上傳API")
                                     print("成功上傳: \(spot.id)")
                                 }
-                                
                             }
                             
                         }
-                        
                     }
-                    HUD.shared.hideLoading()
                     
-                }            }.resume()
+                }
+                HUD.shared.hideLoading()
+                
+            }.resume()
+            
         }
     }
+    
     
 }
 
@@ -237,7 +239,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
                         print("image url: \(url)")  //url轉換成String
                         if let urlString = url?.absoluteString {
                             let dictionary = ["profileImageURL": urlString]
-                            Firestore.firestore().collection("Users").document(uid).updateData(dictionary) { (err) in
+                             API.shared.userRef(uid: uid).updateData(dictionary) { (err) in
                                 if let err = err {
                                     self.view.makeToast(err.localizedDescription)
                                     return

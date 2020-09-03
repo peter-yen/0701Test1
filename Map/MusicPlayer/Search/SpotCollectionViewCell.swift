@@ -13,12 +13,29 @@ import Toast_Swift
 
 class SpotCollectionViewCell: UICollectionViewCell {
     
-    var spot: Spot!
+    var spot: Spot! {
+        didSet {
+            let url = URL(string: spot.picture1)
+            backgroundImageView.sd_setImage(with: url, completed: nil)
+            nameLabel.text = spot.name
+            addressLabel.text = spot.address
+            townLabel.text = spot.district
+            favoriteButton.isSelected = spotViewController.favoriteSpotsIDs.firstIndex(of: spot.id) != nil
+                  
+                    
+            //        if favoriteSpotsIDs.firstIndex(of: spot.id) != nil {
+            //            cell.favoriteButton.isSelected = true
+            //        } else {
+            //            cell.favoriteButton.isSelected = false
+            //        }
+        }
+    }
     var nameLabel: UILabel!
     var backgroundImageView: UIImageView!
     var addressLabel: UILabel!
     var townLabel: UILabel!
     var favoriteButton: UIButton!
+    var spotViewController: SpotsViewController!
     
     
     
@@ -108,36 +125,98 @@ class SpotCollectionViewCell: UICollectionViewCell {
     
     
     @objc func favoriteButtonDidTap() {
-        favoriteButton.isSelected = !favoriteButton.isSelected
-        let id = spot.id
-        if let uid = Auth.auth().currentUser?.uid {
-            Firestore.firestore().collection("Users").document(uid).getDocument { (snapshot, error) in
-                if let error = error {
-                    self.makeToast(error.localizedDescription)
-                    return
-                }
-                if let dictionary = snapshot?.data() {
-                    if let favoriteArray = dictionary["favoriteSpots"] as? [Any] {
-                        print("::\(favoriteArray)")
-//                        var array = [String].self
-                        let favoriteDictionary = ["favoriteSpots": self.spot.id]
+        
+        
+        if !favoriteButton.isSelected {
+            // 還沒點選 -> 已點選
+            favoriteButton.isSelected = true
+            
+            if let uid = Auth.auth().currentUser?.uid {
+                 API.shared.userRef(uid: uid).getDocument { (snapshot, error) in
+                    if let error = error {
+                        self.makeToast(error.localizedDescription)
+                        return
+                    }
+                    
+                    if let dictionary = snapshot?.data() {
                         
-                        if self.favoriteButton.isSelected == true {
-                            Firestore.firestore().collection("Users").document(uid).updateData(favoriteDictionary) { (err) in
-                                if let err = err {
-                                    self.makeToast(err.localizedDescription)
-                                } else {
-                                    self.makeToast("成功上傳！！！")
-                                }
+                        var data: [String: Any] = [:]
+                        
+                        if let favoriteArray = dictionary["favoriteSpots"] as? [String] {
+                            
+                            var newFavoriteArray = favoriteArray
+                            
+                            if newFavoriteArray.firstIndex(of: self.spot.id) == nil {
+                                newFavoriteArray.append(self.spot.id)
+                                
+                                self.spotViewController.favoriteSpotsIDs = newFavoriteArray
+                                
+                                data = ["favoriteSpots": newFavoriteArray]
+                            }
+                            
+                        } else {
+                            // FireStore 沒有這個 Dictionary 的話直接創建一個
+                            let newFavoriteArray = [self.spot.id]
+                            
+                            self.spotViewController.favoriteSpotsIDs = newFavoriteArray
+                            
+                            data = ["favoriteSpots": newFavoriteArray]
+                        }
+                        
+                         API.shared.userRef(uid: uid).updateData(data) { (err) in
+                            if let err = err {
+                                self.makeToast(err.localizedDescription)
+                            } else {
+                                self.makeToast("成功上傳！！！")
                             }
                         }
                     }
-                    
                 }
             }
-            // 1. 存入（updetedata） User 中 favoriteSpots [陣列] 中
+            
+        } else {
+            // 已點選 -> 還沒點選
+            favoriteButton.isSelected = false
+            
+            if let uid = Auth.auth().currentUser?.uid {
+                 API.shared.userRef(uid: uid).getDocument { (snapshot, error) in
+                    if let error = error {
+                        self.makeToast(error.localizedDescription)
+                        return
+                    }
+                    
+                    if let dictionary = snapshot?.data() {
+                        
+                        if let favoriteArray = dictionary["favoriteSpots"] as? [String] {
+                            
+                            if let index = favoriteArray.firstIndex(of: self.spot.id) {
+                                var newFavoriteArray = favoriteArray
+                                newFavoriteArray.remove(at: index)
+                                
+                                self.spotViewController.favoriteSpotsIDs = newFavoriteArray
+                                
+                                let data = ["favoriteSpots": newFavoriteArray]
+                                
+                                 API.shared.userRef(uid: uid).updateData(data) { (err) in
+                                    if let err = err {
+                                        self.makeToast(err.localizedDescription)
+                                        
+                                    } else {
+                                        self.makeToast("成功刪除！！！")
+                                    }
+                                }
+                            }
+                        }
+                        
+                    }
+                }
+            }
         }
     }
+    
+    // 1. 存入（updetedata） User 中 favoriteSpots [陣列] 中
+    
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
