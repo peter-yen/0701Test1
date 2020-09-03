@@ -105,6 +105,8 @@ class SpotCollectionViewCell: UICollectionViewCell {
             m.width.height.equalTo(40)
         }
     }
+    
+    
     @objc func favoriteButtonDidTap() {
         favoriteButton.isSelected = !favoriteButton.isSelected
         let id = spot.id
@@ -115,30 +117,27 @@ class SpotCollectionViewCell: UICollectionViewCell {
                     return
                 }
                 if let dictionary = snapshot?.data() {
-                    if let favoriteaArray = dictionary["favoriteSpots"] as? [Any] {
-                        if self.favoriteButton.isSelected == true {
-                            Firestore.firestore().collection("Users").document(uid).updateData([favoriteaArray : id])
-                            
-                            
-                            
+                    if let favoriteArray = dictionary["favoriteSpots"] as? [Any] {
+                        print("::\(favoriteArray)")
+//                        var array = [String].self
+                        let favoriteDictionary = ["favoriteSpots": self.spot.id]
                         
-                            
-                                
+                        if self.favoriteButton.isSelected == true {
+                            Firestore.firestore().collection("Users").document(uid).updateData(favoriteDictionary) { (err) in
+                                if let err = err {
+                                    self.makeToast(err.localizedDescription)
+                                } else {
+                                    self.makeToast("成功上傳！！！")
+                                }
+                            }
                         }
                     }
                     
                 }
             }
-            
-
-            
             // 1. 存入（updetedata） User 中 favoriteSpots [陣列] 中
-            
-            
         }
     }
-    
-    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
