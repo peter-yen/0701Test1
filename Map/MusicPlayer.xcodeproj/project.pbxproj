@@ -21,6 +21,7 @@
 		8916281424F8DA4400112A5D /* SpotDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8916281324F8DA4400112A5D /* SpotDetailViewController.swift */; };
 		8916281624F8E56100112A5D /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8916281524F8E56100112A5D /* HUD.swift */; };
 		89281A3C24F17D3F00212D0A /* StepThreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89281A3B24F17D3F00212D0A /* StepThreeViewController.swift */; };
+		8929BB442503427800EE0085 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8929BB432503427800EE0085 /* GoogleService-Info.plist */; };
 		8954B14924F3687A00ADCB8A /* RegisterBasicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8954B14824F3687A00ADCB8A /* RegisterBasicViewController.swift */; };
 		8972CBBE24AF430500E94D81 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8972CBBD24AF430500E94D81 /* TabBarViewController.swift */; };
 		8976ADB32502086B0008F19C /* FavoriteSpotsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8976ADB22502086B0008F19C /* FavoriteSpotsViewController.swift */; };
@@ -31,7 +32,6 @@
 		89BC905824EC20600048C2C4 /* StepOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BC905724EC20600048C2C4 /* StepOneViewController.swift */; };
 		89BC905A24ED7C1F0048C2C4 /* StepTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BC905924ED7C1F0048C2C4 /* StepTwoViewController.swift */; };
 		89E64F1D24EF9BEC005C2773 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E64F1C24EF9BEC005C2773 /* User.swift */; };
-		89F31408250094EA0055155E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89F31407250094EA0055155E /* GoogleService-Info.plist */; };
 		89F3140A2500BE330055155E /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F314092500BE330055155E /* API.swift */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +53,7 @@
 		8916281324F8DA4400112A5D /* SpotDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailViewController.swift; sourceTree = "<group>"; };
 		8916281524F8E56100112A5D /* HUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
 		89281A3B24F17D3F00212D0A /* StepThreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepThreeViewController.swift; sourceTree = "<group>"; };
+		8929BB432503427800EE0085 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8954B14824F3687A00ADCB8A /* RegisterBasicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterBasicViewController.swift; sourceTree = "<group>"; };
 		8972CBBD24AF430500E94D81 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		8976ADB22502086B0008F19C /* FavoriteSpotsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteSpotsViewController.swift; sourceTree = "<group>"; };
@@ -64,7 +65,6 @@
 		89BC905924ED7C1F0048C2C4 /* StepTwoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepTwoViewController.swift; sourceTree = "<group>"; };
 		89E64F1C24EF9BEC005C2773 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		89F31405250093EC0055155E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		89F31407250094EA0055155E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		89F314092500BE330055155E /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		BAA08731A1A19761A8BB5D8F /* Pods_MusicPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MusicPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA2B0D2E029FE2A30261E3E9 /* Pods-Map.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Map.release.xcconfig"; path = "Target Support Files/Pods-Map/Pods-Map.release.xcconfig"; sourceTree = "<group>"; };
@@ -145,7 +145,7 @@
 				4E6F404D24DE430B00B55B46 /* Model */,
 				8907A61F24AF421A00EEED09 /* Assets.xcassets */,
 				89F31405250093EC0055155E /* Info.plist */,
-				89F31407250094EA0055155E /* GoogleService-Info.plist */,
+				8929BB432503427800EE0085 /* GoogleService-Info.plist */,
 				8907A62124AF421A00EEED09 /* LaunchScreen.storyboard */,
 				4EDC41A724C2EB5B0060DE29 /* Jay.mp3 */,
 				4EDC41A524C2EB5A0060DE29 /* KenShi.mp3 */,
@@ -255,7 +255,7 @@
 			files = (
 				4EDC41AB24C2EB5B0060DE29 /* Jay.mp3 in Resources */,
 				4EDC41A924C2EB5B0060DE29 /* KenShi.mp3 in Resources */,
-				89F31408250094EA0055155E /* GoogleService-Info.plist in Resources */,
+				8929BB442503427800EE0085 /* GoogleService-Info.plist in Resources */,
 				8907A62324AF421A00EEED09 /* LaunchScreen.storyboard in Resources */,
 				8907A62024AF421A00EEED09 /* Assets.xcassets in Resources */,
 			);

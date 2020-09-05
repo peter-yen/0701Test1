@@ -110,7 +110,14 @@ class Spot {
                           "address": self.address]
         return dictionary
     }
-    
+
     
     
 }
+
+extension Spot: Equatable {}
+
+func ==(left: Spot, right: Spot) -> Bool {
+    return left.id == right.id
+}
+

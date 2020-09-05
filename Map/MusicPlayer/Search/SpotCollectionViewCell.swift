@@ -20,9 +20,13 @@ class SpotCollectionViewCell: UICollectionViewCell {
             nameLabel.text = spot.name
             addressLabel.text = spot.address
             townLabel.text = spot.district
-            favoriteButton.isSelected =  spotViewController.favoriteSpotsIDs.firstIndex(of: spot.id) != nil
             
-
+            if spotViewController != nil {
+                favoriteButton.isSelected = spotViewController?.favoriteSpotsIDs.firstIndex(of: spot.id) != nil
+            } else if favoriteSpotsViewCOntroller != nil {
+                favoriteButton.isSelected = true
+            }
+            
             //        if favoriteSpotsIDs.firstIndex(of: spot.id) != nil {
             //            cell.favoriteButton.isSelected = true
             //        } else {
@@ -37,8 +41,8 @@ class SpotCollectionViewCell: UICollectionViewCell {
     var addressLabel: UILabel!
     var townLabel: UILabel!
     var favoriteButton: UIButton!
-    var spotViewController: SpotsViewController!
-    var favoriteSpotsViewCOntroller: FavoriteSpotsViewController!
+    var spotViewController: SpotsViewController?
+    var favoriteSpotsViewCOntroller: FavoriteSpotsViewController?
     
     
     
@@ -136,7 +140,7 @@ class SpotCollectionViewCell: UICollectionViewCell {
             favoriteButton.isSelected = true
             
             if let uid = Auth.auth().currentUser?.uid {
-                 API.shared.userRef(uid: uid).getDocument { (snapshot, error) in
+                API.shared.userRef(uid: uid).getDocument { (snapshot, error) in
                     if let error = error {
                         self.makeToast(error.localizedDescription)
                         return
@@ -153,10 +157,9 @@ class SpotCollectionViewCell: UICollectionViewCell {
                             if newFavoriteArray.firstIndex(of: self.spot.id) == nil {
                                 newFavoriteArray.append(self.spot.id)
                                 
-                                self.spotViewController.favoriteSpotsIDs = newFavoriteArray
-                                self.favoriteSpotsViewCOntroller.favoriteSpotsIDs = newFavoriteArray
+                                self.spotViewController?.favoriteSpotsIDs = newFavoriteArray
                                 
-                               
+                                
                                 data = ["favoriteSpots": newFavoriteArray]
                             }
                             
@@ -164,12 +167,12 @@ class SpotCollectionViewCell: UICollectionViewCell {
                             // FireStore 沒有這個 Dictionary 的話直接創建一個
                             let newFavoriteArray = [self.spot.id]
                             
-                            self.spotViewController.favoriteSpotsIDs = newFavoriteArray
+                            self.spotViewController?.favoriteSpotsIDs = newFavoriteArray
                             
                             data = ["favoriteSpots": newFavoriteArray]
                         }
                         
-                         API.shared.userRef(uid: uid).updateData(data) { (err) in
+                        API.shared.userRef(uid: uid).updateData(data) { (err) in
                             if let err = err {
                                 self.makeToast(err.localizedDescription)
                             } else {
@@ -182,47 +185,113 @@ class SpotCollectionViewCell: UICollectionViewCell {
             
         } else {
             // 已點選 -> 還沒點選
+            
             favoriteButton.isSelected = false
             
-            if let uid = Auth.auth().currentUser?.uid {
-                 API.shared.userRef(uid: uid).getDocument { (snapshot, error) in
-                    if let error = error {
-                        self.makeToast(error.localizedDescription)
-                        return
-                    }
+            if spotViewController != nil {
+                
+                if let uid = Auth.auth().currentUser?.uid {
                     
-                    if let dictionary = snapshot?.data() {
+                    HUD.shared.showLoading(view: self.spotViewController!.view)
+                    
+                    API.shared.userRef(uid: uid).getDocument { (snapshot, error) in
+                        if let error = error {
+                            self.makeToast(error.localizedDescription)
+                            return
+                        }
                         
-                        if let favoriteArray = dictionary["favoriteSpots"] as? [String] {
+                        if let dictionary = snapshot?.data() {
                             
-                            if let index = favoriteArray.firstIndex(of: self.spot.id) {
+                            if let favoriteArray = dictionary["favoriteSpots"] as? [String] {
                                 
-                                var newFavoriteArray = favoriteArray
-                                
-                                newFavoriteArray.remove(at: index)
-                                
-                                self.spotViewController.favoriteSpotsIDs = newFavoriteArray
-                                
-                                let data = ["favoriteSpots": newFavoriteArray]
-                                
-                                 API.shared.userRef(uid: uid).updateData(data) { (err) in
-                                    if let err = err {
-                                        self.makeToast(err.localizedDescription)
-                                        
-                                    } else {
-                                        self.makeToast("成功刪除！！！")
+                                if let index = favoriteArray.firstIndex(of: self.spot.id) {
+                                    
+                                    var newFavoriteArray = favoriteArray
+                                    
+                                    newFavoriteArray.remove(at: index)
+                                    
+                                    self.spotViewController?.favoriteSpotsIDs = newFavoriteArray
+                                    
+                                    let data = ["favoriteSpots": newFavoriteArray]
+                                    
+                                    API.shared.userRef(uid: uid).updateData(data) { (err) in
+                                        if let err = err {
+                                            self.spotViewController?.view.makeToast(err.localizedDescription)
+                                            
+                                        } else {
+                                            self.spotViewController?.view.makeToast("成功刪除！！！")
+                                        }
                                     }
                                 }
                             }
+                            
+                        }
+                    }
+                }
+            } else if favoriteSpotsViewCOntroller != nil {
+                
+                
+                if let uid = Auth.auth().currentUser?.uid {
+                    
+                    HUD.shared.showLoading(view: favoriteSpotsViewCOntroller!.view)
+                    
+                    API.shared.userRef(uid: uid).getDocument { (snapshot, error) in
+                        if let error = error {
+                            self.makeToast(error.localizedDescription)
+                            return
                         }
                         
+                        if let dictionary = snapshot?.data() {
+                            
+                            if let favoriteArray = dictionary["favoriteSpots"] as? [String] {
+                                
+                                if let index = favoriteArray.firstIndex(of: self.spot.id) {
+                                    
+                                    var newFavoriteArray = favoriteArray
+                                    
+                                    newFavoriteArray.remove(at: index)
+                                    
+                                    self.favoriteSpotsViewCOntroller?.favoriteSpotsIDs = newFavoriteArray
+                                    
+                                    let data = ["favoriteSpots": newFavoriteArray]
+                                    
+                                    API.shared.userRef(uid: uid).updateData(data) { (err) in
+                                        if let err = err {
+                                            self.favoriteSpotsViewCOntroller?.view.makeToast(err.localizedDescription)
+                                            
+                                        } else {
+                                            
+                                            self.favoriteSpotsViewCOntroller?.favoriteSpotsIDs = newFavoriteArray
+                                            if let index = self.favoriteSpotsViewCOntroller?.favoriteSpots.firstIndex(of: self.spot) {
+                                                self.favoriteSpotsViewCOntroller?.favoriteSpots.remove(at: index)
+                                            }
+                                            
+                                            
+                                            
+                                            
+                                            self.favoriteSpotsViewCOntroller?.view.makeToast("成功刪除！！！")
+                                        }
+                                       
+                                        
+                                        
+                                        DispatchQueue.main.async {
+                                            self.favoriteSpotsViewCOntroller?.collectionView.reloadData()
+                                            HUD.shared.hideLoading()
+                                        }
+                                    }
+                                }
+                            }
+                            
+                        }
                     }
                 }
             }
+            
+            
         }
     }
     
-    // 1. 存入（updetedata） User 中 favoriteSpots [陣列] 中
+    
     
     
     

@@ -8,6 +8,8 @@
 
 import UIKit
 import SnapKit
+import FirebaseAuth
+import FirebaseFirestore
 
 class SearchViewController: UIViewController {
     
@@ -17,6 +19,22 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        
+        if let uid = Auth.auth().currentUser?.uid {
+            Firestore.firestore().collection("cities").getDocuments { (snapshot, err) in
+                if let err = err {
+                    self.view.makeToast(err.localizedDescription)
+                    return
+                }
+                if let cities = snapshot?.documents {
+                    print("citys:\(cities)")
+                }
+            }
+        }
+        
+        
+        
+        
         
         configurLayout()
         setupCollectionView()
