@@ -355,9 +355,6 @@ PODS:
   - nanopb/decode (1.30905.0)
   - nanopb/encode (1.30905.0)
   - PromisesObjC (1.2.9)
-  - SDWebImage (5.9.0):
-    - SDWebImage/Core (= 5.9.0)
-  - SDWebImage/Core (5.9.0)
   - SnapKit (5.0.1)
   - Toast-Swift (5.0.1)
 
@@ -368,7 +365,6 @@ DEPENDENCIES:
   - Firebase/Storage
   - GoogleSignIn
   - JGProgressHUD
-  - SDWebImage
   - SnapKit
   - Toast-Swift
 
@@ -398,7 +394,6 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - PromisesObjC
-    - SDWebImage
     - SnapKit
     - Toast-Swift
 
@@ -427,10 +422,9 @@ SPEC CHECKSUMS:
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
-  SDWebImage: 62ae4a18473520c67b79e9724c31a63599cc9423
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: 74972bb1cfc8db68135ad5674acba58badacc06a
+PODFILE CHECKSUM: db589d56d097780c6b7691f3c434566634c61ec2
 
 COCOAPODS: 1.9.3
