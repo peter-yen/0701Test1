@@ -23,6 +23,7 @@
 		89281A3C24F17D3F00212D0A /* StepThreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89281A3B24F17D3F00212D0A /* StepThreeViewController.swift */; };
 		8954B14924F3687A00ADCB8A /* RegisterBasicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8954B14824F3687A00ADCB8A /* RegisterBasicViewController.swift */; };
 		8972CBBE24AF430500E94D81 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8972CBBD24AF430500E94D81 /* TabBarViewController.swift */; };
+		8976ADB32502086B0008F19C /* FavoriteSpotsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8976ADB22502086B0008F19C /* FavoriteSpotsViewController.swift */; };
 		89883B8F24C931B900F76CFE /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89883B8E24C931B900F76CFE /* AuthViewController.swift */; };
 		8989B8A824DD35030084F984 /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8989B8A724DD35030084F984 /* Music.swift */; };
 		89A05A0824F61D2E009E3379 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A05A0724F61D2E009E3379 /* SearchViewController.swift */; };
@@ -54,6 +55,7 @@
 		89281A3B24F17D3F00212D0A /* StepThreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepThreeViewController.swift; sourceTree = "<group>"; };
 		8954B14824F3687A00ADCB8A /* RegisterBasicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterBasicViewController.swift; sourceTree = "<group>"; };
 		8972CBBD24AF430500E94D81 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		8976ADB22502086B0008F19C /* FavoriteSpotsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteSpotsViewController.swift; sourceTree = "<group>"; };
 		89883B8E24C931B900F76CFE /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		8989B8A724DD35030084F984 /* Music.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
 		89A05A0724F61D2E009E3379 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				89BC905524EB7DB00048C2C4 /* ProfileViewController.swift */,
+				8976ADB22502086B0008F19C /* FavoriteSpotsViewController.swift */,
 				890EB8CC24F63D1C00DB0329 /* ProfileTableViewCell.swift */,
 			);
 			path = Profile;
@@ -336,6 +339,7 @@
 				89A05A0824F61D2E009E3379 /* SearchViewController.swift in Sources */,
 				890EB8CF24F8BE9E00DB0329 /* Spot.swift in Sources */,
 				89E64F1D24EF9BEC005C2773 /* User.swift in Sources */,
+				8976ADB32502086B0008F19C /* FavoriteSpotsViewController.swift in Sources */,
 				890EB8CD24F63D1C00DB0329 /* ProfileTableViewCell.swift in Sources */,
 				8954B14924F3687A00ADCB8A /* RegisterBasicViewController.swift in Sources */,
 				8989B8A824DD35030084F984 /* Music.swift in Sources */,

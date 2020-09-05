@@ -20,14 +20,16 @@ class SpotCollectionViewCell: UICollectionViewCell {
             nameLabel.text = spot.name
             addressLabel.text = spot.address
             townLabel.text = spot.district
-            favoriteButton.isSelected = spotViewController.favoriteSpotsIDs.firstIndex(of: spot.id) != nil
-                  
-                    
+            favoriteButton.isSelected =  spotViewController.favoriteSpotsIDs.firstIndex(of: spot.id) != nil
+            
+
             //        if favoriteSpotsIDs.firstIndex(of: spot.id) != nil {
             //            cell.favoriteButton.isSelected = true
             //        } else {
             //            cell.favoriteButton.isSelected = false
             //        }
+            // SpotViewController 的 cellForItem 裡的東西，本來就是 cell 的
+            // 所以拿回 cell 做 ， 版面看起來會比較乾淨
         }
     }
     var nameLabel: UILabel!
@@ -36,6 +38,8 @@ class SpotCollectionViewCell: UICollectionViewCell {
     var townLabel: UILabel!
     var favoriteButton: UIButton!
     var spotViewController: SpotsViewController!
+    var favoriteSpotsViewCOntroller: FavoriteSpotsViewController!
+    
     
     
     
@@ -119,7 +123,7 @@ class SpotCollectionViewCell: UICollectionViewCell {
         favoriteButton.snp.makeConstraints { (m) in
             m.top.equalToSuperview().offset(5)
             m.trailing.equalToSuperview().offset(-5)
-            m.width.height.equalTo(40)
+            m.width.height.equalTo(35)
         }
     }
     
@@ -150,7 +154,9 @@ class SpotCollectionViewCell: UICollectionViewCell {
                                 newFavoriteArray.append(self.spot.id)
                                 
                                 self.spotViewController.favoriteSpotsIDs = newFavoriteArray
+                                self.favoriteSpotsViewCOntroller.favoriteSpotsIDs = newFavoriteArray
                                 
+                               
                                 data = ["favoriteSpots": newFavoriteArray]
                             }
                             
@@ -190,7 +196,9 @@ class SpotCollectionViewCell: UICollectionViewCell {
                         if let favoriteArray = dictionary["favoriteSpots"] as? [String] {
                             
                             if let index = favoriteArray.firstIndex(of: self.spot.id) {
+                                
                                 var newFavoriteArray = favoriteArray
+                                
                                 newFavoriteArray.remove(at: index)
                                 
                                 self.spotViewController.favoriteSpotsIDs = newFavoriteArray

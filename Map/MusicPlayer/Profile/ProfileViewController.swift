@@ -170,6 +170,7 @@ class ProfileViewController: UIViewController {
                         let xmlHead = json["XML_Head"] as? [String:Any],
                         let infos = xmlHead["Infos"] as? [String:Any] ,
                         let info = infos["Info"] as? [Any] {
+                        
                         for i in 0...9 {
                             if let dictionary = info[i] as? [String: Any] {
                                 let progressIndex = currentCount / CGFloat(info.count)
@@ -294,8 +295,8 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         switch indexPath.row {
         case 2:
-            let spotViewController = SpotsViewController()
-            navigationController?.pushViewController(spotViewController, animated: true)
+            let favoriteSpotsViewController = FavoriteSpotsViewController()
+            navigationController?.pushViewController(favoriteSpotsViewController, animated: true)
         case 5:
             if user.isAdmin {
                 self.updateAPI()

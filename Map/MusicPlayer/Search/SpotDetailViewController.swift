@@ -8,8 +8,9 @@
 
 import UIKit
 import SnapKit
+import MapKit
 
-class SpotDetailViewController: UIViewController {
+class SpotDetailViewController: UIViewController, MKMapViewDelegate {
     var spot: Spot!
     var backgroundImageView: UIImageView!
     var descriptionTextView: UITextView!
@@ -20,6 +21,7 @@ class SpotDetailViewController: UIViewController {
     var introductionLabel: UILabel!
     var travellingLabel: UILabel!
     var travellinginfoTextView: UITextView!
+    var mapView: MKMapView!
     var scrollView: UIScrollView! //UIScrollView 是可以垂直滑動的一種View
     
     
@@ -43,6 +45,9 @@ class SpotDetailViewController: UIViewController {
         setupSpaceImageView()
         setupLabel()
         setupTextView()
+        setupMapView()
+        
+        
     }
     
     func setupSpaceImageView() {
@@ -160,7 +165,29 @@ class SpotDetailViewController: UIViewController {
         }
     }
     
+    func setupMapView() {
+        mapView = MKMapView()
+        scrollView.addSubview(mapView)
+        mapView.delegate = self
+        mapView.mapType = .standard
+        
+        let mapPoint = MKPointAnnotation()
+        mapPoint.title = "\(spot.name)"
+        mapPoint.coordinate = CLLocationCoordinate2D(latitude: spot.py, longitude: spot.px)
+        mapView.addAnnotation(mapPoint)
+        mapView.region = MKCoordinateRegion.init(center: CLLocationCoordinate2D(latitude: spot.py, longitude: spot.px), latitudinalMeters: 1000, longitudinalMeters: 1000)
+        
+        mapView.snp.makeConstraints { (m) in
+            m.width.height.equalTo(400)
+            m.top.equalTo(travellinginfoTextView.snp.bottom).offset(100)
+            m.centerX.equalToSuperview()
+        }
+        
+    }
+    
 }
+
+
 extension SpotDetailViewController: UITextViewDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

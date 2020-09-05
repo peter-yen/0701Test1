@@ -6,7 +6,7 @@
 //  Copyright © 2020 嚴啟睿. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import FirebaseAuth
 import FirebaseFirestore
 
