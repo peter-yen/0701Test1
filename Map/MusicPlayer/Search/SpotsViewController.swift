@@ -17,12 +17,15 @@ class SpotsViewController: UIViewController {
     var name: String = ""
     var spots: [Spot] = []
     var favoriteSpotsIDs: [String] = []
-        
+    var spotIds: [String] = []
+    var cityTitle: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .systemGray4
-        title = "台北市"
+        
+        title = cityTitle
         
         setupCollectionView()
         
@@ -31,29 +34,32 @@ class SpotsViewController: UIViewController {
         let dispatchGroup = DispatchGroup()
         // 執行緒
         
-        dispatchGroup.enter()
+        print("idddd:: \(spotIds)")
         
-        Firestore.firestore().collection("Spots").getDocuments { (snapshots, error) in
-            if let error = error {
-                self.view.makeToast(error.localizedDescription)
-                return
-            }
-            if let snapshots = snapshots?.documents {
-                for snapshot in snapshots {
-                    let dictionary = snapshot.data()
-                    let spot = Spot(firestoreDictionary: dictionary)
+        // for loop 找 cityIds 內的 spot , 存入陣列 -> reloadData 顯示資料
+        for id in spotIds {
+            
+            dispatchGroup.enter()
+            
+            Firestore.firestore().collection("Spots").document(id).getDocument { (snapshots, error) in
+                if let error = error {
+                    self.view.makeToast(error.localizedDescription)
+                    return
+                }
+                if let dict = snapshots?.data() {
+                    let spot = Spot(firestoreDictionary: dict)
                     self.spots.append(spot)
-                    
                 }
                 
+                dispatchGroup.leave()
+                
             }
-            dispatchGroup.leave()
         }
         if let uid = Auth.auth().currentUser?.uid {
             
             dispatchGroup.enter()
             
-             API.shared.userRef(uid: uid).getDocument { (snapshot, err) in
+            API.shared.userRef(uid: uid).getDocument { (snapshot, err) in
                 if let err = err {
                     self.view.makeToast(err.localizedDescription)
                     return
@@ -62,9 +68,8 @@ class SpotsViewController: UIViewController {
                     if let favoriteSpotsArray = data["favoriteSpots"] as? [String] {
                         self.favoriteSpotsIDs = favoriteSpotsArray
                         
-                       
                     }
-                 }
+                }
                 dispatchGroup.leave()
             }
         }
@@ -77,24 +82,24 @@ class SpotsViewController: UIViewController {
     
     
     func setupCollectionView() {
-           let layout = UICollectionViewFlowLayout()
-           layout.scrollDirection = .vertical // vertical 垂直的意思，   horizontal 橫向的意思
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical // vertical 垂直的意思，   horizontal 橫向的意思
         layout.minimumLineSpacing = 80.0
         // 上面是調整垂直滑動，每個cell上下之間的間距方法
-           collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-           collectionView.delegate = self
-           collectionView.dataSource = self
-           collectionView.register(SpotCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(SpotCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         collectionView.backgroundColor = .white
-           view.addSubview(collectionView)
-           collectionView.snp.makeConstraints { (m) in
-               m.leading.equalToSuperview().offset(5)
-               m.bottom.trailing.equalToSuperview().offset(-5)
+        view.addSubview(collectionView)
+        collectionView.snp.makeConstraints { (m) in
+            m.leading.equalToSuperview().offset(5)
+            m.bottom.trailing.equalToSuperview().offset(-5)
             m.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-               
-           }
-           
-       }
+            
+        }
+        
+    }
     
 }
 
@@ -127,13 +132,13 @@ extension SpotsViewController: UICollectionViewDelegate, UICollectionViewDataSou
         
         spotDetailViewController.spot = spot
         
-//        favoriteSpotsViewController.spot = spot
+        //        favoriteSpotsViewController.spot = spot
         
         navigationController?.pushViewController(spotDetailViewController, animated: true)
         
     }
- 
-
+    
+    
 }
 extension SpotsViewController: UISearchTextFieldDelegate {
     

@@ -176,7 +176,7 @@ class SpotCollectionViewCell: UICollectionViewCell {
                             if let err = err {
                                 self.makeToast(err.localizedDescription)
                             } else {
-                                self.makeToast("成功上傳！！！")
+                                self.spotViewController?.view.makeToast("成功上傳！！！")
                             }
                         }
                     }
@@ -220,6 +220,7 @@ class SpotCollectionViewCell: UICollectionViewCell {
                                             
                                         } else {
                                             self.spotViewController?.view.makeToast("成功刪除！！！")
+                                            HUD.shared.hideLoading()
                                         }
                                     }
                                 }
@@ -264,7 +265,7 @@ class SpotCollectionViewCell: UICollectionViewCell {
                                             self.favoriteSpotsViewCOntroller?.favoriteSpotsIDs = newFavoriteArray
                                             if let index = self.favoriteSpotsViewCOntroller?.favoriteSpots.firstIndex(of: self.spot) {
                                                 self.favoriteSpotsViewCOntroller?.favoriteSpots.remove(at: index)
-                                            }
+                                            }// 上面的 else 不是已經重複動作了嗎？
                                             
                                             
                                             

@@ -8,11 +8,21 @@
 
 import Foundation
 
+enum CityEnum: String {
+    
+    case TTH = "臺東縣"
+    case HLH = "花蓮縣"
+    case ILH = "宜蘭縣"
+    case TYH = "桃園市"
+    case TNH = "臺南市"
+    
+}
+
 class Spot {
     
     var id: String
     var name: String
-    var city: String
+    var city: String?
     var introduction: String
     var phone: String
     var district: String
@@ -28,7 +38,7 @@ class Spot {
     init(firestoreDictionary: [String: Any]) {
         self.id = firestoreDictionary["id"] as! String
         self.name = firestoreDictionary["name"] as! String
-        self.city = firestoreDictionary["city"] as! String
+        self.city = firestoreDictionary["city"] as? String
         self.introduction = firestoreDictionary["introduction"] as! String
         self.phone = firestoreDictionary["phone"] as! String
         self.district = firestoreDictionary["district"] as! String
@@ -54,11 +64,7 @@ class Spot {
         self.name = dictionary["Name"] as! String
         self.introduction = dictionary["Toldescribe"] as! String
         self.phone = dictionary["Tel"] as! String
-        if let region = dictionary["Region"] as? String {
-            self.city = region
-        } else {
-            self.city = ""
-        }
+        self.city = dictionary["Region"] as? String
         if let town = dictionary["Town"] as? String {
             self.district = town
         } else {

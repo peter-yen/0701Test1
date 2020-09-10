@@ -14,5 +14,5 @@ target 'MusicPlayer' do
   pod 'Toast-Swift'
   pod 'Firebase/Storage'
   pod 'JGProgressHUD'
-#  pod 'SDWebImage'
+  pod 'SDWebImage'
 end

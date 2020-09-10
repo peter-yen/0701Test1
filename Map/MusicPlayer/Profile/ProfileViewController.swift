@@ -151,58 +151,142 @@ class ProfileViewController: UIViewController {
         
     }
     
+    
+    
+    
     func updateAPI() {
-        let text = "https://gis.taiwan.net.tw/XMLReleaseALL_public/scenic_spot_C_f.json"
-        let url = URL(string: text)
-        if let url = url {
+        HUD.shared.showLoading(view: view)
+        // 拿到 getTaiwnSpots 封包 解析 json 數量 [100] 個資列
+        getTaiwanSpots(url: "https://gis.taiwan.net.tw/XMLReleaseALL_public/scenic_spot_C_f.json", count: 100) { (spots) in
             
-            //            HUD.shared.showLoading(view: view)
-            let hud = JGProgressHUD()
-            hud.indicatorView = JGProgressHUDPieIndicatorView()
-            hud.progress = 0
-            hud.show(in: self.view)
-            var currentCount: CGFloat = 0
+            // 不懂 好不容易在 updateSpots 做好 return cityEnumDict
+            // 這裏又馬上說他 ＝ slef.updsteSpots(spots: spots)
+            if let cityEnumDict = self.updateSpots(spots: spots) {
+                // 做一個 把 (key, values) 丟進去 cityEunmDict 的迴圈
+                for (key, values) in cityEnumDict {
+                    
+                    let data = ["cityIds": values]
+                    // 更新創建 資料 key.ralValue 就是 cityEnum的ralVaiue
+                    // data 其實就是 比如 ["台東市": value 就是符合台東市的 [spot.id] 陣列
+                    Firestore.firestore().collection("Cities").document(key.rawValue).setData(data) { (err) in
+                        if let err = err {
+                            print(err)
+                            return
+                                HUD.shared.hideLoading()
+                        }
+                    }
+                }
+            }
             
-            URLSession.shared.dataTask(with: url) { (data, response, error) in
-                if let data = data {
-                    let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String:Any]
-                    if let json = json ,
-                        let xmlHead = json["XML_Head"] as? [String:Any],
-                        let infos = xmlHead["Infos"] as? [String:Any] ,
-                        let info = infos["Info"] as? [Any] {
-                        
-                        for i in 0...9 {
-                            if let dictionary = info[i] as? [String: Any] {
-                                let progressIndex = currentCount / CGFloat(info.count)
-                                currentCount += 1.0
-                                DispatchQueue.main.async {
-                                    hud.setProgress(Float(progressIndex) * 50, animated: true)
-                                    hud.textLabel.text = "更新中"
-                                    hud.detailTextLabel.text = String(format: "%.2f", progressIndex) + "%"
-                                }
+        }
+        
+    }
+    
+    func updateSpots (spots: [Spot]) -> [CityEnum: [String]]? {
+        var cityEnumDict : [CityEnum: [String]] = [:]
+        // 這個包好多層有點...
+        
+        for spot in spots {
+            // 把 spot 這個物件 加進去 spots 裡面做迴圈
+            if let city = spot.city, let cityEnum = CityEnum.init(rawValue: city) {
+                // 把從 spot.city 拿到資料的 city 加進去 CityEnum ralValue 裡
+                // 拉進去 enum 的用意為： 他會幫你偵測你是屬於哪個 value， 類似說
+                // 如果我 city 是"台東縣"的話 他就等於是 TTH , 因為 TTH 的 value 是 "台東縣"
+                
+                // 確定 City 目錄底下有這個 Spot
+                Firestore.firestore().collection("Spots").document(spot.id).setData(spot.dictionary()) { (err) in
+                    // 重新 創建  spot.dictionary 解析成我 Class Spot 打的樣子
+                    // 拿到 spot.id 裡面的 dictionary
+                    // 還是不太懂 為何要 setData , setData 不是重建一個資料夾嗎？
+                    
+                    if let err = err {
+                        print(err)
+                        return
+                    }
+                }
+                // 假如我 spot.city 有符合 cityEnum 那些縣市名
+                // 也就是下面打的 cityEnum != nil (有值的)，
+                // 上面創建的 cityenum型別的 dict 會增加 spot.id ,
+                // 比如 符合"台東縣"的 ，台東縣的那個 ralvalue 有值 ，
+                // 會在"台東縣" 增加 spot.id
+                // 沒有的話 ， 我的 cityEnumDict[cityEnum] 會等於 [spot.id] 不太懂
+                
+                
+                if cityEnumDict[cityEnum] != nil {
+                    cityEnumDict[cityEnum]!.append(spot.id)
+                } else {
+                    cityEnumDict[cityEnum] = [spot.id]
+                }
+            }
+        }
+        return cityEnumDict
+    }
+    
+    
+    
+    func getTaiwanSpots(url: String,count: Int, completion: @escaping ([Spot])->Void) {
+        
+        // 做一個封包 解析呼叫這個封包 給的網址 (String) 解析 json Dictionary
+        guard let url = URL(string: url) else { return }
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            
+            guard let data = data else { return }
+            guard let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String:Any] else { return }
+            guard let xmlHead = json["XML_Head"] as? [String:Any] else { return }
+            
+            guard let infos = xmlHead["Infos"] as? [String:Any] else { return }
+            guard let info = infos["Info"] as? [[String: Any]] else { return }
+            
+            
+            //  做一個迴圈 , 把 dict 丟進去 info[] 裡
+            // 再把他丟到 Class Spot 裡有做好的型別解析轉換，再丟回 spots[] 裡
+            // [spots] 裡是 dictionary
+            
+            var spots: [Spot] = []
+            for dict in info[0...count - 1] {
+                let spot = Spot(dictionary: dict)
+                spots.append(spot)
+            }
+            completion(spots)
+            
+        }.resume()
+    }
+    
+    func upLoadFireStore(spots: [Spot], completion: ()->Void) {
+        
+        //  去 Firestore 拿 Cities 資料夾的資料 , 如果沒有 spot.city 會多創一個 "貓貓市"
+        
+        for spot in spots {
+            Firestore.firestore().collection("Cities").document(spot.city ?? "貓貓市").getDocument { (snapshot, err) in
+                
+                print("asnyc call: \(spot.city)")
+                
+                if let data = snapshot?.data() {
+                    // 拿到 spot.city Data 的資料
+                    if let spotsIds = data["spotsIds"] as? [String] {
+                        if spotsIds.firstIndex(of: spot.id) == nil {
+                            // 判斷式 假如 SpotsIds[] 是空的
+                            // spotsIds 會增加 spot.id
+                            var newSpotsIds = spotsIds
+                            newSpotsIds.append(spot.id)
+                            
+                //  在 Firestore  Cities 資料夾 , 去更新每個 spot.city 的 data, "SpotIds" ： 加入 [newSpotsIds]
+                       
+                            Firestore.firestore().collection("Cities").document(spot.city ?? "貓貓市").updateData(["SpotIds": newSpotsIds]) { (err) in
                                 
-                                let spot = Spot(dictionary: dictionary as! [String : Any])
-                                let dictionary = spot.dictionary()
-                                //                                print("dict: \(dictionary)")
-                                Firestore.firestore().collection("Spots").document(spot.id).setData(dictionary) { (error) in
-                                    if let error = error {
-                                        self.view.makeToast(error.localizedDescription)
-                                        print("失敗上傳 :\(error.localizedDescription)")
-                                        return
-                                    }
-                                    self.view.makeToast("成功上傳API")
-                                    print("成功上傳: \(spot.id)")
-                                }
+                                print("upDate", spot)
                             }
+                        }
+                    } else {
+                        // 如果 data 裡面 沒有 spotsIds 的 String 陣列
+                        // 會直接創建一個 ["SpotsIds": [spot.id]]
+                        Firestore.firestore().collection("Cities").document(spot.city ?? "貓貓市").setData(["spotsIds": [spot.id]]) { (err) in
                             
                         }
                     }
-                    
                 }
-                HUD.shared.hideLoading()
                 
-            }.resume()
-            
+            }
         }
     }
     
@@ -240,7 +324,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
                         print("image url: \(url)")  //url轉換成String
                         if let urlString = url?.absoluteString {
                             let dictionary = ["profileImageURL": urlString]
-                             API.shared.userRef(uid: uid).updateData(dictionary) { (err) in
+                            API.shared.userRef(uid: uid).updateData(dictionary) { (err) in
                                 if let err = err {
                                     self.view.makeToast(err.localizedDescription)
                                     return

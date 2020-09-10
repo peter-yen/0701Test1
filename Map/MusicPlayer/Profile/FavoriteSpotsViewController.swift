@@ -18,6 +18,7 @@ class FavoriteSpotsViewController: UIViewController {
     var favoriteSpotsIDs: [String] = []
     var spotsViewCOntroller: SpotsViewController!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -121,12 +122,10 @@ extension FavoriteSpotsViewController: UICollectionViewDelegate, UICollectionVie
         return size
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        let spot = favoriteSpots[indexPath.item]
         let spotDetailViewController = SpotDetailViewController()
         
-        
-        
-        //        spotDetailViewController.spot = favoriteSpots
+        spotDetailViewController.spot = spot
         
         
         

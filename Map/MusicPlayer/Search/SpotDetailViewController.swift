@@ -23,13 +23,16 @@ class SpotDetailViewController: UIViewController, MKMapViewDelegate {
     var travellinginfoTextView: UITextView!
     var mapView: MKMapView!
     var scrollView: UIScrollView! //UIScrollView 是可以垂直滑動的一種View
-    
+    var mapLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         
         title = spot.name
+        
+        // 從 FavoriteSpotsViewController 點進去 Title spot.name 抓不到
+        
         navigationController?.navigationBar.prefersLargeTitles = true
         //設置Title滑動後的效果
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.red,NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)]
@@ -166,12 +169,21 @@ class SpotDetailViewController: UIViewController, MKMapViewDelegate {
     }
     
     func setupMapView() {
+        mapLabel = UILabel()
+        scrollView.addSubview(mapLabel)
+        mapLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        mapLabel.text = "- 地圖資訊 -"
+        mapLabel.textColor = .systemIndigo
+        mapLabel.snp.makeConstraints { (m) in
+            m.left.equalTo(travellingLabel)
+            m.top.equalTo(travellinginfoTextView.snp.bottom).offset(50)
+        }
         mapView = MKMapView()
         scrollView.addSubview(mapView)
         mapView.delegate = self
         mapView.mapType = .standard
         
-        let mapPoint = MKPointAnnotation()
+        let mapPoint = MKPointAnnotation() 
         mapPoint.title = "\(spot.name)"
         mapPoint.coordinate = CLLocationCoordinate2D(latitude: spot.py, longitude: spot.px)
         mapView.addAnnotation(mapPoint)
@@ -179,7 +191,7 @@ class SpotDetailViewController: UIViewController, MKMapViewDelegate {
         
         mapView.snp.makeConstraints { (m) in
             m.width.height.equalTo(400)
-            m.top.equalTo(travellinginfoTextView.snp.bottom).offset(100)
+            m.top.equalTo(mapLabel.snp.bottom).offset(10)
             m.centerX.equalToSuperview()
         }
         

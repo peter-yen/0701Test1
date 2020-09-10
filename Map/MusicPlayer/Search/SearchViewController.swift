@@ -15,21 +15,39 @@ class SearchViewController: UIViewController {
     
     var searchTextField: UISearchTextField!
     var collectionView: UICollectionView!
+    var cityArray: [[CityEnum: [String]]] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        if let uid = Auth.auth().currentUser?.uid {
-            Firestore.firestore().collection("cities").getDocuments { (snapshot, err) in
+        
+            Firestore.firestore().collection("Cities").getDocuments { (snapshot, err) in
                 if let err = err {
                     self.view.makeToast(err.localizedDescription)
                     return
                 }
-                if let cities = snapshot?.documents {
-                    print("citys:\(cities)")
+                if let snapshots = snapshot?.documents {
+                    for snapshot in snapshots {
+                        
+                        var citydictionary: [CityEnum: [String]] = [:]
+                        let dict = snapshot.data()
+                        if let cityIds = snapshot["cityIds"] as? [String] {
+                            let cityName = snapshot.documentID
+                            if let cityEnum = CityEnum(rawValue: cityName) {
+                                citydictionary[cityEnum] = cityIds
+                            }
+                            
+                        }
+                        self.cityArray.append(citydictionary)
+                    }
+                    
+                    
+                    DispatchQueue.main.async {
+                        self.collectionView.reloadData()
+                    }
                 }
-            }
+            
         }
         
         
@@ -80,11 +98,17 @@ class SearchViewController: UIViewController {
 
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return cityArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CityCollectionViewCell
+        
+        let cityDict = self.cityArray[indexPath.item]
+        
+        if let cityEnum = cityDict.keys.first {
+            cell.nameLabel.text = cityEnum.rawValue
+        }
         
         return cell
     }
@@ -100,8 +124,24 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         return size
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let spotsViewController = SpotsViewController()
-        navigationController?.pushViewController(spotsViewController, animated: true)
+        let cityDict = self.cityArray[indexPath.item]
+               
+               if let cityEnum = cityDict.keys.first {
+                if let cityIds = cityDict[cityEnum] {
+                    print("city: \(cityIds)")
+                    
+                    // 拿到 桃園市所有的 city id, 傳到 spotVC
+                    let spotsViewController = SpotsViewController()
+                    
+                    spotsViewController.spotIds = cityIds
+                    spotsViewController.cityTitle = cityEnum.rawValue
+                    
+                        navigationController?.pushViewController(spotsViewController, animated: true)
+                }
+               }
+        
+        
+    
     }
     
     
