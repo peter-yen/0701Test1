@@ -14,7 +14,7 @@ class TabBarViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-            
+        
         view.backgroundColor = .white
         
         setupController()
@@ -37,7 +37,7 @@ class TabBarViewController: UITabBarController {
         }
         
     }
-        func setupController() {
+    func setupController() {
         
         let searchViewController = SearchViewController()
         searchViewController.tabBarItem.image = UIImage(named: "search")
@@ -47,46 +47,12 @@ class TabBarViewController: UITabBarController {
         profileViewController.tabBarItem.image = UIImage(named: "iosph")
         let profileNavigationController = UINavigationController(rootViewController: profileViewController)
         
-        self.viewControllers = [searchNavigationController, profileNavigationController]
-//
-//        if let uid = Auth.auth().currentUser?.uid {
-//            Firestore.firestore().collection("Users").document(uid).getDocument { (snapshot, err) in
-//                if let err = err {
-//                    // err 是 有值
-//
-//                    self.view.makeToast(err.localizedDescription)
-//                }  else {
-//                    // err 是 nil
-//                }
-//
-//                if let dictionary = snapshot?.data() {
-//                    // snapshot?.data() 是有值
-//
-//                    if let isAdmin = dictionary["isAdmin"] as? Bool {
-//                        // 滿足所有條件
-//                        // 1. dictionary["isAdmin"] 的 型別 布林值
-//                        // 2. dictionary["isAdmin"] 不是 nil
-//                        if isAdmin == true {
-//                            // isAdmin 的 value 是 true
-//                            self.viewControllers = [searchNavigationController, profileNavigationController]
-//                        } else {
-//                            // isAdmin 的 value 是 false
-//                        }
-//
-//                    } else {
-//                        //  任一滿足
-//                        // 1.  dictionary["isAdmin"] 的 型別 布林值
-//                        // 2.  dictionary["isAdmin"] 不是 nil
-//                        self.viewControllers = [searchNavigationController, profileNavigationController]
-//                    }
-//                } else {
-//                    // snapshot?.data() 是 nil
-//                }
-//            }
-//
-//        }
-//    }
-    
+        let mapViewController = MapViewController()
+        mapViewController.tabBarItem.image = UIImage(named: "home")
+        
+        
+        self.viewControllers = [searchNavigationController, mapViewController, profileNavigationController]
+        
     }
-
+    
 }
