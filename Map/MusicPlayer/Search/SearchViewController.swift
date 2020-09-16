@@ -52,10 +52,9 @@ class SearchViewController: UIViewController {
         
         
         
-        
-        
         configurLayout()
         setupCollectionView()
+        
     }
     
     func configurLayout() {
@@ -85,8 +84,8 @@ class SearchViewController: UIViewController {
         collectionView.backgroundColor = .cyan
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { (m) in
-            m.leading.equalToSuperview().offset(10)
-            m.bottom.trailing.equalToSuperview().offset(-10)
+            m.leading.equalToSuperview()
+            m.bottom.trailing.equalToSuperview()
             m.top.equalTo(searchTextField.snp.bottom).offset(20)
             
         }
@@ -103,6 +102,14 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CityCollectionViewCell
+        switch indexPath.item {
+        case 0: cell.backgroundImageView.image = UIImage(named: "taoyun")
+        case 1: cell.backgroundImageView.image = UIImage(named: "tainan")
+        case 2: cell.backgroundImageView.image = UIImage(named: "taitung")
+        case 3: cell.backgroundImageView.image = UIImage(named: "hualiang")
+        default:
+            break
+        }
         
         let cityDict = self.cityArray[indexPath.item]
         
@@ -113,7 +120,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.frame.width / 2 - 10
+        let width = collectionView.frame.width / 2 - 5
 //        var hight: CGFloat = 0
 //        if indexPath.item % 2 == 1 {
 //            hight = 150

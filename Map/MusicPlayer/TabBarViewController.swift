@@ -48,10 +48,10 @@ class TabBarViewController: UITabBarController {
         let profileNavigationController = UINavigationController(rootViewController: profileViewController)
         
         let mapViewController = MapViewController()
-        mapViewController.tabBarItem.image = UIImage(named: "home")
+        mapViewController.tabBarItem.image = UIImage(named: "map")
         
         
-        self.viewControllers = [searchNavigationController, mapViewController, profileNavigationController]
+        self.viewControllers = [mapViewController, searchNavigationController, profileNavigationController]
         
     }
     
