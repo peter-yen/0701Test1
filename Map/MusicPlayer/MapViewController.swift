@@ -154,12 +154,12 @@ class MapViewController: UIViewController {
     func setupDismissButton() {
         dismissButton = UIButton()
         view.addSubview(dismissButton)
-        let buttonImage = UIImage(named: "return")
+        let buttonImage = UIImage(named: "location")
         dismissButton.setImage(buttonImage, for: .normal)
         dismissButton.addTarget(self, action: #selector(dismissButtonDidTap), for: .touchUpInside)
         dismissButton.isEnabled = true
         dismissButton.snp.makeConstraints { (m) in
-            m.height.width.equalTo(40)
+            m.height.width.equalTo(45)
             m.trailing.equalTo(view.snp.trailing).offset(-10)
             m.bottom.equalTo(gestureView.snp.top).offset(-25)
         }
