@@ -13,6 +13,8 @@
 		8907A61724AF421500EEED09 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8907A61624AF421500EEED09 /* AppDelegate.swift */; };
 		8907A62024AF421A00EEED09 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8907A61F24AF421A00EEED09 /* Assets.xcassets */; };
 		8907A62324AF421A00EEED09 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8907A62124AF421A00EEED09 /* LaunchScreen.storyboard */; };
+		8909A6E72511F6EB0080A4A2 /* SpotsMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8909A6E62511F6EB0080A4A2 /* SpotsMapViewController.swift */; };
+		8909A6E92511F70B0080A4A2 /* SpotsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8909A6E82511F70B0080A4A2 /* SpotsCollectionViewController.swift */; };
 		890EB8C824F6288500DB0329 /* CityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890EB8C724F6288500DB0329 /* CityCollectionViewCell.swift */; };
 		890EB8CA24F6331D00DB0329 /* SpotsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890EB8C924F6331D00DB0329 /* SpotsViewController.swift */; };
 		890EB8CD24F63D1C00DB0329 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890EB8CC24F63D1C00DB0329 /* ProfileTableViewCell.swift */; };
@@ -46,6 +48,8 @@
 		8907A61624AF421500EEED09 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8907A61F24AF421A00EEED09 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8907A62224AF421A00EEED09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8909A6E62511F6EB0080A4A2 /* SpotsMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotsMapViewController.swift; sourceTree = "<group>"; };
+		8909A6E82511F70B0080A4A2 /* SpotsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotsCollectionViewController.swift; sourceTree = "<group>"; };
 		890EB8C724F6288500DB0329 /* CityCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityCollectionViewCell.swift; sourceTree = "<group>"; };
 		890EB8C924F6331D00DB0329 /* SpotsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotsViewController.swift; sourceTree = "<group>"; };
 		890EB8CC24F63D1C00DB0329 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
@@ -180,6 +184,8 @@
 			children = (
 				89A05A0724F61D2E009E3379 /* SearchViewController.swift */,
 				890EB8C924F6331D00DB0329 /* SpotsViewController.swift */,
+				8909A6E62511F6EB0080A4A2 /* SpotsMapViewController.swift */,
+				8909A6E82511F70B0080A4A2 /* SpotsCollectionViewController.swift */,
 				8916281324F8DA4400112A5D /* SpotDetailViewController.swift */,
 				8916281124F8D5F200112A5D /* SpotCollectionViewCell.swift */,
 				890EB8C724F6288500DB0329 /* CityCollectionViewCell.swift */,
@@ -335,6 +341,7 @@
 				8972CBBE24AF430500E94D81 /* TabBarViewController.swift in Sources */,
 				89BC905824EC20600048C2C4 /* StepOneViewController.swift in Sources */,
 				8916281424F8DA4400112A5D /* SpotDetailViewController.swift in Sources */,
+				8909A6E72511F6EB0080A4A2 /* SpotsMapViewController.swift in Sources */,
 				89281A3C24F17D3F00212D0A /* StepThreeViewController.swift in Sources */,
 				8916281224F8D5F200112A5D /* SpotCollectionViewCell.swift in Sources */,
 				89883B8F24C931B900F76CFE /* AuthViewController.swift in Sources */,
@@ -351,6 +358,7 @@
 				8916281624F8E56100112A5D /* HUD.swift in Sources */,
 				890EB8C824F6288500DB0329 /* CityCollectionViewCell.swift in Sources */,
 				8907A61724AF421500EEED09 /* AppDelegate.swift in Sources */,
+				8909A6E92511F70B0080A4A2 /* SpotsCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

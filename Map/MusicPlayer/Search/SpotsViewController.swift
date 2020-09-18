@@ -13,9 +13,19 @@ import FirebaseFirestore
 import FirebaseAuth
 
 class SpotsViewController: UIViewController {
-    var collectionView: UICollectionView!
+    
+    var spotsMapViewController: SpotsMapViewController!
+    var spotsCollectionViewController: SpotsCollectionViewController!
+    var currentViewController: UIViewController!
+   
+    var segmentControl: UISegmentedControl!
     var name: String = ""
-    var spots: [Spot] = []
+    var spots: [Spot] = [] {
+        didSet {
+            print("spots:", spots)
+            spotsCollectionViewController.spots = spots
+        }
+    }
     var favoriteSpotsIDs: [String] = []
     var spotIds: [String] = []
     var cityTitle: String = ""
@@ -27,16 +37,36 @@ class SpotsViewController: UIViewController {
         
         title = cityTitle
         
-        setupCollectionView()
+        setupSegmentControl()
         
+        self.spotsCollectionViewController = SpotsCollectionViewController()
+//        let spotsCollectionNavigationController = UINavigationController(rootViewController: self.spotsCollectionViewController)
+        self.spotsMapViewController = SpotsMapViewController()
+        
+        currentViewController = spotsCollectionViewController // 預設
+        
+        
+        self.view.addSubview(currentViewController.view)
+            currentViewController.view.snp.makeConstraints { (m) in
+                m.edges.equalToSuperview()
+            }
+            currentViewController.didMove(toParent: self)
+            self.view.bringSubviewToFront(segmentControl)
+        
+        
+        getSpots { (spots) in
+    // 把這個封包的 spots 傳給 self.spots 讓他傳到 spotsCollectionViewController
+            self.spots = spots
+        }
+    }
+    
+    func getSpots(completion: @escaping ([Spot]) -> Void) {
+        
+    
         HUD.shared.showLoading(view: view)
-        
         let dispatchGroup = DispatchGroup()
         // 執行緒
-        
-        print("idddd:: \(spotIds)")
-        
-        // for loop 找 cityIds 內的 spot , 存入陣列 -> reloadData 顯示資料
+      // for loop 找 cityIds 內的 spot , 存入陣列 -> reloadData 顯示資料
         for id in spotIds {
             
             dispatchGroup.enter()
@@ -75,78 +105,39 @@ class SpotsViewController: UIViewController {
         }
         
         dispatchGroup.notify(queue: .main) {
-            self.collectionView.reloadData()
             HUD.shared.hideLoading()
         }
     }
     
     
-    func setupCollectionView() {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical // vertical 垂直的意思，   horizontal 橫向的意思
-        layout.minimumLineSpacing = 80.0
-        // 上面是調整垂直滑動，每個cell上下之間的間距方法
-        collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.register(SpotCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
-        collectionView.backgroundColor = .white
-        view.addSubview(collectionView)
-        collectionView.snp.makeConstraints { (m) in
-            m.leading.equalToSuperview().offset(5)
-            m.bottom.trailing.equalToSuperview().offset(-5)
-            m.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+    
+    func setupSegmentControl() {
+        segmentControl = UISegmentedControl(items: ["列表", "地圖"])
+        view.addSubview(segmentControl)
+        segmentControl.snp.makeConstraints { (m) in
+            m.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-10)
+            m.centerX.equalToSuperview()
+        }
+        segmentControl.addTarget(self, action: #selector(segmentControlDidChanged), for: .valueChanged)
+    }
+    @objc func segmentControlDidChanged(_ sender: UISegmentedControl!) {
+        currentViewController.view.removeFromSuperview()
+        currentViewController.removeFromParent()
+        
+        if sender.selectedSegmentIndex == 0 {
+            currentViewController = spotsCollectionViewController
+            
+        } else {
+            currentViewController = spotsMapViewController
             
         }
-        
+        self.view.addSubview(currentViewController.view)
+        currentViewController.view.snp.makeConstraints { (m) in
+            m.edges.equalToSuperview()
+        }
+        currentViewController.didMove(toParent: self)
+        self.view.bringSubviewToFront(segmentControl)
     }
     
 }
 
-extension SpotsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return spots.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! SpotCollectionViewCell
-        let spot = spots[indexPath.item]
-        cell.spotViewController = self
-        // 把自己給 SpotCollectionViewCell 裡面 SpotViewController 這個值
-        
-        cell.spot = spot
-        
-        return cell
-    }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.frame.width - 5
-        let size = CGSize(width: width, height: 180)
-        
-        return size
-    }
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let spot = spots[indexPath.item]
-        let spotDetailViewController = SpotDetailViewController()
-        
-        let favoriteSpotsViewController = FavoriteSpotsViewController()
-        
-        spotDetailViewController.spot = spot
-        
-        //        favoriteSpotsViewController.spot = spot
-        
-        navigationController?.pushViewController(spotDetailViewController, animated: true)
-        
-    }
-    
-    
-}
-extension SpotsViewController: UISearchTextFieldDelegate {
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.endEditing(true) //  TouchesBegan 沒有用
-    }
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        view.endEditing(true)
-        return true
-    }
-}

@@ -47,11 +47,11 @@ class TabBarViewController: UITabBarController {
         profileViewController.tabBarItem.image = UIImage(named: "iosph")
         let profileNavigationController = UINavigationController(rootViewController: profileViewController)
         
-        let mapViewController = MapViewController()
-        mapViewController.tabBarItem.image = UIImage(named: "map")
+//        let mapViewController = MapViewController()
+//        mapViewController.tabBarItem.image = UIImage(named: "map")
+//        
         
-        
-        self.viewControllers = [mapViewController, searchNavigationController, profileNavigationController]
+        self.viewControllers = [searchNavigationController, profileNavigationController]
         
     }
     

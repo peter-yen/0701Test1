@@ -1,8 +1,8 @@
 //
-//  MapViewController.swift
+//  SpotsMapViewController.swift
 //  MusicPlayer
 //
-//  Created by 嚴啟睿 on 2020/9/10.
+//  Created by 嚴啟睿 on 2020/9/16.
 //  Copyright © 2020 嚴啟睿. All rights reserved.
 //
 
@@ -11,7 +11,7 @@ import MapKit
 import SnapKit
 import FirebaseFirestore
 
-class MapViewController: UIViewController {
+class SpotsMapViewController: UIViewController {
     var spots: [Spot] = []
     var mapView: MKMapView!
     var locationManager: CLLocationManager!
@@ -84,7 +84,7 @@ class MapViewController: UIViewController {
         mapView = MKMapView()
         view.addSubview(mapView)
         mapView.showsUserLocation = true
-//        mapView.delegate = self
+        mapView.delegate = self
         mapView.snp.makeConstraints { (m) in
             m.edges.equalToSuperview()
         }
@@ -110,10 +110,12 @@ class MapViewController: UIViewController {
         searchView.clipsToBounds = true
         searchView.layer.cornerRadius = 15
         searchView.snp.makeConstraints { (m) in
-            m.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
+            //    位置來這裡沒偵測  safeAreaLayoutGuide
+//            m.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
+            m.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(50)
             m.trailing.equalToSuperview().offset(-10)
             m.leading.equalToSuperview().offset(10)
-            m.height.equalTo(40)
+            m.height.equalTo(35)
         }
     }
     
@@ -121,12 +123,13 @@ class MapViewController: UIViewController {
         spotDetailsView = UIView()
         view.addSubview(spotDetailsView)
         spotDetailsView.backgroundColor = .cyan
+        spotDetailsView.alpha = 0.8
         spotDetailsView.translatesAutoresizingMaskIntoConstraints = false
         spotDetailsView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
         spotDetailsView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
         spotDetailsView.heightAnchor.constraint(equalToConstant: 200).isActive = true
         
-        spotDetailTopAnchor = spotDetailsView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -50)
+        spotDetailTopAnchor = spotDetailsView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -120)
         spotDetailTopAnchor.isActive = true
         
         let pan = UIPanGestureRecognizer(target: self, action: #selector(spotDetailsViewPanGesture(recognizer:)))
@@ -135,7 +138,7 @@ class MapViewController: UIViewController {
         spotDetailsView.addGestureRecognizer(pan)
         spotDetailsView.isUserInteractionEnabled = true // 觸控開關
     }
-
+    
     @objc func spotDetailsViewPanGesture(recognizer: UIPanGestureRecognizer) {
         let translation = recognizer.translation(in: self.view)
         let contant = spotDetailTopAnchor.constant
@@ -143,22 +146,22 @@ class MapViewController: UIViewController {
         switch recognizer.state {
         case .changed:
             let constrainAfterTranslation = spotDetailTopAnchor.constant + translation.y
-            if constrainAfterTranslation > -200 {
+            if constrainAfterTranslation > -240 {
                 // 不懂怎麼設無法拉超過 -200
-            self.spotDetailTopAnchor.constant = constrainAfterTranslation
-            recognizer.setTranslation(.zero, in: self.view)
+                self.spotDetailTopAnchor.constant = constrainAfterTranslation
+                recognizer.setTranslation(.zero, in: self.view)
             }
         case .ended:
-            if contant > -125 {
-                self.spotDetailTopAnchor.constant = -50
+            if contant > -145 {
+                self.spotDetailTopAnchor.constant = -120
             } else {
-                self.spotDetailTopAnchor.constant = -200
+                self.spotDetailTopAnchor.constant = -240
             }
             
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 self.view.layoutIfNeeded()
             },completion: nil)
-        
+            
         default:
             break
         }
@@ -192,7 +195,7 @@ class MapViewController: UIViewController {
         }
     }
     @objc func dismissButtonDidTap() {
-       
+        
         
     }
     
@@ -202,7 +205,7 @@ class MapViewController: UIViewController {
 }
 
 
-extension MapViewController: CLLocationManagerDelegate {
+extension SpotsMapViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         locationManager.stopUpdatingLocation()
@@ -214,33 +217,33 @@ extension MapViewController: CLLocationManagerDelegate {
         let region = MKCoordinateRegion(center: coordinate, span: span)
         mapView.setRegion(region, animated: true)
     }
-
+    
 }
 
 
-//extension MapViewController: MKMapViewDelegate {
-//    
-//    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-//        if let annotation = view.annotation as? SpotAnnotation {
-//            let spotDetailViewController = SpotDetailViewController()
-//            spotDetailViewController.spot = annotation.spot
-//            present(spotDetailViewController, animated: true, completion: nil)
-//        }
-//    }
-//}
-//
-//
-//class SpotAnnotation: MKPointAnnotation {
-//    var spot: Spot!
-//    
-//    convenience  init(spot: Spot) {
-//        self.init()
-//        
-//        self.spot = spot
-//        
-//        let coordinate = CLLocationCoordinate2D(latitude: spot.py, longitude: spot.px)
-//        self.title = spot.name
-//        self.coordinate = coordinate
-//    }
-//    
-//}
+extension SpotsMapViewController: MKMapViewDelegate {
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        if let annotation = view.annotation as? SpotAnnotation {
+            let spotDetailViewController = SpotDetailViewController()
+            spotDetailViewController.spot = annotation.spot
+            present(spotDetailViewController, animated: true, completion: nil)
+        }
+    }
+}
+
+
+class SpotAnnotation: MKPointAnnotation {
+    var spot: Spot!
+    
+    convenience  init(spot: Spot) {
+        self.init()
+        
+        self.spot = spot
+        
+        let coordinate = CLLocationCoordinate2D(latitude: spot.py, longitude: spot.px)
+        self.title = spot.name
+        self.coordinate = coordinate
+    }
+    
+}

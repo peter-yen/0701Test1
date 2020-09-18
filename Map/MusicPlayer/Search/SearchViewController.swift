@@ -82,6 +82,7 @@ class SearchViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.register(CityCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         collectionView.backgroundColor = .cyan
+        collectionView.alpha = 0.9
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { (m) in
             m.leading.equalToSuperview()

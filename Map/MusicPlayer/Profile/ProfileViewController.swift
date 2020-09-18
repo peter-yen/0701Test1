@@ -330,6 +330,12 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         }
         if user.isAdmin && indexPath.row == 5 {
             cell.textLabel?.text = "更新資料庫"
+            cell.customAccessoryTextField.delegate = self
+            cell.customAccessoryTextField.isEnabled = true
+            cell.customAccessoryTextField.placeholder = "請輸入數量"
+            cell.ApiButton.isEnabled = true
+            cell.ApiButton.alpha = 1
+            
         }
         
         return cell
@@ -351,4 +357,14 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     
+}
+
+
+extension ProfileViewController: UITextFieldDelegate {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+        func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        view.endEditing(true)
+    }
 }
