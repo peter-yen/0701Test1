@@ -7,21 +7,27 @@
 //
 
 import UIKit
+import FirebaseFirestore
+import FirebaseAuth
 
 class SpotsCollectionViewController: UIViewController {
+    var spotsViewController: SpotsViewController!
+    var favoriteSpotsIDs: [String] = []
+    var spotIds: [String] = []
     var spots: [Spot] = [] {
         didSet {
             self.collectionView.reloadData()
         }
     }
-     var collectionView: UICollectionView!
-
+    var collectionView: UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        
         setupCollectionView()
         view.backgroundColor = .white
-
+        
     }
     
     func setupCollectionView() {
@@ -43,9 +49,9 @@ class SpotsCollectionViewController: UIViewController {
         }
         
     }
-
     
 }
+        
 
 extension SpotsCollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -55,9 +61,9 @@ extension SpotsCollectionViewController: UICollectionViewDelegate, UICollectionV
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! SpotCollectionViewCell
         let spot = spots[indexPath.item]
-//        cell.spotViewController = self
+        //        cell.spotViewController = self
         // 把自己給 SpotCollectionViewCell 裡面 SpotViewController 這個值
-        
+        cell.spotsCollectionViewController = self
         cell.spot = spot
         
         return cell
@@ -69,16 +75,18 @@ extension SpotsCollectionViewController: UICollectionViewDelegate, UICollectionV
         return size
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let spot = spots[indexPath.item]
-        let spotDetailViewController = SpotDetailViewController()
         
-        let favoriteSpotsViewController = FavoriteSpotsViewController()
+        let spot = spots[indexPath.item]
+        
+        let spotDetailViewController = SpotDetailViewController()
         
         spotDetailViewController.spot = spot
         
+        //        let favoriteSpotsViewController = FavoriteSpotsViewController()
         //        favoriteSpotsViewController.spot = spot
         
-        navigationController?.pushViewController(spotDetailViewController, animated: true)
+        // 拿到 spotsViewController 做參考
+            spotsViewController.navigationController?.pushViewController(spotDetailViewController, animated: true)
         
     }
     

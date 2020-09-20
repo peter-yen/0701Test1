@@ -9,11 +9,17 @@
 import UIKit
 import SnapKit
 
+protocol ProfileTableViewCellDelegate {
+    func apiButtonDidTap(count: Int)
+    func customAccessoryTextFieldDidBegin()
+}
+
 class ProfileTableViewCell: UITableViewCell {
     private var customAccessoryLabel: UILabel!
     private var customAccessoryView: UIView!
     var customAccessoryTextField: UITextField!
     var ApiButton: UIButton!
+    var delegate: ProfileTableViewCellDelegate!
     
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -22,14 +28,13 @@ class ProfileTableViewCell: UITableViewCell {
         accessoryView = customAccessoryView
     }
     
-    func setupAcceoryView() {
-        customAccessoryView = UIView()
-        customAccessoryView.frame = CGRect(x: 0, y: 0, width: 200, height: frame.height)
+    func setupApiView() {
         customAccessoryTextField = UITextField()
-        customAccessoryView.addSubview(customAccessoryTextField)
         customAccessoryTextField.backgroundColor = .white
-        customAccessoryTextField.keyboardType = .numbersAndPunctuation
-        customAccessoryTextField.isEnabled = false
+        customAccessoryTextField.keyboardType = .numberPad
+        customAccessoryTextField.placeholder = "請輸入數量"
+        customAccessoryTextField.addTarget(self, action: #selector(customAccessoryTextFieldDidBegin), for: .editingDidBegin)
+        customAccessoryView.addSubview(customAccessoryTextField)
         customAccessoryTextField.snp.makeConstraints { (m) in
             m.height.equalToSuperview()
             m.width.equalTo(100)
@@ -37,32 +42,45 @@ class ProfileTableViewCell: UITableViewCell {
         }
         ApiButton = UIButton()
         customAccessoryView.addSubview(ApiButton)
-        ApiButton.alpha = 0
-        ApiButton.isEnabled = false
-        let image = UIImage(named: "return")
+        let image = UIImage(systemName: "play.fill")?.withRenderingMode(.alwaysOriginal)
         ApiButton.setImage(image, for: .normal)
-        ApiButton.addTarget(self, action: #selector(ApiButtonDidTap), for: .touchUpInside)
+        ApiButton.addTarget(self, action: #selector(apiButtonDidTap), for: .touchUpInside)
         ApiButton.snp.makeConstraints { (m) in
             m.height.width.equalTo(30)
             m.right.equalToSuperview()
             m.centerY.equalToSuperview()
         }
+
+    }
+    
+    func setupAcceoryView() {
+        customAccessoryView = UIView()
+        customAccessoryView.frame = CGRect(x: 0, y: 0, width: 200, height: frame.height)
+           
+    }
+    
+    func setupCustomAccessoryText(text: String) {
         customAccessoryLabel = UILabel()
         customAccessoryLabel.text = ""
+        customAccessoryLabel.text = text
         customAccessoryView.addSubview(customAccessoryLabel)
         customAccessoryLabel.textAlignment = .center
         customAccessoryLabel.snp.makeConstraints { (m) in
             m.margins.equalToSuperview()
         }
-        
     }
-    func setupCustomAccessoryText(text: String) {
-        customAccessoryLabel.text = text
+    
+    @objc func apiButtonDidTap() {
+        if let text = customAccessoryTextField.text {
+            if let count = Int(text) {
+                delegate.apiButtonDidTap(count: count)
+            }
+        }
         
     }
     
-    @objc func ApiButtonDidTap() {
-        print("23233")
+    @ objc func customAccessoryTextFieldDidBegin() {
+        delegate.customAccessoryTextFieldDidBegin()
     }
     
     required init?(coder: NSCoder) {

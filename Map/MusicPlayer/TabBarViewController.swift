@@ -40,12 +40,13 @@ class TabBarViewController: UITabBarController {
     func setupController() {
         
         let searchViewController = SearchViewController()
-        searchViewController.tabBarItem.image = UIImage(named: "search")
+        searchViewController.tabBarItem.image = UIImage(systemName: "magnifyingglass")
         let searchNavigationController = UINavigationController(rootViewController: searchViewController)
         
         let profileViewController = ProfileViewController()
-        profileViewController.tabBarItem.image = UIImage(named: "iosph")
+        profileViewController.tabBarItem.image = UIImage(systemName: "person.circle")
         let profileNavigationController = UINavigationController(rootViewController: profileViewController)
+        
         
 //        let mapViewController = MapViewController()
 //        mapViewController.tabBarItem.image = UIImage(named: "map")

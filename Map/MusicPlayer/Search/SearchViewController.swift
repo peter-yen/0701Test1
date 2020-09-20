@@ -104,10 +104,11 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CityCollectionViewCell
         switch indexPath.item {
-        case 0: cell.backgroundImageView.image = UIImage(named: "taoyun")
-        case 1: cell.backgroundImageView.image = UIImage(named: "tainan")
-        case 2: cell.backgroundImageView.image = UIImage(named: "taitung")
-        case 3: cell.backgroundImageView.image = UIImage(named: "hualiang")
+        case 0: cell.backgroundImageView.image = UIImage(named: "ilan")
+        case 1: cell.backgroundImageView.image = UIImage(named: "taoyun")
+        case 2: cell.backgroundImageView.image = UIImage(named: "tainan")
+        case 3: cell.backgroundImageView.image = UIImage(named: "taitung")
+        case 4: cell.backgroundImageView.image = UIImage(named: "hualiang")
         default:
             break
         }

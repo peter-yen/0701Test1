@@ -82,7 +82,7 @@ class SpotDetailViewController: UIViewController, MKMapViewDelegate {
         }
         addressLabel = UILabel()
         scrollView.addSubview(addressLabel)
-        addressLabel.text = "地址： \(spot.address)"
+        addressLabel.text = "地址: \(spot.address)"
         addressLabel.font = UIFont.boldSystemFont(ofSize: 18)
         addressLabel.textColor = .systemBlue
         addressLabel.snp.makeConstraints { (m) in

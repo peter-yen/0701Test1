@@ -43,6 +43,7 @@ class SpotCollectionViewCell: UICollectionViewCell {
     var favoriteButton: UIButton!
     var spotViewController: SpotsViewController?
     var favoriteSpotsViewCOntroller: FavoriteSpotsViewController?
+    var spotsCollectionViewController: SpotsCollectionViewController?
     
     
     
@@ -157,7 +158,7 @@ class SpotCollectionViewCell: UICollectionViewCell {
                             if newFavoriteArray.firstIndex(of: self.spot.id) == nil {
                                 newFavoriteArray.append(self.spot.id)
                                 
-                                self.spotViewController?.favoriteSpotsIDs = newFavoriteArray
+                                self.spotsCollectionViewController?.favoriteSpotsIDs = newFavoriteArray
                                 
                                 
                                 data = ["favoriteSpots": newFavoriteArray]
@@ -167,7 +168,7 @@ class SpotCollectionViewCell: UICollectionViewCell {
                             // FireStore 沒有這個 Dictionary 的話直接創建一個
                             let newFavoriteArray = [self.spot.id]
                             
-                            self.spotViewController?.favoriteSpotsIDs = newFavoriteArray
+                            self.spotsCollectionViewController?.favoriteSpotsIDs = newFavoriteArray
                             
                             data = ["favoriteSpots": newFavoriteArray]
                         }
@@ -176,7 +177,7 @@ class SpotCollectionViewCell: UICollectionViewCell {
                             if let err = err {
                                 self.makeToast(err.localizedDescription)
                             } else {
-                                self.spotViewController?.view.makeToast("成功上傳！！！")
+                                self.spotsCollectionViewController?.view.makeToast("成功上傳！！！")
                             }
                         }
                     }
@@ -188,11 +189,11 @@ class SpotCollectionViewCell: UICollectionViewCell {
             
             favoriteButton.isSelected = false
             
-            if spotViewController != nil {
+            if spotsCollectionViewController != nil {
                 
                 if let uid = Auth.auth().currentUser?.uid {
                     
-                    HUD.shared.showLoading(view: self.spotViewController!.view)
+                    HUD.shared.showLoading(view: self.spotsCollectionViewController!.view)
                     
                     API.shared.userRef(uid: uid).getDocument { (snapshot, error) in
                         if let error = error {
@@ -210,16 +211,16 @@ class SpotCollectionViewCell: UICollectionViewCell {
                                     
                                     newFavoriteArray.remove(at: index)
                                     
-                                    self.spotViewController?.favoriteSpotsIDs = newFavoriteArray
+                                    self.spotsCollectionViewController?.favoriteSpotsIDs = newFavoriteArray
                                     
                                     let data = ["favoriteSpots": newFavoriteArray]
                                     
                                     API.shared.userRef(uid: uid).updateData(data) { (err) in
                                         if let err = err {
-                                            self.spotViewController?.view.makeToast(err.localizedDescription)
+                                            self.spotsCollectionViewController?.view.makeToast(err.localizedDescription)
                                             
                                         } else {
-                                            self.spotViewController?.view.makeToast("成功刪除！！！")
+                                            self.spotsCollectionViewController?.view.makeToast("成功刪除！！！")
                                             HUD.shared.hideLoading()
                                         }
                                     }

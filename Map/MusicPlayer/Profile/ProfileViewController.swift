@@ -31,7 +31,17 @@ class ProfileViewController: UIViewController {
         setupData()
         user = User(email: "", name: "", password: "")
         
+        title = "個人資料"
+        
+        // 點擊要打字的行列時 , 鍵盤擋住的話 , view會往上移
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     func setupData() {
         HUD.shared.showLoading(view: view)
         if let uid = Auth.auth().currentUser?.uid {
@@ -54,7 +64,7 @@ class ProfileViewController: UIViewController {
                 if let dictionary = snapshot?.data() {
                     
                     if let name = dictionary["name"] as? String,
-                        let email = dictionary["email"] as? String {
+                       let email = dictionary["email"] as? String {
                         self.user.name = name
                         self.user.email = email
                         if let isAdmin = dictionary["isAdmin"] as? Bool {
@@ -152,103 +162,18 @@ class ProfileViewController: UIViewController {
     }
     
     
-    
-    func updateAPI() {
-        HUD.shared.showLoading(view: view)
-        // 傳入 url, spots 數量 到 getTaiwanSpots , return spots
-        getTaiwanSpots(url: "https://gis.taiwan.net.tw/XMLReleaseALL_public/scenic_spot_C_f.json", count: 100) { (spots) in
-            
-            
-            // 上面拿到的 spots 再傳入 updateSpots(spots: spots)
-            if let cityEnumDict = self.updateSpots(spots: spots) {
-                
-                for (key, values) in cityEnumDict {
-                    
-                    let data = ["cityIds": values]
-                    
-                  // 拿到資料後， 在fireStore setData "Cities"
-                    Firestore.firestore().collection("Cities").document(key.rawValue).setData(data) { (err) in
-                        if let err = err {
-                            print(err)
-                            return
-                                HUD.shared.hideLoading()
-                        }
-                    }
-                }
-            }
-            
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
         }
-        
     }
-    // 傳入 spots , 回傳  dictionary?
-    func updateSpots (spots: [Spot]) -> [CityEnum: [String]]? {
-        var cityEnumDict : [CityEnum: [String]] = [:]
-        
-        
-        for spot in spots {
-            // 把每個 city 轉換成 cityEnum 的型別, 存入cityEnum
-            if let city = spot.city, let cityEnum = CityEnum.init(rawValue: city) {
-                // 把從 spot.city 拿到資料的 city 加進去 CityEnum ralValue 裡
-                // 拉進去 enum 的用意為： 他會幫你偵測你是屬於哪個 value， 類似說
-                // 如果我 city 是"台東縣"的話 他就等於是 TTH , 因為 TTH 的 value 是 "台東縣"
-                
-                // 確定 City 目錄底下有這個 Spot
-                Firestore.firestore().collection("Spots").document(spot.id).setData(spot.dictionary()) { (err) in
-                    // 重新 創建  spot.dictionary 解析成我 Class Spot 打的樣子
-                    // 拿到 spot.id 裡面的 dictionary
-                    
-                    
-                    if let err = err {
-                        print(err)
-                        return
-                    }
-                }
-                // 假如我 spot.city 有符合 cityEnum 那些縣市名
-                // 也就是下面打的 cityEnum != nil (有值的)，
-                // 上面創建的 cityenum型別的 dict 會增加 spot.id ,
-                // 比如 符合"台東縣"的 ，台東縣的那個 ralvalue 有值 ，
-                // 會在"台東縣" 增加 spot.id
-                // 沒有的話 ， 我的 cityEnumDict[cityEnum] 會等於 [spot.id] 不太懂
-                
-                
-                if cityEnumDict[cityEnum] != nil {
-                    cityEnumDict[cityEnum]!.append(spot.id)
-                } else {
-                    cityEnumDict[cityEnum] = [spot.id]
-                }
-            }
-        }
-        return cityEnumDict
+    
+    @objc private func keyboardWillHide(notification: NSNotification) {
+        tableView.contentInset = .zero
     }
     
     
-    // url： 網址 , count: 拿到spots 的數量， completion: 封包( 回傳 spots)
-    func getTaiwanSpots(url: String,count: Int, completion: @escaping ([Spot])->Void) {
-        
-        
-        guard let url = URL(string: url) else { return }
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            // 非同步拿取 url 的 data
-            guard let data = data else { return }
-            guard let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String:Any] else { return }
-            guard let xmlHead = json["XML_Head"] as? [String:Any] else { return }
-            
-            guard let infos = xmlHead["Infos"] as? [String:Any] else { return }
-            guard let info = infos["Info"] as? [[String: Any]] else { return }
-            
-            //  做一個迴圈 , 把 dict 丟進去 info[] 裡
-            // 再把他丟到 Class Spot 裡有做好的型別解析轉換，再丟回 spots[] 裡
-            // [spots] 裡是 dictionary
-            
-            var spots: [Spot] = []
-            for dict in info[0...count - 1] {
-                let spot = Spot(dictionary: dict)
-                spots.append(spot)
-            }
-            completion(spots)
-            
-        }.resume()
-    }
+    
     
 }
 
@@ -325,18 +250,17 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             cell.textLabel?.text = "我的收藏"
             cell.accessoryView = nil // accessory 屬性只能存在一個
             cell.accessoryType = .disclosureIndicator
+        case 5:
+            if user.isAdmin {
+                cell.textLabel?.text = "更新資料庫"
+                cell.delegate = self
+                cell.setupApiView()
+                cell.customAccessoryTextField.delegate = self
+            }
         default:
             cell.textLabel?.text = "您好，歡迎光臨"
         }
-        if user.isAdmin && indexPath.row == 5 {
-            cell.textLabel?.text = "更新資料庫"
-            cell.customAccessoryTextField.delegate = self
-            cell.customAccessoryTextField.isEnabled = true
-            cell.customAccessoryTextField.placeholder = "請輸入數量"
-            cell.ApiButton.isEnabled = true
-            cell.ApiButton.alpha = 1
-            
-        }
+        
         
         return cell
     }
@@ -346,16 +270,14 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         case 2:
             let favoriteSpotsViewController = FavoriteSpotsViewController()
             navigationController?.pushViewController(favoriteSpotsViewController, animated: true)
-        case 5:
-            if user.isAdmin {
-                self.updateAPI()
-            }
         default:
             break
         }
         
     }
-    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        view.endEditing(true)
+    }
     
 }
 
@@ -364,7 +286,29 @@ extension ProfileViewController: UITextFieldDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
-        func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)
     }
+}
+
+extension ProfileViewController: ProfileTableViewCellDelegate {
+    func customAccessoryTextFieldDidBegin() {
+        print("4343434")
+        
+    }
+    
+    func apiButtonDidTap(count: Int) {
+        if user.isAdmin {
+            API.shared.removeSpots {
+                API.shared.removeCities {
+                    API.shared.updataSpotsAPI(count: count) {
+                        print("成功上傳")
+                    }
+                }
+            }
+        }
+        
+    }
+    
+    
 }

@@ -24,6 +24,8 @@ class SpotsViewController: UIViewController {
         didSet {
             print("spots:", spots)
             spotsCollectionViewController.spots = spots
+//            spotsCollectionViewController.favoriteSpotsIDs = self.favoriteSpotsIDs
+//            spotsMapViewController.spots = spots
         }
     }
     var favoriteSpotsIDs: [String] = []
@@ -40,23 +42,24 @@ class SpotsViewController: UIViewController {
         setupSegmentControl()
         
         self.spotsCollectionViewController = SpotsCollectionViewController()
-//        let spotsCollectionNavigationController = UINavigationController(rootViewController: self.spotsCollectionViewController)
         self.spotsMapViewController = SpotsMapViewController()
-        
+        self.spotsCollectionViewController.spotsViewController = self
+            // 傳自己這個值 , 進去 spotsCollectionViewController
         currentViewController = spotsCollectionViewController // 預設
-        
         
         self.view.addSubview(currentViewController.view)
             currentViewController.view.snp.makeConstraints { (m) in
-                m.edges.equalToSuperview()
+                m.edges.equalTo(self.view.safeAreaLayoutGuide.snp.edges)
             }
             currentViewController.didMove(toParent: self)
             self.view.bringSubviewToFront(segmentControl)
         
-        
-        getSpots { (spots) in
-    // 把這個封包的 spots 傳給 self.spots 讓他傳到 spotsCollectionViewController
-            self.spots = spots
+        if self.spots.isEmpty {
+            
+            getSpots { (spots) in
+                // 把這個封包的 spots 傳給 self.spots 讓他傳到 spotsCollectionViewController
+                self.spots = spots
+            }
         }
     }
     
@@ -113,6 +116,7 @@ class SpotsViewController: UIViewController {
     
     func setupSegmentControl() {
         segmentControl = UISegmentedControl(items: ["列表", "地圖"])
+        segmentControl.selectedSegmentIndex = 0
         view.addSubview(segmentControl)
         segmentControl.snp.makeConstraints { (m) in
             m.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-10)
