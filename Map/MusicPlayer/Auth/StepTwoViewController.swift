@@ -11,25 +11,22 @@ import SnapKit
 
 class StepTwoViewController: RegisterBasicViewController {
     var email: String = ""
-    
+    convenience init(email: String) {
+        self.init()
+        self.email = email
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        layouts(title: "密碼", placeholder: "請輸入密碼", progress: 0.66, button: #selector(finishButtonDidTap))
         
-        titleLabel.text = "密碼"
-        textField.placeholder = "請輸入密碼"
-        textField.isSecureTextEntry = true //密碼隱藏
-        progressView.progress = 0.66
-        finishButton.addTarget(self, action: #selector(finishButtonDidTap), for: .touchUpInside)
+        self.textField.isSecureTextEntry = true //密碼隱藏
     }
     
     @objc func finishButtonDidTap() {
-        let stepThreeViewController = StepThreeViewController()
-        if let password = textField.text {
-            let user = User(email: email, name: "", password: password)
-            stepThreeViewController.user = user
-           
+        if let password = self.textField.text {
+            let stepThreeViewController = StepThreeViewController(email: email, password: password)
+            self.navigationController?.pushViewController(stepThreeViewController, animated: true)
         }
-        self.navigationController?.pushViewController(stepThreeViewController, animated: true)
         
     }
 }

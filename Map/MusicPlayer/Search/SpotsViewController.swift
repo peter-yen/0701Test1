@@ -13,6 +13,20 @@ import FirebaseFirestore
 import FirebaseAuth
 
 class SpotsViewController: UIViewController {
+    //  客制初始化
+    convenience init(spotsIds: [String], cityTitle: String) {
+        self.init()
+        self.spotIds = spotsIds
+        self.cityTitle = cityTitle
+    }
+    //  客制初始化 方法2
+    class func vc(spotsIds: [String], cityTitle: String) -> SpotsViewController {
+        let vc = SpotsViewController()
+        vc.spotIds = spotsIds
+        vc.cityTitle = cityTitle
+        return vc
+        
+    }
     
     var spotsMapViewController: SpotsMapViewController!
     var spotsCollectionViewController: SpotsCollectionViewController!
@@ -88,6 +102,7 @@ class SpotsViewController: UIViewController {
                 
             }
         }
+        
         if let uid = Auth.auth().currentUser?.uid {
             
             dispatchGroup.enter()
@@ -113,33 +128,32 @@ class SpotsViewController: UIViewController {
     }
     
     
-    
     func setupSegmentControl() {
-        segmentControl = UISegmentedControl(items: ["列表", "地圖"])
-        segmentControl.selectedSegmentIndex = 0
+        self.segmentControl = UISegmentedControl(items: ["列表", "地圖"])
+        self.segmentControl.selectedSegmentIndex = 0
         view.addSubview(segmentControl)
-        segmentControl.snp.makeConstraints { (m) in
+        self.segmentControl.snp.makeConstraints { (m) in
             m.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-10)
             m.centerX.equalToSuperview()
         }
-        segmentControl.addTarget(self, action: #selector(segmentControlDidChanged), for: .valueChanged)
+        self.segmentControl.addTarget(self, action: #selector(segmentControlDidChanged), for: .valueChanged)
     }
     @objc func segmentControlDidChanged(_ sender: UISegmentedControl!) {
-        currentViewController.view.removeFromSuperview()
-        currentViewController.removeFromParent()
+        self.currentViewController.view.removeFromSuperview()
+        self.currentViewController.removeFromParent()
         
         if sender.selectedSegmentIndex == 0 {
-            currentViewController = spotsCollectionViewController
+            self.currentViewController = spotsCollectionViewController
             
         } else {
-            currentViewController = spotsMapViewController
+            self.currentViewController = spotsMapViewController
             
         }
         self.view.addSubview(currentViewController.view)
-        currentViewController.view.snp.makeConstraints { (m) in
+        self.currentViewController.view.snp.makeConstraints { (m) in
             m.edges.equalToSuperview()
         }
-        currentViewController.didMove(toParent: self)
+        self.currentViewController.didMove(toParent: self)
         self.view.bringSubviewToFront(segmentControl)
     }
     

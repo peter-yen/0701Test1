@@ -10,63 +10,78 @@ import UIKit
 
 class RegisterBasicViewController: UIViewController {
     
-    var titleLabel: UILabel!
-    var textField: UITextField!
-    var progressView: UIProgressView!
-    var finishButton: UIButton!
+    lazy var titleLabel: UILabel = {
+       let tl = UILabel()
+        tl.font = .boldSystemFont(ofSize: 22)
+        return tl
+    }()
+    var textField: UITextField = {
+        let tf = UITextField()
+        return tf
+    }()
+    var progressView: UIProgressView = {
+       let pv = UIProgressView()
+        pv.clipsToBounds = true //開關
+        pv.layer.cornerRadius = 10 //修邊
+        pv.tintColor = .black
+        pv.progress = 0.33
+        return pv
+    }()
+    var finishButton: UIButton = {
+       let fb = UIButton()
+        fb.backgroundColor = .systemRed
+        fb.clipsToBounds = true
+        fb.layer.cornerRadius = 20
+        fb.setTitle("下一步", for: .normal)
+        fb.isEnabled = false //按的開關
+        fb.alpha = 0.3 //透明度
+        return fb
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        configureLayout()
+        self.setupSubviews()
+        
+    }
+    
+    func layouts(title: String,
+                placeholder: String,
+                progress: Float,
+                button: Selector) {
+        self.titleLabel.text = title
+        self.textField.placeholder = placeholder
+        self.progressView.progress = progress
+        self.finishButton.addTarget(self, action: button, for: .touchUpInside)
         
     }
 
-    func configureLayout() {
-        titleLabel = UILabel()
+    func setupSubviews() {
         view.addSubview(titleLabel)
-        titleLabel.font = .boldSystemFont(ofSize: 22)
-        
-        titleLabel.snp.makeConstraints { (m) in
+        self.titleLabel.snp.makeConstraints { (m) in
             m.width.equalTo(100)
             m.height.equalTo(30)
             m.leading.equalTo(view.snp.leading).offset(15)
             m.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(40)
         }
-        
-        textField = UITextField()
         view.addSubview(textField)
-        textField.delegate = self
-        textField.addTarget(self, action: #selector(emailTextFieldEditingChanged), for: .editingChanged)
-        textField.snp.makeConstraints { (m) in
+        self.textField.delegate = self
+        self.textField.addTarget(self, action: #selector(emailTextFieldEditingChanged), for: .editingChanged)
+        self.textField.snp.makeConstraints { (m) in
             m.leading.equalTo(titleLabel.snp.leading)
             m.top.equalTo(titleLabel.snp.bottom).offset(10)
+            m.width.equalToSuperview()
         }
-        
-        finishButton = UIButton()
         view.addSubview(finishButton)
-        finishButton.backgroundColor = .systemRed
-        finishButton.clipsToBounds = true
-        finishButton.layer.cornerRadius = 20
-        finishButton.setTitle("下一步", for: .normal)
-        
-        finishButton.isEnabled = false //按的開關
-        finishButton.alpha = 0.3 //透明度
-        finishButton.snp.makeConstraints { (m) in
+        self.finishButton.snp.makeConstraints { (m) in
             m.width.equalTo(250)
             m.height.equalTo(50)
             m.centerX.equalToSuperview()
             m.centerY.equalToSuperview()
         }
-        
-        progressView = UIProgressView()
         view.addSubview(progressView)
-        progressView.clipsToBounds = true //開關
-        progressView.layer.cornerRadius = 10 //修邊
-        progressView.tintColor = .black
-        progressView.progress = 0.33
-        progressView.snp.makeConstraints { (m) in
+        self.progressView.snp.makeConstraints { (m) in
             m.width.equalTo(300)
             m.height.equalTo(20)
             m.centerX.equalToSuperview()
@@ -77,11 +92,11 @@ class RegisterBasicViewController: UIViewController {
     @objc func emailTextFieldEditingChanged() {
         if let text = textField.text {
             if text.isEmpty == true {
-                finishButton.isEnabled = false
-                finishButton.alpha = 0.3
+                self.finishButton.isEnabled = false
+                self.finishButton.alpha = 0.3
             } else {
-                finishButton.isEnabled = true
-                finishButton.alpha = 1
+                self.finishButton.isEnabled = true
+                self.finishButton.alpha = 1
                 
             }
         }

@@ -16,19 +16,14 @@ class StepOneViewController: RegisterBasicViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        titleLabel.text = "電子郵件"
-        textField.placeholder = "請輸入電子郵件"
-        progressView.progress = 0.33
-        finishButton.addTarget(self, action: #selector(finishButtonDidTap), for: .touchUpInside)
+        layouts(title: "電子郵件", placeholder: "請輸入電子郵件", progress: 0.33, button: #selector(finishButtonDidTap))
     }
     
     @objc func finishButtonDidTap() {
-        let stepTwoViewController = StepTwoViewController()
         if let text = textField.text {
-            stepTwoViewController.email = text
+            let stepTwoViewController = StepTwoViewController(email: text)
+            self.navigationController?.pushViewController(stepTwoViewController, animated: true)
         }
-        self.navigationController?.pushViewController(stepTwoViewController, animated: true)
         
     }
 }

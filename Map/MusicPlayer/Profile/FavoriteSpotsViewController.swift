@@ -50,12 +50,14 @@ class FavoriteSpotsViewController: UIViewController {
                                     self.view.makeToast(err.localizedDescription)
                                     return
                                 }
+                                
                                 if let dict = snapshot?.data() {
                                     let spot = Spot(firestoreDictionary: dict)
                                     
                                     self.favoriteSpots.append(spot)
                                     
                                 }
+                                
                                 dispatchGroup.leave()
                                 
                                 
@@ -82,13 +84,13 @@ class FavoriteSpotsViewController: UIViewController {
         layout.scrollDirection = .vertical // vertical 垂直的意思，   horizontal 橫向的意思
         layout.minimumLineSpacing = 80.0
         // 上面是調整垂直滑動，每個cell上下之間的間距方法
-        collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.register(SpotCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
-        collectionView.backgroundColor = .white
+        self.collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+        self.collectionView.delegate = self
+        self.collectionView.dataSource = self
+        self.collectionView.register(SpotCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        self.collectionView.backgroundColor = .white
         view.addSubview(collectionView)
-        collectionView.snp.makeConstraints { (m) in
+        self.collectionView.snp.makeConstraints { (m) in
             m.leading.equalToSuperview().offset(5)
             m.bottom.trailing.equalToSuperview().offset(-5)
             m.top.equalTo(view.safeAreaLayoutGuide.snp.top)

@@ -35,13 +35,13 @@ class SpotsCollectionViewController: UIViewController {
         layout.scrollDirection = .vertical // vertical 垂直的意思，   horizontal 橫向的意思
         layout.minimumLineSpacing = 80.0
         // 上面是調整垂直滑動，每個cell上下之間的間距方法
-        collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.register(SpotCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
-        collectionView.backgroundColor = .white
+        self.collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+        self.collectionView.delegate = self
+        self.collectionView.dataSource = self
+        self.collectionView.register(SpotCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        self.collectionView.backgroundColor = .white
         view.addSubview(collectionView)
-        collectionView.snp.makeConstraints { (m) in
+        self.collectionView.snp.makeConstraints { (m) in
             m.leading.equalToSuperview().offset(5)
             m.bottom.trailing.equalToSuperview().offset(-5)
             m.top.equalTo(view.safeAreaLayoutGuide.snp.top)
@@ -63,6 +63,7 @@ extension SpotsCollectionViewController: UICollectionViewDelegate, UICollectionV
         let spot = spots[indexPath.item]
         //        cell.spotViewController = self
         // 把自己給 SpotCollectionViewCell 裡面 SpotViewController 這個值
+        cell.spotViewController = self.spotsViewController
         cell.spotsCollectionViewController = self
         cell.spot = spot
         
@@ -78,13 +79,11 @@ extension SpotsCollectionViewController: UICollectionViewDelegate, UICollectionV
         
         let spot = spots[indexPath.item]
         
-        let spotDetailViewController = SpotDetailViewController()
+        let spotDetailViewController = SpotDetailViewController(spot: spot)
         
-        spotDetailViewController.spot = spot
-        
+//        spotDetailViewController.spot = spot
         //        let favoriteSpotsViewController = FavoriteSpotsViewController()
         //        favoriteSpotsViewController.spot = spot
-        
         // 拿到 spotsViewController 做參考
             spotsViewController.navigationController?.pushViewController(spotDetailViewController, animated: true)
         

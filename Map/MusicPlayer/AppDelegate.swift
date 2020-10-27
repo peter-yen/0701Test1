@@ -48,8 +48,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate , GIDSignInDelegate{
         GIDSignIn.sharedInstance().delegate = self
         
         var style = ToastStyle()
-        style.messageFont = UIFont.systemFont(ofSize: 30)
+        style.messageFont = UIFont.systemFont(ofSize: 20)
         ToastManager.shared.style = style
+        var top = ToastPosition.top
+        ToastManager.shared.position = top
         
         window = UIWindow()
         window?.makeKeyAndVisible()

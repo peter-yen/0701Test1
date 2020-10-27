@@ -26,7 +26,6 @@ class SpotCollectionViewCell: UICollectionViewCell {
             } else if favoriteSpotsViewCOntroller != nil {
                 favoriteButton.isSelected = true
             }
-            
             //        if favoriteSpotsIDs.firstIndex(of: spot.id) != nil {
             //            cell.favoriteButton.isSelected = true
             //        } else {
@@ -36,10 +35,32 @@ class SpotCollectionViewCell: UICollectionViewCell {
             // 所以拿回 cell 做 ， 版面看起來會比較乾淨
         }
     }
-    var nameLabel: UILabel!
-    var backgroundImageView: UIImageView!
-    var addressLabel: UILabel!
-    var townLabel: UILabel!
+    lazy var nameLabel: UILabel = {
+       let nl = UILabel()
+        nl.font = UIFont.boldSystemFont(ofSize: 18)
+        nl.textColor = .red
+        return nl
+    }()
+    lazy var backgroundImageView: UIImageView = {
+        let bi = UIImageView()
+        bi.contentMode = .scaleAspectFill
+        bi.clipsToBounds = true
+        bi.backgroundColor = .systemBlue
+        return bi
+    }()
+    lazy var addressLabel: UILabel = {
+       let al = UILabel()
+        al.textAlignment = .right
+        al.font = UIFont.boldSystemFont(ofSize: 15)
+        al.textColor = .black
+        return al
+    }()
+    lazy var townLabel: UILabel = {
+        let tl = UILabel()
+        tl.font = UIFont.boldSystemFont(ofSize: 15)
+        tl.textColor = .black
+        return tl
+    }()
     var favoriteButton: UIButton!
     var spotViewController: SpotsViewController?
     var favoriteSpotsViewCOntroller: FavoriteSpotsViewController?
@@ -52,80 +73,55 @@ class SpotCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         
         backgroundColor = .white
-        setupBackgroundImage()
-        setupNameLabel()
-        setupTownLabel()
-        setupAdressLabel()
-        setupFavoriteButton()
         
+        setupImageView()
+        setupSubviews()
+        setupFavoriteButton()
         
     }
     
-    func setupNameLabel() {
-        nameLabel = UILabel()
+    func setupImageView() {
+        addSubview(backgroundImageView)
+        self.backgroundImageView.image = UIImage(named: "Hebe")
+        self.backgroundImageView.snp.makeConstraints { (m) in
+            m.edges.equalToSuperview()
+        }
+
+    }
+    
+    func setupSubviews() {
         addSubview(nameLabel)
-        nameLabel.text = "城市"
-        nameLabel.font = UIFont.boldSystemFont(ofSize: 18)
-        nameLabel.textColor = .red
-        nameLabel.snp.makeConstraints { (m) in
+        self.nameLabel.snp.makeConstraints { (m) in
             m.left.equalTo(backgroundImageView)
             m.top.equalTo(backgroundImageView.snp.bottom)
         }
-        
-        
-    }
-    
-    func setupBackgroundImage() {
-        backgroundImageView = UIImageView()
-        addSubview(backgroundImageView)
-        backgroundImageView.contentMode = .scaleAspectFill
-        backgroundImageView.clipsToBounds = true
-        backgroundImageView.backgroundColor = .systemBlue
-        backgroundImageView.image = UIImage(named: "Hebe")
-        backgroundImageView.snp.makeConstraints { (m) in
-            m.edges.equalToSuperview()
-            
-        }
-    }
-    func setupAdressLabel() {
-        addressLabel = UILabel()
-        addSubview(addressLabel)
-        addressLabel.text = "Helllo"
-        addressLabel.textAlignment = .right
-        addressLabel.font = UIFont.boldSystemFont(ofSize: 15)
-        addressLabel.textColor = .black
-        addressLabel.snp.makeConstraints { (m) in
-            m.width.equalToSuperview()
-            m.top.equalTo(townLabel)
-            m.centerX.equalToSuperview()
-        }
-        
-    }
-    func setupTownLabel() {
-        townLabel = UILabel()
         addSubview(townLabel)
-        townLabel.text = "所在地"
-        townLabel.font = UIFont.boldSystemFont(ofSize: 15)
-        townLabel.textColor = .black
-        townLabel.snp.makeConstraints { (m) in
+        self.townLabel.snp.makeConstraints { (m) in
             m.width.equalTo(60)
             m.top.equalTo(nameLabel.snp.bottom).offset(6)
             m.left.equalTo(backgroundImageView.snp.left)
         }
-        
+        addSubview(addressLabel)
+        self.addressLabel.snp.makeConstraints { (m) in
+            m.width.equalToSuperview()
+            m.top.equalTo(townLabel)
+            m.centerX.equalToSuperview()
+        }
     }
+        
+    
     
     func setupFavoriteButton() {
-        favoriteButton = UIButton()
+        self.favoriteButton = UIButton()
         addSubview(favoriteButton)
         
         let selectedImage = UIImage(named: "favorite_selected")
         let unselectedImage = UIImage(named: "favorite_unselected")
-        favoriteButton.setImage(selectedImage, for: .selected)
-        favoriteButton.setImage(unselectedImage, for: .normal)
-        favoriteButton.addTarget(self, action: #selector(favoriteButtonDidTap), for: .touchUpInside)
+        self.favoriteButton.setImage(selectedImage, for: .selected)
+        self.favoriteButton.setImage(unselectedImage, for: .normal)
+        self.favoriteButton.addTarget(self, action: #selector(favoriteButtonDidTap), for: .touchUpInside)
         
-        favoriteButton.snp.makeConstraints { (m) in
+        self.favoriteButton.snp.makeConstraints { (m) in
             m.top.equalToSuperview().offset(5)
             m.trailing.equalToSuperview().offset(-5)
             m.width.height.equalTo(35)
@@ -134,7 +130,6 @@ class SpotCollectionViewCell: UICollectionViewCell {
     
     
     @objc func favoriteButtonDidTap() {
-        
         
         if !favoriteButton.isSelected {
             // 還沒點選 -> 已點選
@@ -267,13 +262,10 @@ class SpotCollectionViewCell: UICollectionViewCell {
                                             if let index = self.favoriteSpotsViewCOntroller?.favoriteSpots.firstIndex(of: self.spot) {
                                                 self.favoriteSpotsViewCOntroller?.favoriteSpots.remove(at: index)
                                             }// 上面的 else 不是已經重複動作了嗎？
-                                            
-                                            
-                                            
+                                
                                             
                                             self.favoriteSpotsViewCOntroller?.view.makeToast("成功刪除！！！")
                                         }
-                                       
                                         
                                         
                                         DispatchQueue.main.async {
@@ -283,25 +275,16 @@ class SpotCollectionViewCell: UICollectionViewCell {
                                     }
                                 }
                             }
-                            
                         }
                     }
                 }
             }
-            
-            
         }
     }
-    
-    
-    
-    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
     
     
 }

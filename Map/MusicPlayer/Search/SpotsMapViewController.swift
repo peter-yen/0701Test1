@@ -14,17 +14,54 @@ import FirebaseFirestore
 class SpotsMapViewController: UIViewController {
     var spots: [Spot] = []
     var spot: Spot!
-    var mapView: MKMapView!
+    var mapView: MKMapView = {
+        let mv = MKMapView()
+        mv.showsUserLocation = true
+        return mv
+    }()
     var locationManager: CLLocationManager!
-    var searchView: UIView!
+    lazy var searchView: UIView = {
+        let sv = UIView()
+        sv.backgroundColor = .white
+        sv.clipsToBounds = true
+        sv.layer.cornerRadius = 15
+        return sv
+    }()
     var spotDetailsView: UIView!
-    var dismissButton: UIButton!
+    var myLocationButton: UIButton!
     var spotDetailTopAnchor: NSLayoutConstraint!
-    var touchView: UIView!
-    var nameLabel: UILabel!
-    var addressLabel: UILabel!
-    var phoneLabel: UILabel!
-    var openLabel: UILabel!
+    lazy var touchView: UIView = {
+        let tv = UIView()
+        tv.backgroundColor = .white
+        tv.clipsToBounds = true
+        tv.layer.cornerRadius = 3
+        return tv
+    }()
+    lazy  var nameLabel: UILabel = {
+        let nl = UILabel()
+        nl.textAlignment = .center
+        nl.font = UIFont.boldSystemFont(ofSize: 19)
+        nl.text = ""
+        return nl
+    }()
+    lazy var addressLabel: UILabel = {
+        let al = UILabel()
+        al.text = ""
+        al.font = UIFont.boldSystemFont(ofSize: 18)
+        return al
+    }()
+    lazy var phoneLabel: UILabel = {
+        let pl = UILabel()
+        pl.text = ""
+        pl.font = UIFont.systemFont(ofSize: 18)
+        return pl
+    }()
+    lazy var openLabel: UILabel = {
+        let ol = UILabel()
+        ol.text = ""
+        ol.font = UIFont.systemFont(ofSize: 18)
+        return ol
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +70,7 @@ class SpotsMapViewController: UIViewController {
         setupLocationManager()
         setupSearchView()
         setupSpotDetailsView()
-        setupDismissButton()
+        setupLocationButton()
         setupTouchView()
         
         
@@ -48,16 +85,9 @@ class SpotsMapViewController: UIViewController {
                     let spotArray = Spot(firestoreDictionary: dict)
                     self.spots.append(spotArray)
                     
-                        
-                    
                 }
             }
-//            for spot in self.spots {
-//                self.spot = spot
-//                print("\(self.spot.id)")
-//            }
             self.addAnnotation(spots: self.spots)
-            
             
         }
         
@@ -81,7 +111,7 @@ class SpotsMapViewController: UIViewController {
             alertController.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
             self.present(alertController, animated: true, completion: nil)
         case.notDetermined :
-            locationManager.requestWhenInUseAuthorization()
+            self.locationManager.requestWhenInUseAuthorization()
         default:
             break
         }
@@ -91,44 +121,39 @@ class SpotsMapViewController: UIViewController {
     func addAnnotation(spots: [Spot]) {
         for spot in spots {
             let mapPoint = SpotAnnotation(spot: spot)
-            mapView.addAnnotation(mapPoint)
+            self.mapView.addAnnotation(mapPoint)
             
         }
     }
     
     
     func setupMapView() {
-        mapView = MKMapView()
         view.addSubview(mapView)
-        mapView.showsUserLocation = true
-        mapView.delegate = self
-        mapView.snp.makeConstraints { (m) in
+        self.mapView.delegate = self
+        self.mapView.snp.makeConstraints { (m) in
             m.edges.equalToSuperview()
         }
         
     }
     
     func setupLocationManager() {
-        locationManager = CLLocationManager()
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager = CLLocationManager()
+        self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        
         if CLLocationManager.authorizationStatus() != CLAuthorizationStatus.notDetermined {
-            locationManager.requestWhenInUseAuthorization()
+            self.locationManager.requestWhenInUseAuthorization()
         }
-        locationManager.startUpdatingLocation()
-        // 一開始進去呼叫
+        self.locationManager.startUpdatingLocation()
+        // 一開始進去呼叫自己的位置
         
     }
     
     func setupSearchView() {
-        searchView = UIView()
         view.addSubview(searchView)
-        searchView.backgroundColor = .white
-        searchView.clipsToBounds = true
-        searchView.layer.cornerRadius = 15
-        searchView.snp.makeConstraints { (m) in
+        self.searchView.snp.makeConstraints { (m) in
             //    位置來這裡沒偵測  safeAreaLayoutGuide
-//            m.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
+            //            m.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
             m.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(50)
             m.trailing.equalToSuperview().offset(-10)
             m.leading.equalToSuperview().offset(10)
@@ -137,61 +162,48 @@ class SpotsMapViewController: UIViewController {
     }
     
     func setupSpotDetailsView() {
-        spotDetailsView = UIView()
+        self.spotDetailsView = UIView()
         view.addSubview(spotDetailsView)
-        spotDetailsView.backgroundColor = .cyan
-        spotDetailsView.alpha = 0.8
-        spotDetailsView.translatesAutoresizingMaskIntoConstraints = false
-        spotDetailsView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
-        spotDetailsView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
-        spotDetailsView.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        self.spotDetailsView.backgroundColor = .cyan
+        self.spotDetailsView.alpha = 0.8
+        self.spotDetailsView.translatesAutoresizingMaskIntoConstraints = false
+        self.spotDetailsView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
+        self.spotDetailsView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
+        self.spotDetailsView.heightAnchor.constraint(equalToConstant: 300).isActive = true
         
-        spotDetailTopAnchor = spotDetailsView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -130)
-        spotDetailTopAnchor.isActive = true
+        self.spotDetailTopAnchor = spotDetailsView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -130)
+        self.spotDetailTopAnchor.isActive = true
         
-        nameLabel = UILabel()
-        spotDetailsView.addSubview(nameLabel)
-        nameLabel.text = ""
-        nameLabel.textAlignment = .center
-        nameLabel.font = UIFont.boldSystemFont(ofSize: 19)
-        nameLabel.snp.makeConstraints { (m) in
+        self.spotDetailsView.addSubview(nameLabel)
+        self.nameLabel.snp.makeConstraints { (m) in
             m.top.equalTo(spotDetailsView.snp.top).offset(15)
             m.width.equalToSuperview()
         }
-        addressLabel = UILabel()
-        spotDetailsView.addSubview(addressLabel)
-        addressLabel.text = ""
-        addressLabel.font = UIFont.boldSystemFont(ofSize: 18)
-        addressLabel.snp.makeConstraints { (m) in
-            m.top.equalTo(nameLabel.snp.top).offset(30)
+        self.spotDetailsView.addSubview(addressLabel)
+        self.addressLabel.snp.makeConstraints { (m) in
+            m.top.equalTo(nameLabel.snp.top).offset(35)
             m.width.equalToSuperview()
         }
-        phoneLabel = UILabel()
-        spotDetailsView.addSubview(phoneLabel)
-        phoneLabel.text = ""
-        phoneLabel.font = UIFont.boldSystemFont(ofSize: 18)
-        phoneLabel.snp.makeConstraints { (m) in
-            m.top.equalTo(addressLabel.snp.top).offset(25)
+        self.spotDetailsView.addSubview(phoneLabel)
+        self.phoneLabel.snp.makeConstraints { (m) in
+            m.top.equalTo(addressLabel.snp.top).offset(30)
             m.width.equalToSuperview()
         }
-        openLabel = UILabel()
-        spotDetailsView.addSubview(openLabel)
-        openLabel.text = ""
-        openLabel.font = UIFont.boldSystemFont(ofSize: 18)
-        openLabel.snp.makeConstraints { (m) in
-            m.top.equalTo(phoneLabel.snp.top).offset(25)
+        self.spotDetailsView.addSubview(openLabel)
+        self.openLabel.snp.makeConstraints { (m) in
+            m.top.equalTo(phoneLabel.snp.top).offset(30)
             m.width.equalToSuperview()
         }
         let pan = UIPanGestureRecognizer(target: self, action: #selector(spotDetailsViewPanGesture(recognizer:)))
         pan.minimumNumberOfTouches = 1   // 最少幾根手指觸發
         pan.maximumNumberOfTouches = 1   // 最多幾根手指觸發
-        spotDetailsView.addGestureRecognizer(pan)
-        spotDetailsView.isUserInteractionEnabled = true // 觸控開關
+        self.spotDetailsView.addGestureRecognizer(pan)
+        self.spotDetailsView.isUserInteractionEnabled = true // 觸控開關
     }
     
     @objc func spotDetailsViewPanGesture(recognizer: UIPanGestureRecognizer) {
         let translation = recognizer.translation(in: self.view)
-        let contant = spotDetailTopAnchor.constant
+        let contant = self.spotDetailTopAnchor.constant
         
         switch recognizer.state {
         case .changed:
@@ -218,12 +230,8 @@ class SpotsMapViewController: UIViewController {
     }
     
     func setupTouchView() {
-        touchView = UIView()
-        spotDetailsView.addSubview(touchView)
-        touchView.backgroundColor = .white
-        touchView.clipsToBounds = true
-        touchView.layer.cornerRadius = 3
-        touchView.snp.makeConstraints { (m) in
+        self.spotDetailsView.addSubview(touchView)
+        self.touchView.snp.makeConstraints { (m) in
             m.top.equalToSuperview().offset(7)
             m.height.equalTo(6)
             m.width.equalTo(150)
@@ -231,21 +239,23 @@ class SpotsMapViewController: UIViewController {
         }
     }
     
-    func setupDismissButton() {
-        dismissButton = UIButton()
-        view.addSubview(dismissButton)
-        dismissButton.backgroundColor = .white
-        dismissButton.clipsToBounds = true
-        dismissButton.layer.cornerRadius = 25
+    func setupLocationButton() {
+        self.myLocationButton = UIButton()
+        view.addSubview(myLocationButton)
+        self.myLocationButton.backgroundColor = .white
+        self.myLocationButton.clipsToBounds = true
+        self.myLocationButton.layer.cornerRadius = 25
         
         let configuration = UIImage.SymbolConfiguration(scale: .large)
         // 設置 xcode 原生圖片大小
-        let buttonImage = UIImage(systemName: "location", withConfiguration: configuration)
-        dismissButton.setImage(buttonImage, for: .normal)
-        dismissButton.addTarget(self, action: #selector(dismissButtonDidTap), for: .touchUpInside)
-        dismissButton.isEnabled = true
+        let normalImage = UIImage(systemName: "location", withConfiguration: configuration)
+        self.myLocationButton.setImage(normalImage, for: .normal)
+        let diselectImage = UIImage(systemName: "location.fill", withConfiguration: configuration)
+        self.myLocationButton.setImage(diselectImage, for: .selected)
+        self.myLocationButton.addTarget(self, action: #selector(dismissButtonDidTap), for: .touchUpInside)
+        self.myLocationButton.isEnabled = true
         
-        dismissButton.snp.makeConstraints { (m) in
+        self.myLocationButton.snp.makeConstraints { (m) in
             m.height.width.equalTo(50)
             m.trailing.equalTo(view.snp.trailing).offset(-10)
             m.bottom.equalTo(spotDetailsView.snp.top).offset(-25)
@@ -253,7 +263,8 @@ class SpotsMapViewController: UIViewController {
     }
     @objc func dismissButtonDidTap() {
         
-        locationManager.startUpdatingLocation()
+        self.locationManager.startUpdatingLocation()
+        //  按下去後回到自己的位置
         
     }
     
@@ -261,23 +272,30 @@ class SpotsMapViewController: UIViewController {
 
 
 extension SpotsMapViewController: CLLocationManagerDelegate {
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        locationManager.stopUpdatingLocation()
-        // 呼叫完後就退出呼叫
+        self.locationManager.stopUpdatingLocation()
+        //  不持續, 並停止呼叫自己的位置
         
         guard let coordinate = locations.last?.coordinate else { return }
         let degrees = CLLocationDegrees(0.01)
         let span = MKCoordinateSpan(latitudeDelta: degrees, longitudeDelta: degrees)
         let region = MKCoordinateRegion(center: coordinate, span: span)
-        mapView.setRegion(region, animated: true)
+        self.mapView.setRegion(region, animated: true)
         
+        self.myLocationButton.isSelected = true
     }
-    
 }
 
 
 extension SpotsMapViewController: MKMapViewDelegate {
+    
+    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+        self.myLocationButton.isSelected = false
+    }
+    
+    
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         if let annotation = view.annotation as? SpotAnnotation {
@@ -287,12 +305,12 @@ extension SpotsMapViewController: MKMapViewDelegate {
             mapView.setRegion(region, animated: true)
             // 點擊移動到標記地點 , 固定縮放大小
             self.spot = annotation.spot
-
-            nameLabel.text = "\(spot.name)"
-            addressLabel.text = "地址: \(spot.address)"
-            phoneLabel.text = "電話: \(spot.phone)"
-            openLabel.text = "開放時間: \(spot.opentime)"
-
+            
+            self.nameLabel.text = "\(spot.name)"
+            self.addressLabel.text = "地址: \(spot.address)"
+            self.phoneLabel.text = "電話: \(spot.phone)"
+            self.openLabel.text = "開放時間: \(spot.opentime)"
+            
         }
     }
 }
@@ -310,8 +328,8 @@ class SpotAnnotation: MKPointAnnotation {
         self.title = spot.name
         self.coordinate = coordinate
         
-//        let spotsMapViewController = SpotsMapViewController()
-//        spotsMapViewController.spot = spot
+        //        let spotsMapViewController = SpotsMapViewController()
+        //        spotsMapViewController.spot = spot
     }
     
 }

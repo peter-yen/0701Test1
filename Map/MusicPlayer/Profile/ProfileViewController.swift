@@ -37,10 +37,12 @@ class ProfileViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
     }
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
+    
     
     func setupData() {
         HUD.shared.showLoading(view: view)
@@ -90,47 +92,47 @@ class ProfileViewController: UIViewController {
     
     func configureLayout() {
         
-        navigationView = UIView()
-        navigationView.backgroundColor = .systemGray
+        self.navigationView = UIView()
+        self.navigationView.backgroundColor = .systemGray
         view.addSubview(navigationView)
-        navigationView.snp.makeConstraints { (m) in
+        self.navigationView.snp.makeConstraints { (m) in
             m.top.left.right.equalToSuperview()
             m.height.equalTo(250)
         }
-        avatarImageView = UIImageView()
+        self.avatarImageView = UIImageView()
         view.addSubview(avatarImageView)
-        avatarImageView.image = UIImage(named: "Hebe")
-        avatarImageView.contentMode = .scaleAspectFill
-        avatarImageView.clipsToBounds = true
-        avatarImageView.layer.cornerRadius = 60
-        avatarImageView.isUserInteractionEnabled = true
+        self.avatarImageView.image = UIImage(named: "Hebe")
+        self.avatarImageView.contentMode = .scaleAspectFill
+        self.avatarImageView.clipsToBounds = true
+        self.avatarImageView.layer.cornerRadius = 60
+        self.avatarImageView.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer(target: self, action: #selector(avatarImageViewDidTap))
-        avatarImageView.addGestureRecognizer(tap)
-        avatarImageView.snp.makeConstraints { (m) in
+        self.avatarImageView.addGestureRecognizer(tap)
+        self.avatarImageView.snp.makeConstraints { (m) in
             m.centerX.equalTo(navigationView)
             m.centerY.equalTo(navigationView).offset(30)
             m.height.width.equalTo(120)
         }
         
-        tableView = UITableView()
+        self.tableView = UITableView()
         view.addSubview(tableView)
-        tableView.backgroundColor = .white
-        tableView.separatorColor = .systemGray3
+        self.tableView.backgroundColor = .white
+        self.tableView.separatorColor = .systemGray3
         // separatorColor為tableView 底線的顏色
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.snp.makeConstraints { (m) in
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: "cell")
+        self.tableView.snp.makeConstraints { (m) in
             m.top.equalTo(navigationView.snp.bottom)
             m.bottom.right.left.equalToSuperview()
         }
         
-        signOutButton = UIButton()
+        self.signOutButton = UIButton()
         view.addSubview(signOutButton)
-        signOutButton.setTitle("Sign Out", for: .normal)
-        signOutButton.setTitleColor(.black, for: .normal)
-        signOutButton.addTarget(self, action: #selector(signOut), for: .touchUpInside)
-        signOutButton.snp.makeConstraints { (m) in
+        self.signOutButton.setTitle("Sign Out", for: .normal)
+        self.signOutButton.setTitleColor(.black, for: .normal)
+        self.signOutButton.addTarget(self, action: #selector(signOut), for: .touchUpInside)
+        self.signOutButton.snp.makeConstraints { (m) in
             m.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-20)
             m.centerX.equalToSuperview()
         }
@@ -148,7 +150,7 @@ class ProfileViewController: UIViewController {
             try Auth.auth().signOut()
             self.view.makeToast("成功登出")
             let authViewController = AuthViewController()
-            user.isAdmin = false
+            self.user.isAdmin = false
             authViewController.profileViewController = self
             
             let authNavigationController =  UINavigationController(rootViewController: authViewController)
@@ -169,7 +171,7 @@ class ProfileViewController: UIViewController {
     }
     
     @objc private func keyboardWillHide(notification: NSNotification) {
-        tableView.contentInset = .zero
+        self.tableView.contentInset = .zero
     }
     
     
@@ -186,7 +188,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         }
         self.dismiss(animated: true, completion: nil )
     }
-    
+     
     
     func saveToStorage(image: UIImage) {
         if let uid = Auth.auth().currentUser?.uid {
@@ -229,7 +231,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if user.isAdmin {
+        if self.user.isAdmin {
             return 6
         } else {
             return 5
@@ -251,7 +253,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             cell.accessoryView = nil // accessory 屬性只能存在一個
             cell.accessoryType = .disclosureIndicator
         case 5:
-            if user.isAdmin {
+            if self.user.isAdmin {
                 cell.textLabel?.text = "更新資料庫"
                 cell.delegate = self
                 cell.setupApiView()
@@ -277,6 +279,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     }
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         view.endEditing(true)
+        
     }
     
 }

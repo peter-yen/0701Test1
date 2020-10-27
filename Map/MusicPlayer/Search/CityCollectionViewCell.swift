@@ -11,8 +11,18 @@ import SnapKit
 
 class CityCollectionViewCell: UICollectionViewCell {
     
-    var nameLabel: UILabel!
-    var backgroundImageView: UIImageView!
+    var nameLabel: UILabel = {
+      let nl = UILabel()
+        nl.font = UIFont.systemFont(ofSize: 20)
+        nl.textColor = .white
+        return nl
+    }()
+    var backgroundImageView: UIImageView = {
+       let bv = UIImageView()
+        bv.contentMode = .scaleAspectFill
+        bv.clipsToBounds = true
+        return bv
+    }()
     
     
     override init(frame: CGRect) {
@@ -24,31 +34,20 @@ class CityCollectionViewCell: UICollectionViewCell {
         
     }
     func setupLabel() {
-        nameLabel = UILabel()
         addSubview(nameLabel)
-        nameLabel.text = "城市"
-        nameLabel.font = UIFont.boldSystemFont(ofSize: 20)
-        nameLabel.textColor = .white
-        nameLabel.snp.makeConstraints { (m) in
+        self.nameLabel.snp.makeConstraints { (m) in
             m.bottom.trailing.equalToSuperview().offset(-5)
         }
     }
     
     func setupBackgroundImage() {
-        backgroundImageView = UIImageView()
         addSubview(backgroundImageView)
-        backgroundImageView.contentMode = .scaleAspectFill
-        backgroundImageView.clipsToBounds = true
-        backgroundImageView.image = UIImage(named: "Hebe")
-        backgroundImageView.snp.makeConstraints { (m) in
+        self.backgroundImageView.image = UIImage(named: "Hebe")
+        self.backgroundImageView.snp.makeConstraints { (m) in
             m.edges.equalToSuperview()
             
         }
     }
-    
-    
-    
-    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

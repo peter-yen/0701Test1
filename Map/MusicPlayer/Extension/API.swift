@@ -19,40 +19,64 @@ class API {
         
     }
     
-    func removeSpots(completion: () -> Void) {
+    func removeSpots(completion: @escaping () -> Void) {
         Firestore.firestore().collection("Spots").getDocuments { (snapshot, err) in
             if let err = err {
                 print("\(err.localizedDescription)")
             }
             if let snapshots = snapshot?.documents {
+                
+                let dispatchGroup = DispatchGroup()
+                                
                 for snapshot in snapshots {
                     let id = snapshot.data()
                     if let ids = snapshot["id"] as? String {
                         print("\(ids)")
-                        Firestore.firestore().collection("Spots").document(ids).delete()
+                        
+                        dispatchGroup.enter()
+
+                        Firestore.firestore().collection("Spots").document(ids).delete { (err) in
+                            print("\(err)")
+                            dispatchGroup.leave()
+                        }
                         
                     }
                 }
+                dispatchGroup.notify(queue: .main) {
+                    completion()
+                }
             }
         }
-        completion()
         
     }
     
-    func removeCities(completion: () -> Void) {
+    func removeCities(completion: @escaping () -> Void) {
         Firestore.firestore().collection("Cities").getDocuments { (snapshot, err) in
             if let err = err {
                 print("\(err.localizedDescription)")
             }
             if let snapshots = snapshot?.documents {
+                
+                let dispatchGroup = DispatchGroup()
+                                
                 for snapshot in snapshots {
+                    
                     let cityIds = snapshot.documentID
                     print("\(cityIds)")
-                    Firestore.firestore().collection("Cities").document(cityIds).delete()
+                    
+                    dispatchGroup.enter()
+
+                    Firestore.firestore().collection("Cities").document(cityIds).delete { (err) in
+                        print("\(err)")
+                        dispatchGroup.leave()
+                    }
+                }
+                dispatchGroup.notify(queue: .main) {
+                    completion()
                 }
             }
         }
-        completion()
+        
     }
     
     func updataSpotsAPI(count: Int, completion: @escaping () -> Void) {
@@ -143,7 +167,7 @@ class API {
             guard let xmlHead = json["XML_Head"] as? [String:Any] else { return }
             
             guard let infos = xmlHead["Infos"] as? [String:Any] else { return }
-            guard let info = infos["Info"] as? [[String: Any]] else { return }
+            guard let info = infos["Info"] as? [[String: Any]] else { return } 
             
             //  做一個迴圈 , 把 dict 丟進去 info[] 裡
             // 再把他丟到 Class Spot 裡有做好的型別解析轉換，再丟回 spots[] 裡

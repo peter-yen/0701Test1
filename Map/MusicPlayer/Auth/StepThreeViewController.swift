@@ -12,15 +12,17 @@ import Firebase
 import FirebaseFirestore
 class StepThreeViewController: RegisterBasicViewController {
     var user: User?
+    convenience init(email:String, password:String) {
+        self.init()
+        let user = User(email: email, name: "", password: password)
+        self.user = user
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        layouts(title: "名稱", placeholder: "請輸入名稱", progress: 1.0, button: #selector(finishButtonDidTap))
         
-        titleLabel.text = "名稱"
-        textField.placeholder = "請輸入名稱"
-        finishButton.setTitle("註冊完成", for: .normal)
-        progressView.progress = 1.0
-        finishButton.addTarget(self, action: #selector(finishButtonDidTap), for: .touchUpInside)
+        self.finishButton.setTitle("註冊完成", for: .normal)
     }
     
     @objc func finishButtonDidTap() {
@@ -55,9 +57,6 @@ class StepThreeViewController: RegisterBasicViewController {
                 
             }
         }
-        
-
-        
     }
     
 }
