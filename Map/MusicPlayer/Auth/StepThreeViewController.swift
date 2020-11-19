@@ -30,11 +30,14 @@ class StepThreeViewController: RegisterBasicViewController {
             if let user = user {
                 user.name = name
                 
+                HUD.shared.showLoading(view: self.view)
+                
                 print("\(user.dictionary())")
                 Auth.auth().createUser(withEmail: user.email, password: user.password) { (result, error) in
                     
                     print("result: \(result), error: \(error)")
                     if let error = error {
+                        HUD.shared.hideLoading()
                         self.view.makeToast(error.localizedDescription)
                     } else {
                         // user.dictionary(): User -> Dictionary
@@ -42,11 +45,13 @@ class StepThreeViewController: RegisterBasicViewController {
                             let userDict = user.dictionary()
                              API.shared.userRef(uid: uid).setData(userDict) { (error) in
                                 if let error = error {
+                                    HUD.shared.hideLoading()
                                     self.view.makeToast(error.localizedDescription)
                                 } else {
                                 
                                 self.view.makeToast("Succes")
                                 self.dismiss(animated: true, completion: nil)
+                                    HUD.shared.hideLoading()
                                 }
                             } // setData 型別只吃 [String: Any]
                         }

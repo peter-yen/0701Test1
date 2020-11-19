@@ -93,11 +93,10 @@ class SpotDetailViewController: UIViewController, MKMapViewDelegate {
             m.edges.equalToSuperview()
         }
         
-        setupSpaceImageView()
-        setupLabel()
-        setupTextView()
-        setupMapView()
-        
+        self.setupSpaceImageView()
+        self.setupLabel()
+        self.setupTextView()
+        self.setupMapView()
         
     }
     

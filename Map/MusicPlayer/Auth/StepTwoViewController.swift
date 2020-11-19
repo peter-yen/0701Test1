@@ -23,9 +23,11 @@ class StepTwoViewController: RegisterBasicViewController {
     }
     
     @objc func finishButtonDidTap() {
-        if let password = self.textField.text {
+        if let password = self.textField.text, password.count >= 6 {
             let stepThreeViewController = StepThreeViewController(email: email, password: password)
             self.navigationController?.pushViewController(stepThreeViewController, animated: true)
+        } else {
+            self.view.showToast(text: "密碼至少需要六位數")
         }
         
     }

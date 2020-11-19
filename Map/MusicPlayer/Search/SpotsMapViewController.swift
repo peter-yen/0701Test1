@@ -1,11 +1,3 @@
-//
-//  SpotsMapViewController.swift
-//  MusicPlayer
-//
-//  Created by 嚴啟睿 on 2020/9/16.
-//  Copyright © 2020 嚴啟睿. All rights reserved.
-//
-
 import UIKit
 import MapKit
 import SnapKit
@@ -66,12 +58,12 @@ class SpotsMapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupMapView()
-        setupLocationManager()
-        setupSearchView()
-        setupSpotDetailsView()
-        setupLocationButton()
-        setupTouchView()
+        self.setupMapView()
+        self.setupLocationManager()
+        self.setupSearchView()
+        self.setupSpotDetailsView()
+        self.setupLocationButton()
+        self.setupTouchView()
         
         
         Firestore.firestore().collection("Spots").getDocuments { (snapshot, err) in
@@ -101,8 +93,8 @@ class SpotsMapViewController: UIViewController {
         case .authorizedWhenInUse:
             break
         case .denied :
-            let alertController = UIAlertController(title: "嗨！你好", message: "同意定位", preferredStyle: .actionSheet)
-            let action = UIAlertAction(title: "去設定", style: .default) { (_) in
+            let alertController = UIAlertController(title: "您好，如果需要使用地圖資訊，請同意定位", message: "同意定位", preferredStyle: .actionSheet)
+            let action = UIAlertAction(title: "請去設定", style: .default) { (_) in
                 if let url = URL.init(string: UIApplication.openSettingsURLString) {
                     UIApplication.shared.open(url)
                 }
@@ -145,15 +137,13 @@ class SpotsMapViewController: UIViewController {
             self.locationManager.requestWhenInUseAuthorization()
         }
         self.locationManager.startUpdatingLocation()
-        // 一開始進去呼叫自己的位置
+        // MARK: 一開始進去呼叫自己的位置
         
     }
     
     func setupSearchView() {
         view.addSubview(searchView)
         self.searchView.snp.makeConstraints { (m) in
-            //    位置來這裡沒偵測  safeAreaLayoutGuide
-            //            m.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
             m.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(50)
             m.trailing.equalToSuperview().offset(-10)
             m.leading.equalToSuperview().offset(10)
@@ -209,7 +199,6 @@ class SpotsMapViewController: UIViewController {
         case .changed:
             let constrainAfterTranslation = spotDetailTopAnchor.constant + translation.y
             if constrainAfterTranslation > -250 {
-                // 不懂怎麼設無法拉超過 -200
                 self.spotDetailTopAnchor.constant = constrainAfterTranslation
                 recognizer.setTranslation(.zero, in: self.view)
             }
@@ -264,7 +253,7 @@ class SpotsMapViewController: UIViewController {
     @objc func dismissButtonDidTap() {
         
         self.locationManager.startUpdatingLocation()
-        //  按下去後回到自己的位置
+        //  MARK: 按下去後回到自己的位置
         
     }
     
@@ -276,7 +265,7 @@ extension SpotsMapViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         self.locationManager.stopUpdatingLocation()
-        //  不持續, 並停止呼叫自己的位置
+        // MARK:  不持續, 並停止呼叫自己的位置
         
         guard let coordinate = locations.last?.coordinate else { return }
         let degrees = CLLocationDegrees(0.01)
@@ -327,9 +316,6 @@ class SpotAnnotation: MKPointAnnotation {
         let coordinate = CLLocationCoordinate2D(latitude: spot.py, longitude: spot.px)
         self.title = spot.name
         self.coordinate = coordinate
-        
-        //        let spotsMapViewController = SpotsMapViewController()
-        //        spotsMapViewController.spot = spot
     }
     
 }
